@@ -5,9 +5,10 @@ export default async function CharacterPage({
 }: {
   params: { character: string };
 }) {
+  const { character: characterId } = await params;
   const character = await prisma.character.findUnique({
     where: {
-      id: params.character,
+      slug: characterId,
     },
   });
 

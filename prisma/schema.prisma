@@ -13,12 +13,14 @@ datasource db {
 
 model Game {
   id         String      @id @default(cuid())
+  slug       String      @unique
   name       String
   characters Character[]
 }
 
 model Character {
   id     String @id @default(cuid())
+  slug   String @unique
   name   String
   notes  Note[]
   Game   Game   @relation(fields: [gameId], references: [id])
