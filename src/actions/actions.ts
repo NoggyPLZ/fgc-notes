@@ -1,7 +1,7 @@
 "use server";
 import z from "zod";
 import { loginSchema } from "@/lib/types";
-import { createSession } from "@/lib/session";
+import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 
 const testUser = {
@@ -36,7 +36,10 @@ export async function login(prevState: any, formData: FormData) {
   console.log("all good...");
   await createSession(testUser.id);
   console.log("redirect coming...");
-  redirect("/select");
+  redirect("/dashboard");
 }
 
-export async function logout() {}
+export async function logout() {
+  await deleteSession();
+  redirect("/");
+}
