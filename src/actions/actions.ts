@@ -1,8 +1,9 @@
 "use server";
 import z from "zod";
-import { loginSchema } from "@/lib/types";
+import { loginSchema, signUpSchema } from "@/lib/types";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
+import { prisma } from "@/lib/db";
 
 const testUser = {
   id: "1",
@@ -23,9 +24,25 @@ export async function login(prevState: any, formData: FormData) {
     };
   }
 
-  console.log("more check...");
+  console.log("Input is correct shape, now lets find it in the db...");
+
   const { email, password } = result.data;
-  if (email !== testUser.email || password !== testUser.password) {
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (!user) {
+    return {
+      errors: {
+        email: ["Invalid email or password"],
+      },
+    };
+  }
+
+  if (password !== user?.password) {
     return {
       errors: {
         email: ["Invalid email or password"],
@@ -34,7 +51,7 @@ export async function login(prevState: any, formData: FormData) {
   }
 
   console.log("all good...");
-  await createSession(testUser.id);
+  await createSession(user.id);
   console.log("redirect coming...");
   redirect("/dashboard");
 }
@@ -42,4 +59,50 @@ export async function login(prevState: any, formData: FormData) {
 export async function logout() {
   await deleteSession();
   redirect("/");
+}
+
+export async function signUp(prevState: any, formData: FormData) {
+  console.log("Beginning sign up validation");
+  const result = signUpSchema.safeParse(Object.fromEntries(formData));
+  console.log("schema check complete, moving to errors if any...");
+  if (!result.success) {
+    const flat = z.flattenError(result.error);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  console.log("No immediate errors moving on...");
+
+  const { email, password } = result.data;
+
+  const emailCheck = await prisma.user.findUnique({
+    where: {
+      email: email,
+    },
+  });
+
+  if (emailCheck) {
+    console.log("email exists");
+    return {
+      errors: {
+        email: ["Email already exists."],
+      },
+    };
+  }
+
+  try {
+    const user = await prisma.user.create({
+      data: {
+        name: email,
+        email: email,
+        password: password,
+      },
+    });
+
+    await createSession(user.id);
+  } catch (error) {
+    console.log("Error:", error);
+  }
+  redirect("/dashboard");
 }
