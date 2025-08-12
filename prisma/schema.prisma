@@ -19,24 +19,35 @@ model Game {
 }
 
 model Character {
-  id     String @id @default(cuid())
-  slug   String @unique
-  name   String
-  notes  Note[]
-  Game   Game   @relation(fields: [gameId], references: [id])
-  gameId String
+  id              String @id @default(cuid())
+  slug            String @unique
+  name            String
+  notesAsMain     Note[] @relation("MainCharacterNotes")
+  notesAsOpponent Note[] @relation("OpponentCharacterNotes")
+  Game            Game   @relation(fields: [gameId], references: [id])
+  gameId          String
 }
 
 model Note {
-  id          String    @id @default(cuid())
+  id          String       @id @default(cuid())
   content     String
-  rating      Int       @default(1)
-  updatedAt   DateTime  @updatedAt
-  createdAt   DateTime  @default(now())
-  Character   Character @relation(fields: [characterId], references: [id])
+  rating      Int          @default(1)
+  updatedAt   DateTime     @updatedAt
+  createdAt   DateTime     @default(now())
+  Character   Character    @relation("MainCharacterNotes", fields: [characterId], references: [id])
   characterId String
+  opponentId  String?
+  Opponent    Character?   @relation("OpponentCharacterNotes", fields: [opponentId], references: [id])
   userId      String
-  User        User      @relation(fields: [userId], references: [id])
+  User        User         @relation(fields: [userId], references: [id])
+  category    NoteCategory
+}
+
+enum NoteCategory {
+  NEUTRAL
+  MATCHUPS
+  COMBOS
+  SETPLAY
 }
 
 model User {
@@ -45,5 +56,19 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  verified  Boolean  @default(false)
+  rating    Int      @default(1)
+  role      Role     @default(USER)
+  status    Status   @default(ACTIVE)
   notes     Note[]
+}
+
+enum Status {
+  ACTIVE
+  DISABLED
+}
+
+enum Role {
+  USER
+  ADMIN
 }
