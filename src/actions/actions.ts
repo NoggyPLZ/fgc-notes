@@ -4,6 +4,7 @@ import { loginSchema, signUpSchema } from "@/lib/types";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
+import bcrypt from "bcryptjs";
 
 const testUser = {
   id: "1",
@@ -42,7 +43,9 @@ export async function login(prevState: any, formData: FormData) {
     };
   }
 
-  if (password !== user?.password) {
+  const passCompare = await bcrypt.compare(password, user.password);
+
+  if (!passCompare) {
     return {
       errors: {
         email: ["Invalid email or password"],
@@ -64,6 +67,7 @@ export async function logout() {
 export async function signUp(prevState: any, formData: FormData) {
   console.log("Beginning sign up validation");
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
+
   console.log("schema check complete, moving to errors if any...");
   if (!result.success) {
     const flat = z.flattenError(result.error);
@@ -73,8 +77,9 @@ export async function signUp(prevState: any, formData: FormData) {
   }
 
   console.log("No immediate errors moving on...");
-
   const { email, password } = result.data;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   const emailCheck = await prisma.user.findUnique({
     where: {
@@ -96,7 +101,7 @@ export async function signUp(prevState: any, formData: FormData) {
       data: {
         name: email,
         email: email,
-        password: password,
+        password: hashedPassword,
       },
     });
 
