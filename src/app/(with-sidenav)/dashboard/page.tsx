@@ -8,10 +8,6 @@ export default function Dashboard() {
   return (
     <div>
       <h1>Dashboard</h1>
-      <Link href={"/select"}>Select a game</Link>
-      <Button style="cancel" onClick={logout}>
-        Logout
-      </Button>
     </div>
   );
 }
