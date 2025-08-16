@@ -1,10 +1,11 @@
 "use server";
 import z from "zod";
-import { loginSchema, signUpSchema } from "@/lib/types";
+import { loginSchema, noteSchema, signUpSchema } from "@/lib/types";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
+import { getCurrentUser } from "@/lib/auth";
 
 const testUser = {
   id: "1",
@@ -110,4 +111,37 @@ export async function signUp(prevState: any, formData: FormData) {
     console.log("Error:", error);
   }
   redirect("/dashboard");
+}
+
+export async function noteSubmit(prevState: any, formData: FormData) {
+  const results = noteSchema.safeParse(Object.fromEntries(formData));
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    return flat.fieldErrors;
+  }
+
+  const { character, category, note, opponent } = results.data;
+  const user = await getCurrentUser();
+
+  if (!user) {
+    return {
+      errors: {
+        user: ["User not found"],
+      },
+    };
+  }
+
+  try {
+    await prisma.note.create({
+      data: {
+        content: note,
+        characterId: character,
+        userId: user.id,
+        category: category,
+        ...(opponent ? { opponentId: opponent } : {}),
+      },
+    });
+  } catch (error) {
+    console.log("Error making note:", error);
+  }
 }

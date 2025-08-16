@@ -22,3 +22,20 @@ export const signUpSchema = z
   });
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
+
+export const noteSchema = z.discriminatedUnion("category", [
+  z.object({
+    character: z.string(),
+    opponent: z.string(),
+    category: z.enum(["MATCHUPS"]),
+    note: z.string(),
+  }),
+  z.object({
+    character: z.string(),
+    opponent: z.string().optional(),
+    category: z.enum(["NEUTRAL", "COMBOS", "SETPLAY"]),
+    note: z.string(),
+  }),
+]);
+
+export type TNoteSchema = z.infer<typeof noteSchema>;
