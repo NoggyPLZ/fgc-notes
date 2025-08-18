@@ -1,24 +1,44 @@
+import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
 
 export default async function CharacterPage({
   params,
 }: {
-  params: { character: string };
+  params: { game: string; character: string };
 }) {
-  const { character: characterId } = await params;
-  const character = await prisma.character.findUnique({
+  const { game: gameId, character: characterId } = await params;
+  const game = await prisma.game.findUnique({
     where: {
-      slug: characterId,
+      slug: gameId,
+    },
+    include: {
+      characters: true,
     },
   });
-
-  if (!character) {
-    return <div>Character not found.</div>;
+  if (!game) {
+    return <div>no game found</div>;
   }
+
+  const characterList = game.characters;
+
+  const characterChoice = game.characters.find(
+    (char) => char.slug === characterId
+  );
+
+  if (!characterChoice) {
+    return <div>no character found</div>;
+  }
+
   return (
     <div>
       <h1>Character Page</h1>
-      <h2>{character.name}</h2>
+      <h2>{characterChoice && characterChoice.name}</h2>
+      <div>
+        <NoteForm
+          characterList={characterList}
+          mainCharacter={characterChoice}
+        />
+      </div>
     </div>
   );
 }
