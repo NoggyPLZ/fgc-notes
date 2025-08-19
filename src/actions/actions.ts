@@ -113,13 +113,26 @@ export async function signUp(prevState: any, formData: FormData) {
   redirect("/dashboard");
 }
 
+type NoteErrors = {
+  character?: string[];
+  opponent?: string[];
+  category?: string[];
+  note?: string[];
+  user?: string[];
+};
+
 export async function noteSubmit(prevState: any, formData: FormData) {
+  console.log("checking against type schema...");
   const results = noteSchema.safeParse(Object.fromEntries(formData));
+  console.log("checking results...");
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    return flat.fieldErrors;
+    console.log(flat.fieldErrors);
+    return {
+      errors: flat.fieldErrors as NoteErrors,
+    };
   }
-
+  console.log("validation passed.");
   const { character, category, note, opponent } = results.data;
   const user = await getCurrentUser();
 

@@ -31,8 +31,9 @@ export default async function CharacterPage({
 
   return (
     <div>
-      <h1>Character Page</h1>
-      <h2>{characterChoice && characterChoice.name}</h2>
+      <h1 className="text-5xl font-black">
+        {characterChoice && characterChoice.name}
+      </h1>
       <div>
         <NoteForm
           characterList={characterList}

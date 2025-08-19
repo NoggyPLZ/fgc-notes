@@ -25,39 +25,39 @@ export default function Signup(props: SignupProps) {
   const { handleClick } = props;
 
   const onSubmit = async (data: TSignUpSchema) => {
-    const response = await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const responseData = await response.json();
-    if (!response.ok) {
-      return;
-    }
+    // const response = await fetch("/api/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const responseData = await response.json();
+    // if (!response.ok) {
+    //   return;
+    // }
 
-    if (responseData.errors) {
-      const errors = responseData.errors;
-      if (errors.email) {
-        setError("email", {
-          type: "server",
-          message: errors.email,
-        });
-      } else if (errors.password) {
-        setError("password", {
-          type: "server",
-          message: errors.password,
-        });
-      } else if (errors.confirmPassword) {
-        setError("confirmPassword", {
-          type: "server",
-          message: errors.confirmPassword,
-        });
-      } else {
-        alert("something went wrong!");
-      }
-    }
+    // if (responseData.errors) {
+    //   const errors = responseData.errors;
+    //   if (errors.email) {
+    //     setError("email", {
+    //       type: "server",
+    //       message: errors.email,
+    //     });
+    //   } else if (errors.password) {
+    //     setError("password", {
+    //       type: "server",
+    //       message: errors.password,
+    //     });
+    //   } else if (errors.confirmPassword) {
+    //     setError("confirmPassword", {
+    //       type: "server",
+    //       message: errors.confirmPassword,
+    //     });
+    //   } else {
+    //     alert("something went wrong!");
+    //   }
+    // }
 
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
