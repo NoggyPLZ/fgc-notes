@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { getCurrentUser } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 const testUser = {
   id: "1",
@@ -133,7 +134,8 @@ export async function noteSubmit(prevState: any, formData: FormData) {
     };
   }
   console.log("validation passed.");
-  const { character, category, note, opponent } = results.data;
+  const { character, category, note, opponent, characterslug, gameslug } =
+    results.data;
   const user = await getCurrentUser();
 
   if (!user) {
@@ -154,6 +156,7 @@ export async function noteSubmit(prevState: any, formData: FormData) {
         ...(opponent ? { opponentId: opponent } : {}),
       },
     });
+    revalidatePath(`/select/${gameslug}/${characterslug}`);
   } catch (error) {
     console.log("Error making note:", error);
   }

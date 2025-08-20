@@ -1,3 +1,4 @@
+import NoteSection from "@/components/character/NoteSection";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
 
@@ -34,10 +35,12 @@ export default async function CharacterPage({
       <h1 className="text-5xl font-black">
         {characterChoice && characterChoice.name}
       </h1>
+      <NoteSection characterId={characterId} characterList={characterList} />
       <div>
         <NoteForm
           characterList={characterList}
           mainCharacter={characterChoice}
+          game={game.slug}
         />
       </div>
     </div>

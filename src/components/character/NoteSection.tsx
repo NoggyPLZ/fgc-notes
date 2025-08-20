@@ -1,0 +1,66 @@
+import { Note } from "@/generated/prisma";
+import { prisma } from "@/lib/db";
+import { Character, NoteCategory } from "@prisma/client";
+import NoteByCategory from "./NoteByCategory";
+import { NoteWithUserSafe } from "@/lib/types";
+
+type NoteSectionProps = {
+  category: NoteCategory;
+  note: Note;
+};
+
+export default async function NoteSection({
+  characterId,
+  characterList,
+}: {
+  characterId: string;
+  characterList: Character[];
+}) {
+  const notes = await prisma.character.findUnique({
+    where: {
+      slug: characterId,
+    },
+    include: {
+      notesAsMain: {
+        include: {
+          User: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
+  if (!notes) {
+    return <div>no notes found</div>;
+  }
+  const category: NoteCategory[] = ["NEUTRAL", "COMBOS", "SETPLAY", "MATCHUPS"];
+
+  const notesByCategory = (notesToSort: NoteWithUserSafe[]) => {
+    const groupByCategory = notesToSort.reduce<
+      Record<string, NoteWithUserSafe[]>
+    >((acc, note) => {
+      (acc[note.category] ||= []).push(note);
+      return acc;
+    }, {});
+
+    for (const cat in groupByCategory) {
+      groupByCategory[cat].sort((a, b) => b.rating - a.rating);
+    }
+    return groupByCategory;
+  };
+
+  const grouped = notesByCategory(notes.notesAsMain);
+
+  return (
+    <div>
+      {category.map((cat, i) => (
+        <div key={i}>
+          <NoteByCategory category={cat} notes={grouped[cat] ?? []} />
+        </div>
+      ))}
+    </div>
+  );
+}

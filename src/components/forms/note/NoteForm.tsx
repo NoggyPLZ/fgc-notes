@@ -12,10 +12,11 @@ import { useActionState } from "react";
 type NoteFormProps = {
   characterList: Character[];
   mainCharacter: Character;
+  game: string;
 };
 
 export default function NoteForm(props: NoteFormProps) {
-  const { characterList, mainCharacter } = props;
+  const { characterList, mainCharacter, game } = props;
   const [showMatchups, setShowMatchups] = useState<boolean>(false);
   const [state, noteSubmitAction] = useActionState(noteSubmit, undefined);
   const [numberOfNotes, setNumberOfNotes] = useState<number>(1);
@@ -43,6 +44,8 @@ export default function NoteForm(props: NoteFormProps) {
   return (
     <div>
       <form action={noteSubmitAction} className="flex flex-col gap-5">
+        <input type="hidden" name="characterslug" value={mainCharacter.slug} />
+        <input type="hidden" name="gameslug" value={game} />
         <input type="hidden" name="character" value={mainCharacter.id} />
         {state?.errors?.user && (
           <p className="text-red-500">{state.errors.user}</p>
