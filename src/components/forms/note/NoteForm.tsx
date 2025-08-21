@@ -6,18 +6,26 @@ import { useForm } from "react-hook-form";
 import { TNoteSchema, noteSchema } from "@/lib/types";
 import { noteSubmit } from "@/actions/actions";
 import { useState } from "react";
-import { Character } from "@prisma/client";
+import { Character, Note, NoteCategory } from "@prisma/client";
 import { useActionState } from "react";
 
 type NoteFormProps = {
   characterList: Character[];
   mainCharacter: Character;
   game: string;
+  latestCategory?: NoteCategory;
+  latestOpponent?: string | null;
 };
 
 export default function NoteForm(props: NoteFormProps) {
-  const { characterList, mainCharacter, game } = props;
-  const [showMatchups, setShowMatchups] = useState<boolean>(false);
+  const { characterList, mainCharacter, game, latestCategory, latestOpponent } =
+    props;
+  const [category, setCategory] = useState<NoteCategory>(
+    latestCategory ?? "NEUTRAL"
+  );
+  const [opponent, setOpponent] = useState(
+    latestOpponent ?? characterList[0].id
+  );
   const [state, noteSubmitAction] = useActionState(noteSubmit, undefined);
   const [numberOfNotes, setNumberOfNotes] = useState<number>(1);
   const {
@@ -30,16 +38,6 @@ export default function NoteForm(props: NoteFormProps) {
   } = useForm<TNoteSchema>({
     resolver: zodResolver(noteSchema),
   });
-
-  const changeHandler = (e: any) => {
-    const value = e.target.value;
-    if (value === "MATCHUPS") {
-      setShowMatchups(true);
-    } else {
-      setShowMatchups(false);
-    }
-  };
-  console.log("list here", characterList);
 
   return (
     <div>
@@ -56,10 +54,10 @@ export default function NoteForm(props: NoteFormProps) {
               Category
             </label>
             <select
-              onChange={changeHandler}
+              onChange={(e) => setCategory(e.target.value as NoteCategory)}
               name="category"
-              defaultValue={"NEUTRAL"}
               id="category"
+              value={category}
             >
               <option value="NEUTRAL">Neutral</option>
               <option value="COMBOS">Combos</option>
@@ -70,7 +68,7 @@ export default function NoteForm(props: NoteFormProps) {
               <p className="text-red-500">{state.errors.category}</p>
             )}
           </div>
-          {showMatchups && (
+          {category === "MATCHUPS" && (
             <div className="flex flex-col">
               <label htmlFor="opponent" className="font-bold">
                 Matchup
@@ -78,7 +76,8 @@ export default function NoteForm(props: NoteFormProps) {
               <select
                 name="opponent"
                 id="opponent"
-                defaultValue={characterList[0].id}
+                value={opponent}
+                onChange={(e) => setOpponent(e.target.value)}
               >
                 {characterList.map((char) => (
                   <option key={char.slug} value={char.id}>

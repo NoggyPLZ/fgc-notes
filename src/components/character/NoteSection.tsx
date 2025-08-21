@@ -58,7 +58,11 @@ export default async function NoteSection({
     <div>
       {category.map((cat, i) => (
         <div key={i}>
-          <NoteByCategory category={cat} notes={grouped[cat] ?? []} />
+          <NoteByCategory
+            category={cat}
+            notes={grouped[cat] ?? []}
+            characterList={characterList}
+          />
         </div>
       ))}
     </div>

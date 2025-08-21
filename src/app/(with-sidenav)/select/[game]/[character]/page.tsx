@@ -20,6 +20,15 @@ export default async function CharacterPage({
     return <div>no game found</div>;
   }
 
+  const latestNote = await prisma.note.findFirst({
+    where: {
+      Character: {
+        slug: characterId,
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
   const characterList = game.characters;
 
   const characterChoice = game.characters.find(
@@ -32,15 +41,18 @@ export default async function CharacterPage({
 
   return (
     <div>
-      <h1 className="text-5xl font-black">
+      <h1 className="text-5xl font-black mb-5">
         {characterChoice && characterChoice.name}
       </h1>
       <NoteSection characterId={characterId} characterList={characterList} />
       <div>
         <NoteForm
+          key={latestNote?.id}
           characterList={characterList}
           mainCharacter={characterChoice}
           game={game.slug}
+          latestCategory={latestNote?.category}
+          latestOpponent={latestNote?.opponentId}
         />
       </div>
     </div>
