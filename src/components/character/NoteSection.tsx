@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { Character, NoteCategory } from "@prisma/client";
 import NoteByCategory from "./NoteByCategory";
 import { NoteWithUserSafe } from "@/lib/types";
+import { getCurrentUser } from "@/lib/auth";
 
 type NoteSectionProps = {
   category: NoteCategory;
@@ -16,6 +17,7 @@ export default async function NoteSection({
   characterId: string;
   characterList: Character[];
 }) {
+  const user = await getCurrentUser();
   const notes = await prisma.character.findUnique({
     where: {
       slug: characterId,
@@ -29,10 +31,31 @@ export default async function NoteSection({
               name: true,
             },
           },
+          votes: {
+            where: { userId: user?.id },
+            select: { value: true },
+          },
         },
       },
     },
   });
+
+  if (notes) {
+    const noteIds = notes.notesAsMain.map((note) => note.id);
+
+    const voteSums = await prisma.votes.groupBy({
+      by: ["noteId"],
+      where: {
+        noteId: {
+          in: noteIds,
+        },
+      },
+      _sum: {
+        value: true,
+      },
+    });
+  }
+
   if (!notes) {
     return <div>no notes found</div>;
   }

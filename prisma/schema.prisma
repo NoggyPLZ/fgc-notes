@@ -16,16 +16,20 @@ model Game {
   slug       String      @unique
   name       String
   characters Character[]
+  logoUrl    String?
 }
 
 model Character {
-  id              String @id @default(cuid())
-  slug            String @unique
+  id              String  @id @default(cuid())
+  slug            String  @unique
   name            String
-  notesAsMain     Note[] @relation("MainCharacterNotes")
-  notesAsOpponent Note[] @relation("OpponentCharacterNotes")
-  Game            Game   @relation(fields: [gameId], references: [id])
+  notesAsMain     Note[]  @relation("MainCharacterNotes")
+  notesAsOpponent Note[]  @relation("OpponentCharacterNotes")
+  Game            Game    @relation(fields: [gameId], references: [id])
   gameId          String
+  story           String?
+  avatarUrl       String?
+  profileImageUrl String?
 }
 
 model Note {
@@ -41,6 +45,7 @@ model Note {
   userId      String
   User        User         @relation(fields: [userId], references: [id])
   category    NoteCategory
+  votes       Votes[]
 }
 
 enum NoteCategory {
@@ -60,7 +65,9 @@ model User {
   rating    Int      @default(1)
   role      Role     @default(USER)
   status    Status   @default(ACTIVE)
+  avatarUrl String?
   notes     Note[]
+  votes     Votes[]
 }
 
 enum Status {
@@ -71,4 +78,15 @@ enum Status {
 enum Role {
   USER
   ADMIN
+}
+
+model Votes {
+  id     String @id @default(cuid())
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+  noteId String
+  Note   Note   @relation(fields: [noteId], references: [id])
+  value  Int
+
+  @@unique([userId, noteId])
 }

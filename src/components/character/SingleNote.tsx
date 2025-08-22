@@ -21,8 +21,8 @@ export default function SingleNote(props: SingleNoteProps) {
         <div className="flex flex-col">
           <h5 className="text-xs font-light">{note.User.name}</h5>
           <h3 className="text-lg">{note.content}</h3>
-          <div className="flex flex-row gap-3 mt-2">
-            <NoteRating />
+          <div className="flex flex-row gap-3 mt-2 items-center">
+            <NoteRating rating={note.rating} />
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
           </div>
         </div>
