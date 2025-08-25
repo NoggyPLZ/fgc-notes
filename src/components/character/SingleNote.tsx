@@ -1,12 +1,16 @@
-import { NoteWithUserSafe } from "@/lib/types";
+import { NoteWithUserSafe, TVoteSums } from "@/lib/types";
 import NoteRating from "./NoteRating";
 
 type SingleNoteProps = {
   note: NoteWithUserSafe;
+  voteSums: TVoteSums[];
 };
 
 export default function SingleNote(props: SingleNoteProps) {
-  const { note } = props;
+  const { note, voteSums } = props;
+
+  const voteSum = voteSums.filter((vote) => vote.noteId === note.id);
+  const total = voteSum[0]?._sum?.value || 0;
 
   const date = new Date(note.updatedAt);
   const formattedDate = date.toLocaleDateString("en-US", {
@@ -22,7 +26,7 @@ export default function SingleNote(props: SingleNoteProps) {
           <h5 className="text-xs font-light">{note.User.name}</h5>
           <h3 className="text-lg">{note.content}</h3>
           <div className="flex flex-row gap-3 mt-2 items-center">
-            <NoteRating rating={note.rating} />
+            <NoteRating rating={total + 1} note={note} />
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
           </div>
         </div>

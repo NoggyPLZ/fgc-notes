@@ -28,6 +28,7 @@ export async function getCurrentUser() {
     select: {
       id: true,
       name: true,
+      votes: true,
     },
   });
   return user;

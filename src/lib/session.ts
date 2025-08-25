@@ -34,13 +34,18 @@ export async function encrypt(payload: SessionPayload) {
     .sign(encodedKey);
 }
 
-export async function decrypt(session: string | undefined = "") {
+export async function decrypt(session?: string) {
+  if (!session) {
+    console.log("no session provided");
+    return null;
+  }
+  console.log("verifying session: ", session?.slice(0, 30));
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ["HS256"],
     });
     return payload;
   } catch (error) {
-    console.log("failed to verify session");
+    console.log("failed to verify session ", error);
   }
 }

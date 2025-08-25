@@ -40,21 +40,21 @@ export default async function NoteSection({
     },
   });
 
-  if (notes) {
-    const noteIds = notes.notesAsMain.map((note) => note.id);
+  // console.log(notes?.notesAsMain[0]); //CONSOLE LOG TO DELETE AFTER DEV
 
-    const voteSums = await prisma.votes.groupBy({
-      by: ["noteId"],
-      where: {
-        noteId: {
-          in: noteIds,
-        },
+  const noteIds = notes?.notesAsMain.map((note) => note.id);
+
+  const voteSums = await prisma.votes.groupBy({
+    by: ["noteId"],
+    where: {
+      noteId: {
+        in: noteIds,
       },
-      _sum: {
-        value: true,
-      },
-    });
-  }
+    },
+    _sum: {
+      value: true,
+    },
+  });
 
   if (!notes) {
     return <div>no notes found</div>;
@@ -85,6 +85,7 @@ export default async function NoteSection({
             category={cat}
             notes={grouped[cat] ?? []}
             characterList={characterList}
+            voteSums={voteSums}
           />
         </div>
       ))}
