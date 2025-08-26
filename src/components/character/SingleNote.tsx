@@ -1,4 +1,4 @@
-import { NoteWithUserSafe, TVoteSums } from "@/lib/types";
+import { NoteWithUserAndVote, NoteWithUserSafe, TVoteSums } from "@/lib/types";
 import NoteRating from "./NoteRating";
 
 type SingleNoteProps = {
@@ -26,7 +26,7 @@ export default function SingleNote(props: SingleNoteProps) {
           <h5 className="text-xs font-light">{note.User.name}</h5>
           <h3 className="text-lg">{note.content}</h3>
           <div className="flex flex-row gap-3 mt-2 items-center">
-            <NoteRating rating={total + 1} note={note} />
+            <NoteRating rating={total + 1} note={note as NoteWithUserAndVote} />
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
           </div>
         </div>

@@ -11,9 +11,8 @@ type NoteByCategoryProps = {
 
 export default function NoteByCategory(props: NoteByCategoryProps) {
   const { category, notes, characterList, voteSums } = props;
-
+  // console.log(voteSums);
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
-  console.log(voteSums);
   return (
     <div>
       <h1 className="font-black">{category}</h1>

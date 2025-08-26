@@ -53,6 +53,10 @@ export type NoteWithUserSafe = Prisma.NoteGetPayload<{
   };
 }>;
 
+export type NoteWithUserAndVote = NoteWithUserSafe & {
+  votes?: { value: number }[];
+};
+
 export const voteSchema = z.object({
   noteId: z.string().cuid(),
   value: z.coerce.number().refine((v): v is 1 | -1 => v === 1 || v === -1, {
@@ -60,7 +64,10 @@ export const voteSchema = z.object({
   }),
 });
 
-export type TVoteSchema = z.infer<typeof voteSchema>;
+export type TVoteSchema = {
+  noteId: string;
+  value: "1" | "-1";
+};
 
 export type TVoteSums = {
   _sum: {

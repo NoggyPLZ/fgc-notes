@@ -40,7 +40,7 @@ export default async function NoteSection({
     },
   });
 
-  // console.log(notes?.notesAsMain[0]); //CONSOLE LOG TO DELETE AFTER DEV
+  console.log(notes?.notesAsMain[2].votes); //CONSOLE LOG TO DELETE AFTER DEV
 
   const noteIds = notes?.notesAsMain.map((note) => note.id);
 
