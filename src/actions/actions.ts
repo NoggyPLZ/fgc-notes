@@ -230,3 +230,72 @@ export async function voteSubmit(prevState: any, formData: FormData) {
     }
   }
 }
+
+export async function voteHandle(voteEntry: any) {
+  console.log("starting vote validation...");
+  const results = voteSchema.safeParse(voteEntry);
+
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  const { value, noteId } = results.data;
+  console.log("The vote passed validation");
+  const user = await getCurrentUser();
+  if (!user) {
+    return {
+      errors: ["no logged in user found"],
+    };
+  }
+  console.log("user found");
+
+  const userVote = user.votes.find((vote) => vote.noteId === noteId);
+
+  // console.log(user.votes);
+  console.log("Note id: ", noteId);
+  console.log(userVote);
+  if (!userVote) {
+    try {
+      await prisma.votes.create({
+        data: {
+          userId: user.id,
+          noteId: noteId,
+          value: value,
+        },
+      });
+    } catch (error) {
+      console.log("error voting", error);
+    }
+  } else if (userVote.value === value) {
+    console.log("userVote value: ", userVote.value);
+    console.log("value: ", value);
+    try {
+      console.log("DELETING RECORD");
+      await prisma.votes.delete({
+        where: {
+          id: userVote.id,
+        },
+      });
+    } catch (error) {
+      console.log("Error deleting vote ", error);
+    }
+  } else {
+    try {
+      console.log("UPDATING RECORD TO ", value);
+      await prisma.votes.update({
+        where: {
+          id: userVote.id,
+        },
+        data: {
+          value: value,
+        },
+      });
+    } catch (error) {
+      console.log("Error updating vote ", error);
+    }
+  }
+}
