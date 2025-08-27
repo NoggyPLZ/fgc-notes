@@ -39,7 +39,7 @@ export async function decrypt(session?: string) {
     console.log("no session provided");
     return null;
   }
-  console.log("verifying session: ", session?.slice(0, 30));
+  // console.log("verifying session: ", session?.slice(0, 30));
   try {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ["HS256"],

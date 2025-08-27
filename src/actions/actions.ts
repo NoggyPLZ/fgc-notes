@@ -186,7 +186,7 @@ export async function voteSubmit(prevState: any, formData: FormData) {
 
   const userVote = user.votes.find((vote) => vote.noteId === noteId);
 
-  console.log(user.votes);
+  // console.log(user.votes);
   console.log("Note id: ", noteId);
   console.log(userVote);
   if (!userVote) {
@@ -202,6 +202,8 @@ export async function voteSubmit(prevState: any, formData: FormData) {
       console.log("error voting", error);
     }
   } else if (userVote.value === value) {
+    console.log("userVote value: ", userVote.value);
+    console.log("value: ", value);
     try {
       console.log("DELETING RECORD");
       await prisma.votes.delete({
@@ -227,13 +229,4 @@ export async function voteSubmit(prevState: any, formData: FormData) {
       console.log("Error updating vote ", error);
     }
   }
-
-  // if (userVote && userVote.value === value) {
-  //   //Destroy entry
-  // } else if ((userVote && value === 1) || value === -1) {
-  //   //Update
-  // }
-
-  // need to write the try/catch
-  //This needs the userId, noteId and value
 }
