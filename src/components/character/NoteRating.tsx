@@ -1,10 +1,8 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { startTransition, useActionState, useState } from "react";
+import { startTransition, useState } from "react";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
-import { voteHandle, voteSubmit } from "@/actions/actions";
+import { voteHandle } from "@/actions/actions";
 import { NoteWithUserAndVote } from "@/lib/types";
 
 type ActiveValueType = "1" | "-1" | null;
@@ -21,10 +19,6 @@ export default function NoteRating({ rating, note }: NoteRatingProps) {
         ? "1"
         : "-1"
       : null;
-  const [state, voteSubmitAction] = useActionState(voteSubmit, undefined);
-  const [numOfVotes, setNumOfVotes] = useState<number>(rating);
-  const [activeButton, setActiveButton] = useState<ActiveValueType>(voteState);
-
   const [optimisticVote, setOptimisticVote] =
     useState<ActiveValueType>(voteState);
   const [optimisticCount, setOptimisticCount] = useState<number>(rating);
