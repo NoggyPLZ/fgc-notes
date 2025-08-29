@@ -85,7 +85,7 @@ model Votes {
   userId String
   User   User   @relation(fields: [userId], references: [id])
   noteId String
-  Note   Note   @relation(fields: [noteId], references: [id])
+  Note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
   value  Int
 
   @@unique([userId, noteId])

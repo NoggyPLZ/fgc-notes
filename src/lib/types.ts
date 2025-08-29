@@ -75,3 +75,10 @@ export type TVoteSums = {
   };
   noteId: string;
 };
+
+export const editNoteSchema = z.object({
+  id: z.string(),
+  content: z.string(),
+});
+
+export type TEditNoteSchema = z.infer<typeof editNoteSchema>;

@@ -18,6 +18,9 @@ export default async function NoteSection({
   characterList: Character[];
 }) {
   const user = await getCurrentUser();
+  if (!user) {
+    return <div>user not found</div>;
+  }
   const notes = await prisma.character.findUnique({
     where: {
       slug: characterId,
@@ -86,6 +89,7 @@ export default async function NoteSection({
             notes={grouped[cat] ?? []}
             characterList={characterList}
             voteSums={voteSums}
+            currentUserId={user?.id}
           />
         </div>
       ))}

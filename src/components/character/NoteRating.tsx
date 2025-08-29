@@ -48,7 +48,7 @@ export default function NoteRating({ rating, note }: NoteRatingProps) {
 
   return (
     <div className="flex flex-row gap-1">
-      {optimisticCount}
+      {optimisticCount + 1}
       <button
         name="value"
         onClick={() => handleVote("1")}

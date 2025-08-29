@@ -1,6 +1,12 @@
 "use server";
 import z from "zod";
-import { loginSchema, noteSchema, signUpSchema, voteSchema } from "@/lib/types";
+import {
+  editNoteSchema,
+  loginSchema,
+  noteSchema,
+  signUpSchema,
+  voteSchema,
+} from "@/lib/types";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
@@ -250,5 +256,60 @@ export async function voteHandle(voteEntry: any) {
     } catch (error) {
       console.log("Error updating/inserting vote ", error);
     }
+  }
+}
+
+export async function editSubmit(prevState: any, formData: FormData) {
+  console.log("checking against edit schema...");
+  console.log(Object.fromEntries(formData));
+  const results = editNoteSchema.safeParse(Object.fromEntries(formData));
+  console.log("checking results...");
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat.fieldErrors);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  const { id, content } = results.data;
+
+  const noteForPath = await prisma.note.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      Character: {
+        select: {
+          slug: true,
+          Game: {
+            select: {
+              slug: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!noteForPath) {
+    console.log("No note found...");
+  }
+
+  try {
+    await prisma.note.update({
+      where: {
+        id: id,
+      },
+      data: {
+        content: content,
+      },
+    });
+    revalidatePath(
+      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
+    );
+    return { success: true };
+  } catch (error) {
+    console.log("Failed to update note: ", error);
   }
 }

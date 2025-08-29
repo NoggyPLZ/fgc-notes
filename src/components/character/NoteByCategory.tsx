@@ -7,10 +7,11 @@ type NoteByCategoryProps = {
   notes: NoteWithUserSafe[];
   characterList: Character[];
   voteSums: TVoteSums[];
+  currentUserId: string;
 };
 
 export default function NoteByCategory(props: NoteByCategoryProps) {
-  const { category, notes, characterList, voteSums } = props;
+  const { category, notes, characterList, voteSums, currentUserId } = props;
   // console.log(voteSums);
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
@@ -25,7 +26,11 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
               {matchupNotes.map((note, midx) => (
                 <div key={midx}>
                   {note.opponentId === char.id && (
-                    <SingleNote note={note} voteSums={voteSums} />
+                    <SingleNote
+                      note={note}
+                      voteSums={voteSums}
+                      currentUserId={currentUserId}
+                    />
                   )}
                 </div>
               ))}
@@ -35,7 +40,12 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
       ) : (
         <>
           {notes.map((note, i) => (
-            <SingleNote key={i} note={note} voteSums={voteSums} />
+            <SingleNote
+              key={i}
+              note={note}
+              voteSums={voteSums}
+              currentUserId={currentUserId}
+            />
           ))}
         </>
       )}
