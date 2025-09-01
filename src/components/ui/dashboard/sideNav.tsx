@@ -3,8 +3,12 @@ import Link from "next/link";
 import NavLinks from "../navLinks";
 import { Power } from "lucide-react";
 import ProfilePreview from "../ProfilePreview";
+import { prisma } from "@/lib/db";
+import { getCurrentUser } from "@/lib/auth";
 
-export default function SideNav() {
+export default async function SideNav() {
+  const user = await getCurrentUser();
+  if (!user) return <p>no user found</p>;
   return (
     <div className="flex flex-col h-full p-2">
       <div className="bg-gray-200 flex flex-col rounded-2xl grow">
@@ -14,9 +18,9 @@ export default function SideNav() {
         >
           Logo
         </Link>
-        <ProfilePreview />
+        <ProfilePreview user={user} />
         <div className="flex grow flex-row md:flex-col justify-between">
-          <NavLinks />
+          <NavLinks userId={user.id} />
           <div className="hidden h-auto grow md:block"></div>
           <form
             action={async () => {

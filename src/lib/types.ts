@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, Votes } from "@prisma/client";
 import z from "zod";
 
 export const loginSchema = z.object({
@@ -82,3 +82,13 @@ export const editNoteSchema = z.object({
 });
 
 export type TEditNoteSchema = z.infer<typeof editNoteSchema>;
+
+export type UserForProfile = {
+  id: string;
+  name: string;
+  email?: string;
+  createdAt?: Date;
+  verified?: Boolean;
+  status?: "ACTIVE" | "DISABLED";
+  votes?: Votes[];
+};

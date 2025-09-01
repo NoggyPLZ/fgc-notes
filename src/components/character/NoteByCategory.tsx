@@ -16,12 +16,12 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
     <div>
-      <h1 className="font-black">{category}</h1>
+      <h1 className="font-black text-rose-600">{category}</h1>
       {notes.length < 1 && `No notes for ${category}, be the first!`}
       {category === "MATCHUPS" ? (
-        <div>
+        <div className="flex gap-4">
           {characterList.map((char, i) => (
-            <div key={i}>
+            <div key={i} className="flex flex-col w-1/2">
               <h2 className="font-bold">{char.name}</h2>
               {matchupNotes.map((note, midx) => (
                 <div key={midx}>

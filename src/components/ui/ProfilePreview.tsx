@@ -1,8 +1,18 @@
 import Image from "next/image";
 import { getCurrentUser } from "@/lib/auth";
+import { User } from "@prisma/client";
+import { UserForProfile } from "@/lib/types";
 
-export default async function ProfilePreview() {
-  const user = await getCurrentUser();
+export default async function ProfilePreview({
+  user,
+}: {
+  user: UserForProfile | null;
+}) {
+  // const user = await getCurrentUser();
+
+  if (!user) {
+    return <p>no user found</p>;
+  }
 
   return (
     <div className="flex flex-col">

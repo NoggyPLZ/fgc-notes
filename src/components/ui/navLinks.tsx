@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import { Joystick, NotepadText } from "lucide-react";
+import { Joystick, NotepadText, Settings } from "lucide-react";
 
-export default function NavLinks() {
+export default function NavLinks({ userId }: { userId: string }) {
   const links = [
     {
       name: "Games",
@@ -13,6 +13,11 @@ export default function NavLinks() {
       name: "Notes",
       href: "/select/",
       icon: NotepadText,
+    },
+    {
+      name: "Profile Settings",
+      href: `/user/${userId}`,
+      icon: Settings,
     },
   ];
   return (
