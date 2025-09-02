@@ -25,7 +25,7 @@ export default function SingleNote(props: SingleNoteProps) {
   });
 
   return (
-    <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 pb-3">
+    <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-950 pb-3">
       <div className="flex flex-row gap-3 mb-2">
         <div>{/* {image here} */}</div>
         <div className="flex flex-col">

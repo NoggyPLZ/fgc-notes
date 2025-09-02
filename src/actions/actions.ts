@@ -1,6 +1,7 @@
 "use server";
 import z from "zod";
 import {
+  changeNameSchema,
   editNoteSchema,
   loginSchema,
   noteSchema,
@@ -311,5 +312,36 @@ export async function editSubmit(prevState: any, formData: FormData) {
     return { success: true };
   } catch (error) {
     console.log("Failed to update note: ", error);
+  }
+}
+
+export async function editName(prevState: any, formData: FormData) {
+  console.log("Name change validation starting...");
+  const results = changeNameSchema.safeParse(Object.fromEntries(formData));
+  console.log("Name change passed validation...");
+
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat.fieldErrors);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  const { id, name } = results.data;
+
+  try {
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+      },
+    });
+    revalidatePath(`/user/${id}`);
+    return { success: true };
+  } catch (error) {
+    console.log("Failed to update name: ", error);
   }
 }

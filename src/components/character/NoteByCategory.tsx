@@ -16,7 +16,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
     <div>
-      <h1 className="font-black text-rose-600">{category}</h1>
+      <h1 className="font-black text-rose-500 text-5xl pb-5">{category}</h1>
       {notes.length < 1 && `No notes for ${category}, be the first!`}
       {category === "MATCHUPS" ? (
         <div className="flex gap-4">

@@ -92,3 +92,10 @@ export type UserForProfile = {
   status?: "ACTIVE" | "DISABLED";
   votes?: Votes[];
 };
+
+export const changeNameSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+});
+
+export type TChangeNameSchema = z.infer<typeof changeNameSchema>;
