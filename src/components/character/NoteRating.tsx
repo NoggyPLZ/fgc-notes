@@ -47,7 +47,7 @@ export default function NoteRating({ rating, note }: NoteRatingProps) {
   };
 
   return (
-    <div className="flex flex-row gap-1">
+    <div className="flex flex-row gap-1 dark:bg-gray-900 bg-gray-800 text-gray-100 dark:border-gray-700 border-1 border-gray-400 p-1 pl-2 rounded-lg font-semibold">
       {optimisticCount + 1}
       <button
         name="value"

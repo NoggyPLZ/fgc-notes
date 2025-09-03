@@ -19,8 +19,8 @@ export default async function ProfilePreview({
       <Image
         src={"/profile-image-placeholder.gif"}
         alt={"profile image placholder"}
-        height={100}
-        width={100}
+        height={50}
+        width={50}
         className="rounded-full border-1 mx-auto"
       />
       <div className="text-center">

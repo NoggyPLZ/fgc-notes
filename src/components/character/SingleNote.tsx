@@ -25,19 +25,19 @@ export default function SingleNote(props: SingleNoteProps) {
   });
 
   return (
-    <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-950 pb-3">
+    <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3">
       <div className="flex flex-row gap-3 mb-2">
         <div>{/* {image here} */}</div>
         <div className="flex flex-col">
-          <h5 className="text-xs font-light">{note.User.name}</h5>
           <div className="flex flex-col gap-3">
-            <h3 className="">
+            <h3 className="flex flex-row gap-2 flex-wrap">
               {note.content}
               {creatorPresent && <EditNote note={note} />}
             </h3>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center">
             <NoteRating rating={total} note={note as NoteWithUserAndVote} />
+            <h5 className="text-xs font-light">{note.User.name}</h5>
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
             {creatorPresent && <DeleteNote note={note} />}
           </div>

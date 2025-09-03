@@ -1,3 +1,4 @@
+"use server";
 import { jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { prisma } from "./db";
@@ -17,6 +18,7 @@ export async function getSession() {
   }
 }
 
+//GET THE USER HERE, ABOVE FUNCTION IS A HELPER SHHH DON'T .. DON'T TOUCH NO NO BAD DEVELOPER! STOP IT!
 export async function getCurrentUser() {
   const session = await getSession();
 

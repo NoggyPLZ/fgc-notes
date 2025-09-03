@@ -21,6 +21,7 @@ const testUser = {
   password: "1234567890",
 };
 
+//LOGIN FUNCTION
 export async function login(prevState: any, formData: FormData) {
   console.log("running check now...");
   console.log(formData);
@@ -68,11 +69,13 @@ export async function login(prevState: any, formData: FormData) {
   redirect("/dashboard");
 }
 
+//SIGNOUT FUNCTION
 export async function logout() {
   await deleteSession();
   redirect("/");
 }
 
+//SIGNUP FUNCTION
 export async function signUp(prevState: any, formData: FormData) {
   console.log("Beginning sign up validation");
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
@@ -129,6 +132,7 @@ type NoteErrors = {
   user?: string[];
 };
 
+//NOTE SUBMISSION FUNCTION
 export async function noteSubmit(prevState: any, formData: FormData) {
   console.log("checking against type schema...");
   const results = noteSchema.safeParse(Object.fromEntries(formData));
@@ -169,6 +173,7 @@ export async function noteSubmit(prevState: any, formData: FormData) {
   }
 }
 
+//UPVOTE/DOWNVOTE ACTION
 export async function voteHandle(voteEntry: any) {
   console.log("starting vote validation...");
   const results = voteSchema.safeParse(voteEntry);
@@ -260,6 +265,7 @@ export async function voteHandle(voteEntry: any) {
   }
 }
 
+//EDIT NOTE FUNCTION
 export async function editSubmit(prevState: any, formData: FormData) {
   console.log("checking against edit schema...");
   console.log(Object.fromEntries(formData));
@@ -315,6 +321,7 @@ export async function editSubmit(prevState: any, formData: FormData) {
   }
 }
 
+//CHANGE NAME FUNCTION
 export async function editName(prevState: any, formData: FormData) {
   console.log("Name change validation starting...");
   const results = changeNameSchema.safeParse(Object.fromEntries(formData));
@@ -345,3 +352,7 @@ export async function editName(prevState: any, formData: FormData) {
     console.log("Failed to update name: ", error);
   }
 }
+
+//VERIFICATION TOKEN CREATION
+
+//PASSWORD RESET TOKEN CREATION
