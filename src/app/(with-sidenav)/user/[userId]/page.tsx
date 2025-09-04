@@ -5,6 +5,7 @@ import Image from "next/image";
 import { UserPen } from "lucide-react";
 import ChangeAvatar from "@/components/forms/profileEdit/ChangeAvatar";
 import ChangeTheme from "@/components/forms/profileEdit/ChangeTheme";
+import VerifyEmail from "@/components/dashboard/VerifyEmail";
 
 export default async function UserProfile({
   params,
@@ -57,12 +58,16 @@ export default async function UserProfile({
         <h4>
           Status: <strong>{user.status}</strong>
         </h4>
-        <h4>
-          Verified:{" "}
-          {user.verified
-            ? "Thank you for being verified!"
-            : "Our records indicate you are not verified yet."}
-        </h4>
+        {user.verified ? (
+          <div>
+            <h4>Verified: Thank you for being Verified!</h4>
+          </div>
+        ) : (
+          <div>
+            <h4>Verified: Our records indicate you are not verified yet.</h4>
+            <VerifyEmail />
+          </div>
+        )}
         <h4>Theme:</h4>
         <ChangeTheme />
       </div>

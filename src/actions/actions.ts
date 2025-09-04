@@ -14,6 +14,8 @@ import { prisma } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { getCurrentUser } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
+import { Resend } from "resend";
+import crypto from "crypto";
 
 const testUser = {
   id: "1",
@@ -353,6 +355,68 @@ export async function editName(prevState: any, formData: FormData) {
   }
 }
 
-//VERIFICATION TOKEN CREATION
+export type VerifyActionType = {
+  success?: boolean;
+  message?: string;
+};
+
+//SEND VERIFICATION EMAIL
+export async function sendVerifyEmail(prevState: any, formData: FormData) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  console.log("Email verification action pew");
+
+  const token = crypto.randomBytes(32).toString("hex");
+  const hashedVerify = await bcrypt.hash(token, 12);
+
+  const user = await getCurrentUser();
+  if (!user) {
+    return { success: false, message: "No user is logged in." };
+  }
+
+  const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000);
+
+  try {
+    const data = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: "bhicksdesigndev@gmail.com",
+      subject: "test",
+      html: `First Test here`,
+    });
+
+    await prisma.verfication.create({
+      data: {
+        userId: user.id,
+        token: hashedVerify,
+        expiresAt,
+      },
+    });
+    console.log(`Email sent `, data);
+    return { success: true, message: "Email sent!" };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to send email." };
+  }
+}
 
 //PASSWORD RESET TOKEN CREATION
+export async function sendResetPasswordEmail(
+  prevState: any,
+  formData: FormData
+) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  console.log("Password reset action...");
+
+  try {
+    const data = await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: "bhicksdesigndev@gmail.com",
+      subject: "test",
+      html: `First Test here`,
+    });
+    console.log(`Email sent `, data);
+    return { success: true, message: "Email sent!" };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "failed to send" };
+  }
+}
