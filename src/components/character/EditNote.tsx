@@ -12,7 +12,7 @@ export default function EditNote({ note }: { note: NoteWithUserSafe }) {
     <>
       <button
         onClick={() => setEditToggle((prev) => !prev)}
-        className={`cursor-pointer  rounded-md p-1 text-gray-200 bg-blue-500 hover:bg-blue-600 ml-1`}
+        className={`cursor-pointer rounded-md p-1 text-gray-200 bg-blue-500 hover:bg-blue-600 ml-3`}
       >
         <SquarePen size={15} />
       </button>

@@ -26,7 +26,7 @@ export default function EditNoteForm({
       className="flex flex-col gap-2 py-2"
     >
       <input type="hidden" name="id" value={note.id} />
-      <input
+      <textarea
         name="content"
         className="border-1 border-gray-400 rounded-2xl p-3 w-full"
         placeholder={content}

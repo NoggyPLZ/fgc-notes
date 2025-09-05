@@ -8,8 +8,6 @@ export default async function ProfilePreview({
 }: {
   user: UserForProfile | null;
 }) {
-  // const user = await getCurrentUser();
-
   if (!user) {
     return <p>no user found</p>;
   }
@@ -25,7 +23,9 @@ export default async function ProfilePreview({
       />
       <div className="text-center">
         <p className="text-center text-rose-500">Welcome back,</p>
-        <h4 className="text-xl text-gray-800">{user && user.name}</h4>
+        <h4 className="text-xl dark:text-gray-300 text-gray-800 ">
+          {user && user.name}
+        </h4>
       </div>
     </div>
   );

@@ -90,6 +90,7 @@ export default async function NoteSection({
             characterList={characterList}
             voteSums={voteSums}
             currentUserId={user?.id}
+            verified={user?.verified}
           />
         </div>
       ))}

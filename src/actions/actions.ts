@@ -380,7 +380,7 @@ export async function sendVerifyEmail(prevState: any, formData: FormData) {
       from: "onboarding@resend.dev",
       to: "bhicksdesigndev@gmail.com",
       subject: "test",
-      html: `First Test here`,
+      html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">http://localhost:3000/verify/${token}</a></p>`,
     });
 
     await prisma.verfication.create({

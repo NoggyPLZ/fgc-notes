@@ -8,10 +8,12 @@ type NoteByCategoryProps = {
   characterList: Character[];
   voteSums: TVoteSums[];
   currentUserId: string;
+  verified?: boolean;
 };
 
 export default function NoteByCategory(props: NoteByCategoryProps) {
-  const { category, notes, characterList, voteSums, currentUserId } = props;
+  const { category, notes, characterList, voteSums, currentUserId, verified } =
+    props;
   // console.log(voteSums);
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
@@ -30,6 +32,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
                       note={note}
                       voteSums={voteSums}
                       currentUserId={currentUserId}
+                      verified={verified}
                     />
                   )}
                 </div>
@@ -45,6 +48,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
               note={note}
               voteSums={voteSums}
               currentUserId={currentUserId}
+              verified={verified}
             />
           ))}
         </>

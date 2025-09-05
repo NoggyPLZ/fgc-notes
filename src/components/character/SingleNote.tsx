@@ -7,10 +7,11 @@ type SingleNoteProps = {
   note: NoteWithUserSafe;
   voteSums: TVoteSums[];
   currentUserId: string;
+  verified?: boolean;
 };
 
 export default function SingleNote(props: SingleNoteProps) {
-  const { note, voteSums, currentUserId } = props;
+  const { note, voteSums, currentUserId, verified } = props;
 
   const creatorPresent = currentUserId === note.userId;
 
@@ -24,22 +25,24 @@ export default function SingleNote(props: SingleNoteProps) {
     year: "numeric",
   });
 
+  const canEdit = creatorPresent && verified;
+
   return (
     <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3">
       <div className="flex flex-row gap-3 mb-2">
         <div>{/* {image here} */}</div>
         <div className="flex flex-col">
           <div className="flex flex-col gap-3">
-            <h3 className="flex flex-row gap-2 flex-wrap">
+            <h3>
               {note.content}
-              {creatorPresent && <EditNote note={note} />}
+              {canEdit && <EditNote note={note} />}
             </h3>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center">
             <NoteRating rating={total} note={note as NoteWithUserAndVote} />
             <h5 className="text-xs font-light">{note.User.name}</h5>
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
-            {creatorPresent && <DeleteNote note={note} />}
+            {canEdit && <DeleteNote note={note} />}
           </div>
         </div>
       </div>
