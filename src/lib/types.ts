@@ -99,3 +99,23 @@ export const changeNameSchema = z.object({
 });
 
 export type TChangeNameSchema = z.infer<typeof changeNameSchema>;
+
+export const confirmEmailSchema = z.object({
+  email: z.email({ message: "Must be a valid email" }).trim(),
+});
+
+export type TConfirmEmailSchema = z.infer<typeof confirmEmailSchema>;
+
+export const newPasswordSchema = z
+  .object({
+    userId: z.string(),
+    resetId: z.string(),
+    password: z.string().min(10, "Password must be at least 10 characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
+
+export type TNewPasswordSchema = z.infer<typeof newPasswordSchema>;

@@ -2,8 +2,10 @@
 import z from "zod";
 import {
   changeNameSchema,
+  confirmEmailSchema,
   editNoteSchema,
   loginSchema,
+  newPasswordSchema,
   noteSchema,
   signUpSchema,
   voteSchema,
@@ -380,7 +382,7 @@ export async function sendVerifyEmail(prevState: any, formData: FormData) {
       from: "onboarding@resend.dev",
       to: "bhicksdesigndev@gmail.com",
       subject: "test",
-      html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">http://localhost:3000/verify/${token}</a></p>`,
+      html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">to verify your account</a></p>`,
     });
 
     await prisma.verfication.create({
@@ -398,25 +400,147 @@ export async function sendVerifyEmail(prevState: any, formData: FormData) {
   }
 }
 
-//PASSWORD RESET TOKEN CREATION
-export async function sendResetPasswordEmail(
-  prevState: any,
-  formData: FormData
-) {
+//ACTION TO RESET PASSWORD FROM FORM
+export async function confirmEmailForPW(prevState: any, formData: FormData) {
+  console.log("confirming email...");
+  const results = confirmEmailSchema.safeParse(Object.fromEntries(formData));
+  console.log(results);
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat.fieldErrors);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  console.log("passed verification, onto gathering data for email...");
+
+  const { email } = results.data;
+
+  const token = crypto.randomBytes(32).toString("hex");
+  const hashedToken = await bcrypt.hash(token, 12);
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  if (!user) {
+    return {
+      errors: {
+        email: ["No user found"],
+      },
+    };
+  }
+
+  const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000);
+
   const resend = new Resend(process.env.RESEND_API_KEY);
-  console.log("Password reset action...");
 
   try {
+    await prisma.passwordReset.create({
+      data: {
+        userId: user.id,
+        token: hashedToken,
+        expiresAt,
+      },
+    });
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "bhicksdesigndev@gmail.com",
-      subject: "test",
-      html: `First Test here`,
+      subject: "Password Reset Request",
+      html: `<p>A password reset was requested for this email. <a href="http://localhost:3000/reset/${token}?user=${user.id}">Click here to reset password</a>. If you didn't request this, please disregard</p>`,
     });
-    console.log(`Email sent `, data);
-    return { success: true, message: "Email sent!" };
   } catch (error) {
-    console.log(error);
-    return { success: false, message: "failed to send" };
+    console.log("Errors: ", error);
   }
 }
+
+export async function setNewPassword(prevState: any, formData: FormData) {
+  console.log("Starting password reset...");
+  const results = newPasswordSchema.safeParse(Object.fromEntries(formData));
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat.fieldErrors);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+
+  const { password, resetId, userId } = results.data;
+
+  const hashedToken = await prisma.passwordReset.findFirst({
+    where: {
+      userId,
+    },
+  });
+
+  if (!hashedToken) {
+    return {
+      errors: {
+        password: "Token is expired or missing",
+      },
+    };
+  }
+
+  const isMatch = bcrypt.compare(resetId, hashedToken.token);
+
+  if (!isMatch) {
+    return {
+      errors: {
+        password: ["No user found or reset token exired"],
+      },
+    };
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  try {
+    await prisma.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+    await prisma.passwordReset.delete({
+      where: {
+        token: hashedToken.token,
+      },
+    });
+  } catch (error) {
+    console.log("Failed to reset password: ", error);
+    return {
+      errors: {
+        password: [`Failed to reset password: ${error}`],
+      },
+    };
+  }
+}
+
+// //PASSWORD RESET TOKEN CREATION
+// export async function sendResetPasswordEmail(
+//   prevState: any,
+//   formData: FormData
+// ) {
+//   const resend = new Resend(process.env.RESEND_API_KEY);
+//   console.log("Password reset action...");
+
+//   try {
+//     const data = await resend.emails.send({
+//       from: "onboarding@resend.dev",
+//       to: "bhicksdesigndev@gmail.com",
+//       subject: "test",
+//       html: `First Test here`,
+//     });
+//     console.log(`Email sent `, data);
+//     return { success: true, message: "Email sent!" };
+//   } catch (error) {
+//     console.log(error);
+//     return { success: false, message: "failed to send" };
+//   }
+// }
