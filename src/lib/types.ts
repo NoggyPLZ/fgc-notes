@@ -119,3 +119,11 @@ export const newPasswordSchema = z
   });
 
 export type TNewPasswordSchema = z.infer<typeof newPasswordSchema>;
+
+export const reportSchema = z.object({
+  noteId: z.string().cuid(),
+  reason: z.enum(["harrassment", "racism", "sexual"]),
+  info: z.string(),
+});
+
+export type TReportSchema = z.infer<typeof reportSchema>;

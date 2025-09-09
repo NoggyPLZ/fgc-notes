@@ -46,6 +46,7 @@ model Note {
   User        User         @relation(fields: [userId], references: [id])
   category    NoteCategory
   votes       Votes[]
+  reports     Reports[]    @relation("ReportsOnNote")
 }
 
 enum NoteCategory {
@@ -70,6 +71,7 @@ model User {
   votes         Votes[]
   verification  Verfication?
   passwordreset PasswordReset?
+  Reports       Reports[]      @relation("ReportsByUser")
 }
 
 enum Status {
@@ -107,4 +109,14 @@ model PasswordReset {
   token     String   @unique
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Reports {
+  id         String @id @default(cuid())
+  reportedBy String
+  reporter   User   @relation("ReportsByUser", fields: [reportedBy], references: [id])
+  noteId     String
+  Note       Note   @relation("ReportsOnNote", fields: [noteId], references: [id])
+  reason     String
+  info       String
 }

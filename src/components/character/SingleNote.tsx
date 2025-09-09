@@ -2,6 +2,7 @@ import { NoteWithUserAndVote, NoteWithUserSafe, TVoteSums } from "@/lib/types";
 import NoteRating from "./NoteRating";
 import EditNote from "./EditNote";
 import DeleteNote from "./DeleteNote";
+import ReportNote from "./ReportNote";
 
 type SingleNoteProps = {
   note: NoteWithUserSafe;
@@ -28,10 +29,10 @@ export default function SingleNote(props: SingleNoteProps) {
   const canEdit = creatorPresent && verified;
 
   return (
-    <div className="flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3">
+    <div className="relative flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3">
       <div className="flex flex-row gap-3 mb-2">
         <div>{/* {image here} */}</div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           <div className="flex flex-col gap-3">
             <h3>
               {note.content}
@@ -43,6 +44,7 @@ export default function SingleNote(props: SingleNoteProps) {
             <h5 className="text-xs font-light">{note.User.name}</h5>
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
             {canEdit && <DeleteNote note={note} />}
+            {verified && <ReportNote note={note} />}
           </div>
         </div>
       </div>

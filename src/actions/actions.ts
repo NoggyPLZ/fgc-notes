@@ -7,6 +7,7 @@ import {
   loginSchema,
   newPasswordSchema,
   noteSchema,
+  reportSchema,
   signUpSchema,
   voteSchema,
 } from "@/lib/types";
@@ -522,25 +523,36 @@ export async function setNewPassword(prevState: any, formData: FormData) {
   }
 }
 
-// //PASSWORD RESET TOKEN CREATION
-// export async function sendResetPasswordEmail(
-//   prevState: any,
-//   formData: FormData
-// ) {
-//   const resend = new Resend(process.env.RESEND_API_KEY);
-//   console.log("Password reset action...");
+export async function reportAction(prevState: any, formData: FormData) {
+  const results = reportSchema.safeParse(Object.fromEntries(formData));
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
 
-//   try {
-//     const data = await resend.emails.send({
-//       from: "onboarding@resend.dev",
-//       to: "bhicksdesigndev@gmail.com",
-//       subject: "test",
-//       html: `First Test here`,
-//     });
-//     console.log(`Email sent `, data);
-//     return { success: true, message: "Email sent!" };
-//   } catch (error) {
-//     console.log(error);
-//     return { success: false, message: "failed to send" };
-//   }
-// }
+  const user = await getCurrentUser();
+  if (!user || !user.verified) {
+    return {
+      errors: {
+        user: ["User not logged in, or not verified."],
+      },
+    };
+  }
+
+  const { noteId, reason, info } = results.data;
+
+  try {
+    await prisma.reports.create({
+      data: {
+        reportedBy: user.id,
+        noteId,
+        reason,
+        info,
+      },
+    });
+  } catch (error) {
+    console.log("Failed to make a report: ", error);
+  }
+}
