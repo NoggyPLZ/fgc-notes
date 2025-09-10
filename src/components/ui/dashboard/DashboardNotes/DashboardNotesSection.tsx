@@ -19,8 +19,6 @@ export default async function DashboardNoteSection() {
     return <p>No recent notes found.</p>;
   }
 
-  console.log(recentNotes);
-
   return (
     <div className="flex flex-col bg-gray-200 dark:bg-gray-800 rounded-2xl p-2 max-w-[600px] pb-6 shadow-sm">
       <h2 className="font-black text-rose-500 text-5xl p-3 border-b-1 border-b-gray-300 dark:border-b-gray-900">
