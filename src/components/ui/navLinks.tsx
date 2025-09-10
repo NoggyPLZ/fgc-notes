@@ -1,18 +1,18 @@
 "use client";
 import Link from "next/link";
-import { Joystick, NotepadText, Settings } from "lucide-react";
+import { Joystick, LayoutGrid, NotepadText, Settings } from "lucide-react";
 
 export default function NavLinks({ userId }: { userId: string }) {
   const links = [
     {
+      name: "Dashboard",
+      href: "/",
+      icon: LayoutGrid,
+    },
+    {
       name: "Games",
       href: "/select/",
       icon: Joystick,
-    },
-    {
-      name: "Notes",
-      href: "/select/",
-      icon: NotepadText,
     },
     {
       name: "Profile Settings",

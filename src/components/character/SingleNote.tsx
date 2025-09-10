@@ -29,12 +29,12 @@ export default function SingleNote(props: SingleNoteProps) {
   const canEdit = creatorPresent && verified;
 
   return (
-    <div className="relative flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3">
+    <div className="relative flex flex-col gap-3 mb-5 border-b-1 border-gray-300 dark:border-gray-900 pb-3 drop-shadow-lg/14">
       <div className="flex flex-row gap-3 mb-2">
         <div>{/* {image here} */}</div>
         <div className="flex flex-col w-full">
           <div className="flex flex-col gap-3">
-            <h3>
+            <h3 className="font-semibold text-lg">
               {note.content}
               {canEdit && <EditNote note={note} />}
             </h3>

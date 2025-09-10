@@ -127,3 +127,25 @@ export const reportSchema = z.object({
 });
 
 export type TReportSchema = z.infer<typeof reportSchema>;
+
+export type RecentNote = Prisma.NoteGetPayload<{
+  include: {
+    Character: {
+      select: {
+        slug: true;
+        name: true;
+        Game: {
+          select: {
+            slug: true;
+          };
+        };
+      };
+    };
+    Opponent: {
+      select: {
+        slug: true;
+        name: true;
+      };
+    };
+  };
+}>;

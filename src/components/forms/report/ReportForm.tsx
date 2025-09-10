@@ -42,16 +42,20 @@ export default function ReportForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
       <input {...register("noteId")} type="hidden" />
-      <label htmlFor="reason">Reason for Report</label>
+      <label htmlFor="reason" className="font-semibold">
+        Reason for Report
+      </label>
       <select
         {...register("reason")}
-        className="border-1 border-gray-300 rounded-2xl p-3 bg-gray-800"
+        className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-gray-800 bg-gray-100"
       >
         <option value="harrassment">Harrassment</option>
         <option value="racism">Racism/Bigotry</option>
         <option value="sexual">Sexual Violence</option>
       </select>
-      <label htmlFor="info">Additional Info:</label>
+      <label htmlFor="info" className="font-semibold">
+        Additional Info:
+      </label>
       <input
         {...register("info")}
         className="border-1 border-gray-300 rounded-2xl p-3 focus:outline-rose-600 focus:outline-1"
