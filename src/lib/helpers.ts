@@ -4,9 +4,32 @@ import { prisma } from "@/lib/db";
 import { NoteWithUserSafe } from "./types";
 import { getCurrentUser } from "./auth";
 import bcrypt from "bcryptjs";
+import { revalidatePath } from "next/cache";
 
 export async function deleteNote(noteId: NoteWithUserSafe) {
   console.log("DELETING NOTE...");
+
+  const noteForPath = await prisma.note.findUnique({
+    where: {
+      id: noteId.id,
+    },
+    select: {
+      Character: {
+        select: {
+          slug: true,
+          Game: {
+            select: {
+              slug: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!noteForPath) {
+    console.log("No note found...");
+  }
   try {
     await prisma.note.delete({
       where: {
@@ -14,6 +37,9 @@ export async function deleteNote(noteId: NoteWithUserSafe) {
       },
     });
     console.log("NOTE DELETED.");
+    revalidatePath(
+      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
+    );
   } catch (error) {
     console.log("Deleting note failed: ", error);
   }
