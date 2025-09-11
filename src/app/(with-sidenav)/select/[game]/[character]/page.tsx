@@ -1,3 +1,4 @@
+import NoteModal from "@/components/character/noteModal/NoteModal";
 import NoteSection from "@/components/character/NoteSection";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
@@ -45,7 +46,7 @@ export default async function CharacterPage({
         {characterChoice && characterChoice.name}
       </h1>
       <NoteSection characterId={characterId} characterList={characterList} />
-      <div>
+      <NoteModal>
         <NoteForm
           key={latestNote?.id}
           characterList={characterList}
@@ -54,6 +55,16 @@ export default async function CharacterPage({
           latestCategory={latestNote?.category}
           latestOpponent={latestNote?.opponentId}
         />
+      </NoteModal>
+      <div>
+        {/* <NoteForm
+          key={latestNote?.id}
+          characterList={characterList}
+          mainCharacter={characterChoice}
+          game={game.slug}
+          latestCategory={latestNote?.category}
+          latestOpponent={latestNote?.opponentId}
+        /> */}
       </div>
     </div>
   );

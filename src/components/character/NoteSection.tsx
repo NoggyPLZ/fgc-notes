@@ -81,9 +81,9 @@ export default async function NoteSection({
   const grouped = notesByCategory(notes.notesAsMain);
 
   return (
-    <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 rounded-2xl p-5 gap-5 shadow-xl">
+    <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 rounded-2xl p-5 shadow-xl">
       {category.map((cat, i) => (
-        <div key={i} className={`${cat === "MATCHUPS" ? "w-full" : "grow"}`}>
+        <div key={i} className={`${cat === "MATCHUPS" ? "w-full" : "w-full"}`}>
           <NoteByCategory
             category={cat}
             notes={grouped[cat] ?? []}

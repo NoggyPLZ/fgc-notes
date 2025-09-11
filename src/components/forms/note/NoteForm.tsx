@@ -58,6 +58,7 @@ export default function NoteForm(props: NoteFormProps) {
               name="category"
               id="category"
               value={category}
+              className="dark:bg-gray-900"
             >
               <option value="NEUTRAL">Neutral</option>
               <option value="COMBOS">Combos</option>
@@ -77,6 +78,7 @@ export default function NoteForm(props: NoteFormProps) {
                 name="opponent"
                 id="opponent"
                 value={opponent}
+                className="dark:bg-gray-900"
                 onChange={(e) => setOpponent(e.target.value)}
               >
                 {characterList.map((char) => (
