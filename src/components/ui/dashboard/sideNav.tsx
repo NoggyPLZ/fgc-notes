@@ -11,7 +11,7 @@ export default async function SideNav() {
   if (!user) return <p>no user found</p>;
   return (
     <div className="flex flex-col h-full p-2">
-      <div className="bg-gray-200 dark:bg-gray-800 flex flex-col rounded-2xl grow  shadow-xl/20">
+      <div className="bg-gray-200 dark:bg-gray-800 flex flex-col rounded-2xl grow shadow-md/20 md:shadow-xl/20">
         <div className="flex md:flex-col flex-row items-center gap-4 pt-3 pb-4 justify-center">
           <Link
             href={"/"}

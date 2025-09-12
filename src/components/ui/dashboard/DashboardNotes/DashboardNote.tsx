@@ -23,7 +23,7 @@ export default function DashboardNote({ note }: { note: RecentNote }) {
       <p className="font-semibold">{content}</p>
       <div className="flex flex-row text-xs italic gap-2">
         <p className="text-rose-600 dark:text-rose-100 dark:bg-rose-700 dark:px-2 dark:rounded-sm font-black">
-          {rating}
+          {rating + 1}
         </p>
         <p className="border-l-1 border-l-gray-400 dark:border-l-gray-900 pl-2">
           {formattedDate}
