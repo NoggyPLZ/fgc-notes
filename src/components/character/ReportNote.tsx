@@ -21,11 +21,10 @@ export default function ReportNote({ note }: { note: NoteWithUserSafe }) {
       )}
       <button
         onClick={() => setModal((prev) => !prev)}
-        className={`text-xs ml-auto cursor-pointer flex flex-row items-center gap-2 rounded-md p-1 text-gray-200 bg-gray-900 hover:bg-gray-950 }`}
+        className={`text-xs ml-auto cursor-pointer flex flex-row items-center gap-1 rounded-md p-1 text-red-500 }`}
       >
-        <span className="bg-red-500 p-1 rounded-md">
-          <TriangleAlert size={15} />
-        </span>
+        <TriangleAlert size={15} />
+        Report
       </button>
     </>
   );

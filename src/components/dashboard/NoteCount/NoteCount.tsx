@@ -18,8 +18,10 @@ export default async function NoteCount() {
   return (
     <>
       <DashboardCard>
-        <p className="text-center font-bold uppercase">Number of notes</p>
-        <h2 className="text-8xl font-black text-rose-500 text-center">
+        <p className="text-center font-bold uppercase text-sm md:text-md">
+          Number of notes
+        </p>
+        <h2 className="md:text-8xl text-5xl font-black text-rose-500 text-center">
           {count.length}
         </h2>
       </DashboardCard>

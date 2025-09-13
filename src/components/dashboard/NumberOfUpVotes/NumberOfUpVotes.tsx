@@ -16,8 +16,10 @@ export default async function NumberOfUpVotes() {
   });
   return (
     <DashboardCard>
-      <p className="text-center font-bold uppercase">Total Up Votes</p>
-      <h2 className="text-8xl font-black text-rose-500 text-center">
+      <p className="text-center font-bold uppercase text-sm md:text-md">
+        Total Up Votes
+      </p>
+      <h2 className="md:text-8xl text-5xl font-black text-rose-500 text-center">
         {upVoteCount.length}
       </h2>
     </DashboardCard>

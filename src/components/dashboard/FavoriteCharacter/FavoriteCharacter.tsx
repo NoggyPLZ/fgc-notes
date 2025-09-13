@@ -58,10 +58,14 @@ export default async function FavoriteCharacter() {
 
   return (
     <DashboardCard>
-      <p className="text-center font-bold uppercase">Favorite Character</p>
+      <p className="text-center font-bold uppercase text-sm md:text-md">
+        Favorite Character
+      </p>
       <div>
-        <h3 className="text-center font-medium">{result.Game.name}</h3>
-        <h2 className="text-5xl font-black text-rose-500 text-center hover:text-rose-600">
+        <h3 className="text-center font-medium text-sm hidden">
+          {result.Game.name}
+        </h3>
+        <h2 className="text-2xl md:text-5xl font-black text-rose-500 text-center hover:text-rose-600">
           <Link href={`/select/${result.Game.slug}/${result.slug}`}>
             {result.name}
           </Link>
