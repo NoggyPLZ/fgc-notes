@@ -2,6 +2,7 @@ import NoteModal from "@/components/character/noteModal/NoteModal";
 import NoteSection from "@/components/character/NoteSection";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
+import Image from "next/image";
 
 export default async function CharacterPage({
   params,
@@ -42,9 +43,18 @@ export default async function CharacterPage({
 
   return (
     <div>
-      <h1 className="text-5xl font-black mb-5">
-        {characterChoice && characterChoice.name}
-      </h1>
+      <div className="flex flex-col md:flex-row gap-2 pb-5">
+        <Image
+          src={`/character-icons/${characterChoice.name.toLocaleLowerCase()}-sml.webp`}
+          alt={`Character portrait of ${characterChoice.name}`}
+          width={200}
+          height={200}
+          className="rounded-2xl"
+        />
+        <h1 className="text-5xl font-black mb-5">
+          {characterChoice && characterChoice.name}
+        </h1>
+      </div>
       <NoteSection characterId={characterId} characterList={characterList} />
       <NoteModal>
         <NoteForm

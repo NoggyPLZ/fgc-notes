@@ -1,6 +1,7 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function FavoriteCharacter() {
@@ -61,15 +62,24 @@ export default async function FavoriteCharacter() {
       <p className="text-center font-bold uppercase text-sm md:text-md">
         Favorite Character
       </p>
-      <div>
-        <h3 className="text-center font-medium text-sm hidden">
-          {result.Game.name}
-        </h3>
-        <h2 className="text-2xl md:text-5xl font-black text-rose-500 text-center hover:text-rose-600">
-          <Link href={`/select/${result.Game.slug}/${result.slug}`}>
-            {result.name}
-          </Link>
-        </h2>
+      <div className="flex flex-col md:flex-row items-center justify-center md:gap-2">
+        <Image
+          src={`/character-icons/${result.name.toLowerCase()}-sml.webp`}
+          alt={`Character portrait for ${result.name}`}
+          width={100}
+          height={100}
+          className="rounded-2xl hidden md:flex"
+        />
+        <div className="flex flex-col">
+          <h3 className="text-center font-medium text-sm hidden md:flex">
+            {result.Game.name}
+          </h3>
+          <h2 className="text-2xl md:text-5xl font-black text-rose-500 text-center hover:text-rose-600">
+            <Link href={`/select/${result.Game.slug}/${result.slug}`}>
+              {result.name}
+            </Link>
+          </h2>
+        </div>
       </div>
     </DashboardCard>
   );

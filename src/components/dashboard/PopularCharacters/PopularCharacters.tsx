@@ -1,5 +1,6 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
+import Image from "next/image";
 
 export default async function PopularCharacters() {
   const characters = await prisma.character.findMany({
@@ -22,11 +23,20 @@ export default async function PopularCharacters() {
       <p className="text-center font-bold uppercase">Most popular characters</p>
       <div className="flex md:flex-row flex-col justify-between">
         {characters.map((char) => (
-          <div key={char.id} className="flex-row flex items-center">
-            <h2 className="text-5xl font-black text-rose-500 text-center">
-              {char.name}
-            </h2>
-            <p>{char._count.notesAsMain} Notes</p>
+          <div key={char.id} className="flex-row flex items-center gap-2">
+            <Image
+              src={`/character-icons/${char.name.toLowerCase()}-sml.webp`}
+              alt={`Character portrait for ${char.name}`}
+              width={100}
+              height={100}
+              className="rounded-2xl"
+            />
+            <div className="flex flex-col gap-2">
+              <h2 className="text-5xl font-black text-rose-500 text-center">
+                {char.name}
+              </h2>
+              <p className="font-light">{char._count.notesAsMain} Notes</p>
+            </div>
           </div>
         ))}
         <div className="flex-row flex items-center">
