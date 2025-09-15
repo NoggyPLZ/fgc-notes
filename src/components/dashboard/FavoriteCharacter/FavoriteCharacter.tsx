@@ -54,7 +54,13 @@ export default async function FavoriteCharacter() {
   });
 
   if (!result) {
-    return <p>No char found</p>;
+    return (
+      <DashboardCard>
+        <p className="text-center text-sm md:text-xl px-5">
+          No favorite character found, yet.
+        </p>
+      </DashboardCard>
+    );
   }
 
   return (

@@ -32,6 +32,7 @@ export async function getCurrentUser() {
       name: true,
       votes: true,
       verified: true,
+      role: true,
     },
   });
   return user;

@@ -9,12 +9,14 @@ type SingleNoteProps = {
   voteSums: TVoteSums[];
   currentUserId: string;
   verified?: boolean;
+  role: "USER" | "ADMIN";
 };
 
 export default function SingleNote(props: SingleNoteProps) {
-  const { note, voteSums, currentUserId, verified } = props;
+  const { note, voteSums, currentUserId, verified, role } = props;
 
   const creatorPresent = currentUserId === note.userId;
+  const adminPresent = role === "ADMIN";
 
   const voteSum = voteSums.filter((vote) => vote.noteId === note.id);
   const total = voteSum[0]?._sum?.value || 0;
@@ -26,7 +28,7 @@ export default function SingleNote(props: SingleNoteProps) {
     year: "numeric",
   });
 
-  const canEdit = creatorPresent && verified;
+  const canEdit = (creatorPresent && verified) || adminPresent;
 
   return (
     <div className="relative flex flex-col gap-3 mb-5 px-2">

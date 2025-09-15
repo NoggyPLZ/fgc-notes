@@ -72,6 +72,7 @@ model User {
   verification  Verfication?
   passwordreset PasswordReset?
   Reports       Reports[]      @relation("ReportsByUser")
+  News          News[]
 }
 
 enum Status {
@@ -119,4 +120,13 @@ model Reports {
   Note       Note   @relation("ReportsOnNote", fields: [noteId], references: [id])
   reason     String
   info       String
+}
+
+model News {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  content   String
+  createdAt DateTime @default(now())
 }

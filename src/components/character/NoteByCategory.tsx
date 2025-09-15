@@ -9,11 +9,19 @@ type NoteByCategoryProps = {
   voteSums: TVoteSums[];
   currentUserId: string;
   verified?: boolean;
+  role: "USER" | "ADMIN";
 };
 
 export default function NoteByCategory(props: NoteByCategoryProps) {
-  const { category, notes, characterList, voteSums, currentUserId, verified } =
-    props;
+  const {
+    category,
+    notes,
+    characterList,
+    voteSums,
+    currentUserId,
+    verified,
+    role,
+  } = props;
   // console.log(voteSums);
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
@@ -35,6 +43,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
                       voteSums={voteSums}
                       currentUserId={currentUserId}
                       verified={verified}
+                      role={role}
                     />
                   )}
                 </div>
@@ -51,6 +60,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
               voteSums={voteSums}
               currentUserId={currentUserId}
               verified={verified}
+              role={role}
             />
           ))}
         </>

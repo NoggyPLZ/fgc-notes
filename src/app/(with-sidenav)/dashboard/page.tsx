@@ -2,6 +2,7 @@ import FavoriteCharacter from "@/components/dashboard/FavoriteCharacter/Favorite
 import NoteCount from "@/components/dashboard/NoteCount/NoteCount";
 import NumberOfUpVotes from "@/components/dashboard/NumberOfUpVotes/NumberOfUpVotes";
 import PopularCharacters from "@/components/dashboard/PopularCharacters/PopularCharacters";
+import SiteNews from "@/components/dashboard/SiteNews/SiteNews";
 import DashboardNoteSection from "@/components/ui/dashboard/DashboardNotes/DashboardNotesSection";
 
 export default function Dashboard() {
@@ -17,8 +18,13 @@ export default function Dashboard() {
           <PopularCharacters />
         </div>
       </div>
-      <div className="row-span-5">
-        <DashboardNoteSection />
+      <div className="row-span-5 grid grid-cols-6 md:gap-5 gap-2">
+        <div className="col-span-full lg:col-span-4">
+          <SiteNews />
+        </div>
+        <div className="col-span-full lg:col-span-2">
+          <DashboardNoteSection />
+        </div>
       </div>
     </div>
   );
