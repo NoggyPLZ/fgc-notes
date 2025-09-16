@@ -44,7 +44,7 @@ export default function ConfirmEmail({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-[600px] flex flex-col p-5 rounded-2xl mx-auto gap-5"
+      className="flex flex-col p-5 rounded-2xl mx-auto gap-5"
     >
       <label htmlFor="email">Email used:</label>
       <input

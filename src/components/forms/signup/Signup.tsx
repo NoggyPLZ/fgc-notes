@@ -84,7 +84,7 @@ export default function Signup(props: SignupProps) {
   };
 
   return (
-    <div className="flex flex-col w-[600px] mx-auto gap-5">
+    <div className="flex flex-col mx-auto gap-5">
       Sign Up
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <input

@@ -16,9 +16,9 @@ export default function ToggleLogin() {
   };
 
   return (
-    <div>
+    <div className="bg-gray-100 rounded-2xl md:max-w-[600px] mx-auto p-5 md:p-5">
       {!toggleForm && (
-        <div className="w-[600px] flex flex-col p-5 rounded-2xl mx-auto gap-5">
+        <div className="flex flex-col p-2 md:p-5 rounded-2xl mx-auto gap-5">
           <Button onClick={handleClick} value="login" style="primary">
             Log in
           </Button>

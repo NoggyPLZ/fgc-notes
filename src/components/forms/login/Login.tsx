@@ -17,7 +17,7 @@ export default function Login(props: LoginProps) {
   const { handleClick } = props;
 
   return (
-    <div className="flex flex-col w-[600px] mx-auto gap-5">
+    <div className="flex flex-col mx-auto gap-5">
       Login
       <form action={loginAction} className="flex flex-col gap-5">
         <input
@@ -42,6 +42,9 @@ export default function Login(props: LoginProps) {
         )}
         <Button type="submit" style={"primary"}>
           Log In
+        </Button>
+        <Button style={"secondary"} onClick={handleClick} value={"forgot"}>
+          Forgot password?
         </Button>
         <Button style={"secondary"} onClick={handleClick} value={"signup"}>
           Need an account? Sign up
