@@ -317,9 +317,11 @@ export async function editSubmit(prevState: any, formData: FormData) {
         content: content,
       },
     });
+    console.log("revalidate...");
     revalidatePath(
       `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
     );
+    console.log("ravlidated.");
     return { success: true };
   } catch (error) {
     console.log("Failed to update note: ", error);

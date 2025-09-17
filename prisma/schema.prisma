@@ -88,7 +88,7 @@ enum Role {
 model Votes {
   id     String @id @default(cuid())
   userId String
-  User   User   @relation(fields: [userId], references: [id])
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   noteId String
   Note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
   value  Int
@@ -115,9 +115,9 @@ model PasswordReset {
 model Reports {
   id         String @id @default(cuid())
   reportedBy String
-  reporter   User   @relation("ReportsByUser", fields: [reportedBy], references: [id])
+  reporter   User   @relation("ReportsByUser", fields: [reportedBy], references: [id], onDelete: Cascade)
   noteId     String
-  Note       Note   @relation("ReportsOnNote", fields: [noteId], references: [id])
+  Note       Note   @relation("ReportsOnNote", fields: [noteId], references: [id], onDelete: Cascade)
   reason     String
   info       String
 }

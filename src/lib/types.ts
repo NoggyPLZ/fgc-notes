@@ -149,3 +149,24 @@ export type RecentNote = Prisma.NoteGetPayload<{
     };
   };
 }>;
+
+export type ReportWithNoteSafe = Prisma.ReportsGetPayload<{
+  include: {
+    Note: {
+      include: {
+        User: {
+          select: {
+            id: true;
+            name: true;
+          };
+        };
+      };
+    };
+    reporter: {
+      select: {
+        id: true;
+        name: true;
+      };
+    };
+  };
+}>;
