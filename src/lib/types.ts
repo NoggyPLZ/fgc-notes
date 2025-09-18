@@ -170,3 +170,10 @@ export type ReportWithNoteSafe = Prisma.ReportsGetPayload<{
     };
   };
 }>;
+
+export const newsPostSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+});
+
+export type TNewsPostSchema = z.infer<typeof newsPostSchema>;

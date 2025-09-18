@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function CharacterSelect({
@@ -12,7 +13,11 @@ export default async function CharacterSelect({
       slug: gameId,
     },
     include: {
-      characters: true,
+      characters: {
+        orderBy: {
+          name: "asc",
+        },
+      },
     },
   });
 
@@ -20,16 +25,28 @@ export default async function CharacterSelect({
 
   return (
     <div>
-      <h1>Character Select</h1>
-      <ul>
+      <h1 className="text-8xl text-rose-600 font-black">Character Select</h1>
+      <div className="flex flex-row gap-5 pt-5">
         {game.characters.map((character) => (
-          <li key={character.id}>
+          <div
+            key={character.id}
+            className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-800"
+          >
             <Link href={`/select/${game.slug}/${character.slug}`}>
-              {character.name}
+              <Image
+                src={`/character-icons/${character.name.toLocaleLowerCase()}-sml.webp`}
+                className="rounded-2xl"
+                width={200}
+                height={200}
+                alt={`Character portraite for ${character.name} that links to the page for ${character.name}`}
+              />
+              <h4 className="absolute bottom-0 text-2xl font-black bg-gray-800 group-hover:bg-rose-500 text-gray-100 px-2">
+                {character.name}
+              </h4>
             </Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

@@ -1,8 +1,12 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
+import CreateNews from "./CreateNews";
 
-export default async function SiteNews() {
+export default async function SiteNews({ admin }: { admin?: boolean }) {
   const news = await prisma.news.findFirst({
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       user: {
         select: {
@@ -33,6 +37,7 @@ export default async function SiteNews() {
         </span>
       </div>
       <p className="text-lg pt-5">{news.content}</p>
+      {admin && <CreateNews />}
     </DashboardCard>
   );
 }

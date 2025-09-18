@@ -6,6 +6,7 @@ import {
   editNoteSchema,
   loginSchema,
   newPasswordSchema,
+  newsPostSchema,
   noteSchema,
   reportSchema,
   signUpSchema,
@@ -556,5 +557,51 @@ export async function reportAction(prevState: any, formData: FormData) {
     });
   } catch (error) {
     console.log("Failed to make a report: ", error);
+  }
+}
+
+export async function createNewsAction(prevState: any, formData: FormData) {
+  console.log("Starting newsPost parsing...");
+  const results = newsPostSchema.safeParse(Object.fromEntries(formData));
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    return {
+      errors: flat.fieldErrors,
+    };
+  }
+  console.log("Parse finished. Getting current user...");
+  const user = await getCurrentUser();
+  if (!user || user.role !== "ADMIN") {
+    return {
+      errors: {
+        content: [
+          "Not logged in or user is not authorized to make a news post.",
+        ],
+      },
+    };
+  }
+
+  console.log("Current user acquired. Begin try/catch...");
+
+  const { title, content } = results.data;
+  console.log("extracting title ", title);
+  console.log("extracting content ", content);
+  try {
+    console.log("Try block starting...");
+    await prisma.news.create({
+      data: {
+        userId: user.id,
+        title,
+        content,
+      },
+    });
+    revalidatePath("/dashboard/");
+  } catch (error) {
+    console.log("Failed to create a news post. ", error);
+    return {
+      errors: {
+        content: ["Failed to create a new Post"],
+      },
+    };
   }
 }

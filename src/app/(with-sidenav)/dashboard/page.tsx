@@ -31,13 +31,13 @@ export default async function Dashboard() {
       <div className={`row-span-5 grid grid-cols-6 md:gap-5 gap-2`}>
         <div
           className={`col-span-full lg:col-span-4 ${
-            admin && `grid-rows-6 grid gap-5`
+            admin && `grid-rows-6 grid gap-2 md:gap-5`
           }`}
         >
           {admin ? (
             <>
               <div className="row-span-3">
-                <SiteNews />
+                <SiteNews admin={admin} />
               </div>
               <div className="row-span-3">
                 <ReportFeed />
