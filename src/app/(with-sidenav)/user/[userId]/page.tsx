@@ -42,34 +42,57 @@ export default async function UserProfile({
   const owner = currentUser.id === user.id;
 
   return (
-    <div className="bg-gray-200 dark:bg-gray-800 p-5 rounded-2xl flex flex-row gap-10">
-      <ChangeAvatar avatar={user.avatarUrl} name={user.name} />
-      <div className="flex flex-col gap-5">
-        <h1>
-          User Name: {user.name} {owner && <ChangeName id={currentUser.id} />}
-        </h1>
-
-        <h3>
-          Email: <strong>{user.email}</strong>
-        </h3>
-        <h4>
-          Joined: <strong>{user.createdAt.toString()}</strong>
+    <div className=" p-5 rounded-2xl flex md:flex-row flex-col gap-10">
+      <div className="flex flex-col gap-10 bg-gray-200 dark:bg-gray-800 p-10 rounded-2xl">
+        <ChangeAvatar avatar={user.avatarUrl} name={user.name} />
+        <div>
+          <span className="text-3xl text-rose-500 font-black">{user.name}</span>{" "}
+          {owner && <ChangeName id={currentUser.id} />}
+        </div>
+      </div>
+      <div className="flex flex-col gap-5 bg-gray-200 dark:bg-gray-800 p-10 rounded-2xl">
+        <h4 className="border-b-1 border-gray-300 dark:border-gray-900 pb-5">
+          <span className="text-rose-500 font-black text-xl uppercase">
+            Email:
+          </span>{" "}
+          <>{user.email}</>
         </h4>
-        <h4>
-          Status: <strong>{user.status}</strong>
+        <h4 className="border-b-1 border-gray-300 dark:border-gray-900 pb-5">
+          <span className="text-rose-500 font-black text-xl uppercase">
+            Joined:
+          </span>{" "}
+          <>{user.createdAt.toString()}</>
+        </h4>
+        <h4 className="border-b-1 border-gray-300 dark:border-gray-900 pb-5">
+          <span className="text-rose-500 font-black text-xl uppercase">
+            Status:
+          </span>{" "}
+          <>{user.status}</>
         </h4>
         {user.verified ? (
           <div>
-            <h4>Verified: Thank you for being Verified!</h4>
+            <h4 className="border-b-1 border-gray-300 dark:border-gray-900 pb-5">
+              <span className="text-rose-500 font-black text-xl uppercase">
+                Verified:
+              </span>{" "}
+              Thank you for being Verified!
+            </h4>
           </div>
         ) : (
           <div>
-            <h4>Verified: Our records indicate you are not verified yet.</h4>
+            <h4 className="border-b-1 border-gray-300 dark:border-gray-900 pb-5">
+              <span className="text-rose-500 font-black text-xl uppercase">
+                Verified:
+              </span>{" "}
+              Our records indicate you are not verified yet.
+            </h4>
             <VerifyEmail />
           </div>
         )}
-        <h4>Theme:</h4>
-        <ChangeTheme />
+        <div className="flex items-center gap-2">
+          <h4 className="font-black text-rose-500 uppercase text-xl">Theme:</h4>
+          <ChangeTheme />
+        </div>
       </div>
     </div>
   );

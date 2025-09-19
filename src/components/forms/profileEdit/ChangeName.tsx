@@ -65,7 +65,7 @@ export default function ChangeName({ id }: { id: string }) {
       {isOpen && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-row items-center gap-5 mt-5"
+          className="flex flex-col gap-5 mt-5"
         >
           <input {...register("id")} type="hidden" value={id} name="id" />
           <label htmlFor="name">New Name:</label>
@@ -77,6 +77,14 @@ export default function ChangeName({ id }: { id: string }) {
           {errors.name && <p className="text-red-500">{errors.name.message}</p>}
           <Button style="primary" type="submit" disabled={isSubmitting}>
             Submit
+          </Button>
+          <Button
+            onClick={() => setIsOpen(false)}
+            style="cancel"
+            type="button"
+            disabled={isSubmitting}
+          >
+            Cancel
           </Button>
         </form>
       )}

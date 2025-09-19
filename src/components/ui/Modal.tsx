@@ -27,7 +27,7 @@ export default function Modal({
       {children}
       <button
         onClick={clickHandler}
-        className="px-2 py-1 mr-auto text-gray-100 font-bold cursor-pointer hover:bg-red-700 bg-red-800 flex  items-center gap-2 rounded-lg"
+        className="px-2 py-1 mr-auto text-gray-100 font-bold cursor-pointer hover:bg-neutral-700 bg-neutral-600 flex  items-center gap-2 rounded-lg"
       >
         <Ban size={15} strokeWidth={3} /> close
       </button>
