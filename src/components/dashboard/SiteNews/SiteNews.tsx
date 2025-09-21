@@ -27,7 +27,7 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
   });
   return (
     <DashboardCard>
-      <h2 className="text-3xl text-rose-500 font-black">{news.title}</h2>
+      <h2 className="text-5xl text-rose-500 font-black">{news.title}</h2>
       <div className="flex gap-2">
         <span className="font-semibold border-r-1 border-rose-500 pr-2">
           {news.user.name}

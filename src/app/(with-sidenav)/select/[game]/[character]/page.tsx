@@ -42,8 +42,13 @@ export default async function CharacterPage({
   }
 
   return (
-    <div>
-      <div className="flex flex-col md:flex-row gap-2 pb-5">
+    <div
+      style={{
+        backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
+      }}
+      className="rounded-2xl bg-blend-multiply bg-cyan-500"
+    >
+      <div className="flex flex-col lg:flex-row gap-2 p-5">
         <Image
           src={`/character-icons/${characterChoice.name.toLocaleLowerCase()}-sml.webp`}
           alt={`Character portrait of ${characterChoice.name}`}
@@ -51,9 +56,12 @@ export default async function CharacterPage({
           height={200}
           className="rounded-2xl"
         />
-        <h1 className="text-5xl font-black mb-5">
-          {characterChoice && characterChoice.name}
-        </h1>
+        <div className="flex flex-col md:gap-4 text-gray-100 lg:w-[50%]">
+          <h1 className="text-5xl font-black mb-5">
+            {characterChoice && characterChoice.name}
+          </h1>
+          <p>{characterChoice.story}</p>
+        </div>
       </div>
       <NoteSection characterId={characterId} characterList={characterList} />
       <NoteModal>

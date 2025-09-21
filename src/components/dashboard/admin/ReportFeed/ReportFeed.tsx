@@ -33,7 +33,7 @@ export default async function ReportFeed() {
 
   return (
     <DashboardCard>
-      <h2 className="text-rose-500 font-black text-3xl">Reports</h2>
+      <h2 className="text-rose-500 font-black text-5xl">Reports</h2>
       {reports.length < 1 && (
         <p className="text-center my-auto">There are current no reports.</p>
       )}

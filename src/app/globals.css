@@ -26,3 +26,10 @@ body {
 } */
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+.image-skeleton {
+  transition: opacity 0.3s ease;
+}
+img.loaded + .image-skeleton {
+  opacity: 0;
+}

@@ -1,6 +1,7 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
 import Image from "next/image";
+import CharacterArtWithSkeleton from "./CharacterArtWithSkeleton";
 
 export default async function PopularCharacters() {
   const characters = await prisma.character.findMany({
@@ -24,12 +25,11 @@ export default async function PopularCharacters() {
       <div className="flex md:flex-row flex-col justify-between">
         {characters.map((char) => (
           <div key={char.id} className="flex-row flex items-center gap-2">
-            <Image
+            <CharacterArtWithSkeleton
               src={`/character-icons/${char.name.toLowerCase()}-sml.webp`}
               alt={`Character portrait for ${char.name}`}
               width={100}
               height={100}
-              className="rounded-2xl"
             />
             <div className="flex flex-col gap-2">
               <h2 className="text-5xl font-black text-rose-500 text-center">

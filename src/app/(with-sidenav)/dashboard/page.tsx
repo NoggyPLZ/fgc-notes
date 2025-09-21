@@ -4,9 +4,10 @@ import NoteCount from "@/components/dashboard/NoteCount/NoteCount";
 import NumberOfUpVotes from "@/components/dashboard/NumberOfUpVotes/NumberOfUpVotes";
 import PopularCharacters from "@/components/dashboard/PopularCharacters/PopularCharacters";
 import SiteNews from "@/components/dashboard/SiteNews/SiteNews";
+import SmallCardSKeleton from "@/components/skeletons/dashboard/SmallCardSkeleton";
 import DashboardNoteSection from "@/components/ui/dashboard/DashboardNotes/DashboardNotesSection";
 import { getCurrentUser } from "@/lib/auth";
-import { prisma } from "@/lib/db";
+import { Suspense } from "react";
 
 export default async function Dashboard() {
   const user = await getCurrentUser();
@@ -20,12 +21,20 @@ export default async function Dashboard() {
     <div className="grid md:grid-rows-6 gap-2 md:gap-5">
       <div className="grid xl:grid-cols-6 grid-rows-1 gap-2 md:gap-5">
         <div className="grid col-span-3 grid-cols-3 md:grid-cols-3 lg:grid-cols-3 row-span-1 grid-rows-1 md:grid-rows-1 gap-2 md:gap-5">
-          <NoteCount />
-          <NumberOfUpVotes />
-          <FavoriteCharacter />
+          <Suspense fallback={<SmallCardSKeleton />}>
+            <NoteCount />
+          </Suspense>
+          <Suspense fallback={<SmallCardSKeleton />}>
+            <NumberOfUpVotes />
+          </Suspense>
+          <Suspense fallback={<SmallCardSKeleton />}>
+            <FavoriteCharacter />
+          </Suspense>
         </div>
         <div className="col-span-3">
-          <PopularCharacters />
+          <Suspense fallback={<SmallCardSKeleton />}>
+            <PopularCharacters />
+          </Suspense>
         </div>
       </div>
       <div className={`row-span-5 grid grid-cols-6 md:gap-5 gap-2`}>
