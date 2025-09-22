@@ -1,15 +1,21 @@
 import NoteModal from "@/components/character/noteModal/NoteModal";
+import NoteOptionsContainer from "@/components/character/NoteOptionsContainer";
 import NoteSection from "@/components/character/NoteSection";
+import NoteToggle from "@/components/character/noteToggle/NoteToggle";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
 import Image from "next/image";
 
 export default async function CharacterPage({
   params,
+  searchParams,
 }: {
   params: { game: string; character: string };
+  searchParams?: { filter?: string };
 }) {
   const { game: gameId, character: characterId } = await params;
+  const filterSearch = await searchParams;
+
   const game = await prisma.game.findUnique({
     where: {
       slug: gameId,
@@ -63,7 +69,16 @@ export default async function CharacterPage({
           <p>{characterChoice.story}</p>
         </div>
       </div>
-      <NoteSection characterId={characterId} characterList={characterList} />
+      <NoteOptionsContainer
+        characterSlug={characterChoice.slug}
+        gameSlug={game.slug}
+        filter={filterSearch?.filter || "ALL"}
+      />
+      <NoteSection
+        characterId={characterId}
+        characterList={characterList}
+        filter={filterSearch?.filter || "ALL"}
+      />
       <NoteModal>
         <NoteForm
           key={latestNote?.id}

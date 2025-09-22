@@ -23,7 +23,7 @@ export default function CharacterArtWithSkeleton({
         width={width}
         height={height}
         className="rounded-2xl"
-        onLoadingComplete={() => setLoaded(true)}
+        onLoad={() => setLoaded(true)}
       />
       {!loaded && (
         <div className="absolute inset-0 bg-gray-300 dark:bg-gray-700 animate-pulse rounded-md image-skeleton"></div>

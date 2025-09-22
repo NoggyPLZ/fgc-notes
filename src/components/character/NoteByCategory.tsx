@@ -36,7 +36,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
                 {char.name}
               </h2>
               {matchupNotes.map((note, midx) => (
-                <div key={midx}>
+                <div key={note.id}>
                   {note.opponentId === char.id && (
                     <SingleNote
                       note={note}
@@ -55,7 +55,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
         <>
           {notes.map((note, i) => (
             <SingleNote
-              key={i}
+              key={note.id}
               note={note}
               voteSums={voteSums}
               currentUserId={currentUserId}

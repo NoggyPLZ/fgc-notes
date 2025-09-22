@@ -4,6 +4,7 @@ import { startTransition, useState } from "react";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { voteHandle } from "@/actions/actions";
 import { NoteWithUserAndVote } from "@/lib/types";
+import { useRouter } from "next/navigation";
 
 type ActiveValueType = "1" | "-1" | null;
 
@@ -13,6 +14,7 @@ type NoteRatingProps = {
 };
 
 export default function NoteRating({ rating, note }: NoteRatingProps) {
+  const router = useRouter();
   const voteState: ActiveValueType =
     note.votes && note.votes.length > 0
       ? note.votes[0].value === 1
@@ -43,6 +45,7 @@ export default function NoteRating({ rating, note }: NoteRatingProps) {
     };
     startTransition(async () => {
       await voteHandle(voteEntry);
+      router.refresh();
     });
   };
 
