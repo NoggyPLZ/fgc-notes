@@ -14,17 +14,21 @@ export default async function NoteSection({
   characterId,
   characterList,
   filter,
+  query,
 }: {
   characterId: string;
   characterList: Character[];
-  filter: string;
+  filter?: string;
+  query?: string;
 }) {
   //Check for current user
   const user = await getCurrentUser();
   if (!user) {
     return <div>user not found</div>;
   }
-
+  if (query) {
+    console.log(decodeURIComponent(query));
+  }
   //Get notes from db
   const notes = await prisma.character.findUnique({
     where: {
@@ -32,8 +36,8 @@ export default async function NoteSection({
     },
     include: {
       notesAsMain: {
-        where:
-          filter === "USER"
+        where: {
+          ...(filter === "USER"
             ? {
                 OR: [
                   { userId: user.id },
@@ -47,7 +51,15 @@ export default async function NoteSection({
                   },
                 ],
               }
-            : {},
+            : {}),
+          ...(query
+            ? {
+                content: {
+                  contains: decodeURIComponent(query),
+                },
+              }
+            : {}),
+        },
         include: {
           User: {
             select: {

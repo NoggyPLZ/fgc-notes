@@ -1,7 +1,6 @@
 import NoteModal from "@/components/character/noteModal/NoteModal";
 import NoteOptionsContainer from "@/components/character/NoteOptionsContainer";
 import NoteSection from "@/components/character/NoteSection";
-import NoteToggle from "@/components/character/noteToggle/NoteToggle";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { prisma } from "@/lib/db";
 import Image from "next/image";
@@ -11,7 +10,7 @@ export default async function CharacterPage({
   searchParams,
 }: {
   params: { game: string; character: string };
-  searchParams?: { filter?: string };
+  searchParams?: { filter?: string; query?: string };
 }) {
   const { game: gameId, character: characterId } = await params;
   const filterSearch = await searchParams;
@@ -78,6 +77,7 @@ export default async function CharacterPage({
         characterId={characterId}
         characterList={characterList}
         filter={filterSearch?.filter || "ALL"}
+        query={filterSearch?.query}
       />
       <NoteModal>
         <NoteForm
@@ -89,16 +89,6 @@ export default async function CharacterPage({
           latestOpponent={latestNote?.opponentId}
         />
       </NoteModal>
-      <div>
-        {/* <NoteForm
-          key={latestNote?.id}
-          characterList={characterList}
-          mainCharacter={characterChoice}
-          game={game.slug}
-          latestCategory={latestNote?.category}
-          latestOpponent={latestNote?.opponentId}
-        /> */}
-      </div>
     </div>
   );
 }

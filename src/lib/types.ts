@@ -177,3 +177,9 @@ export const newsPostSchema = z.object({
 });
 
 export type TNewsPostSchema = z.infer<typeof newsPostSchema>;
+
+export const searchSchema = z.object({
+  query: z.string().min(3),
+});
+
+export type TSearchSchema = z.infer<typeof searchSchema>;

@@ -1,3 +1,4 @@
+import SearchBar from "../forms/search/SearchBar";
 import NoteToggle from "./noteToggle/NoteToggle";
 
 export default function NoteOptionsContainer({
@@ -10,7 +11,8 @@ export default function NoteOptionsContainer({
   filter: string;
 }) {
   return (
-    <div className="bg-gray-800 flex flex-col md:flex-row text-gray-100 justify-center items-center p-2">
+    <div className="bg-gray-800 dark:bg-gray-950 flex flex-col md:flex-row text-gray-100 justify-center items-center p-2 gap-5">
+      <SearchBar characterSlug={characterSlug} gameSlug={gameSlug} />
       <NoteToggle
         characterSlug={characterSlug}
         gameSlug={gameSlug}

@@ -1,5 +1,5 @@
 "use server";
-import z from "zod";
+import z, { success } from "zod";
 import {
   changeNameSchema,
   confirmEmailSchema,
@@ -9,6 +9,7 @@ import {
   newsPostSchema,
   noteSchema,
   reportSchema,
+  searchSchema,
   signUpSchema,
   voteSchema,
 } from "@/lib/types";
@@ -604,4 +605,22 @@ export async function createNewsAction(prevState: any, formData: FormData) {
       },
     };
   }
+}
+
+export async function searchAction(prevState: any, formData: FormData) {
+  const results = searchSchema.safeParse(Object.fromEntries(formData));
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    return {
+      success: false,
+      errors: flat.fieldErrors,
+    };
+  }
+
+  return {
+    success: true,
+    data: {
+      query: results.data.query,
+    },
+  };
 }
