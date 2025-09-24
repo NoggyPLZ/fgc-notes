@@ -12,13 +12,15 @@ export default async function ProfilePreview({
     return <p>no user found</p>;
   }
 
+  const avatar = user.avatarUrl || "/profile-image-placeholder.gif";
+
   return (
     <div className="flex flex-col">
       <Image
-        src={"/profile-image-placeholder.gif"}
+        src={avatar}
         alt={"profile image placholder"}
-        height={50}
-        width={50}
+        height={100}
+        width={100}
         className="rounded-full border-1 mx-auto"
       />
       <div className="text-center">

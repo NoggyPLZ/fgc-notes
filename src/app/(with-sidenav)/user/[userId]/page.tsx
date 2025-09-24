@@ -43,7 +43,7 @@ export default async function UserProfile({
 
   return (
     <div className=" p-5 rounded-2xl flex md:flex-row flex-col gap-10">
-      <div className="flex flex-col gap-10 bg-gray-200 dark:bg-gray-800 p-10 rounded-2xl">
+      <div className="flex flex-col gap-10 bg-gray-200 dark:bg-gray-800 p-10 rounded-2xl max-w-[800px]">
         <ChangeAvatar avatar={user.avatarUrl} name={user.name} />
         <div>
           <span className="text-3xl text-rose-500 font-black">{user.name}</span>{" "}

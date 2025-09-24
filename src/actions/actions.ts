@@ -624,3 +624,27 @@ export async function searchAction(prevState: any, formData: FormData) {
     },
   };
 }
+
+export async function avatarAction(avatar: string) {
+  const user = await getCurrentUser();
+  if (!user) {
+    return {
+      errors: "No user found",
+    };
+  }
+  try {
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        avatarUrl: avatar,
+      },
+    });
+    revalidatePath(`/`);
+  } catch (error) {
+    return {
+      errors: "Failed to update Avatar",
+    };
+  }
+}

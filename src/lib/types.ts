@@ -91,6 +91,7 @@ export type UserForProfile = {
   verified?: Boolean;
   status?: "ACTIVE" | "DISABLED";
   votes?: Votes[];
+  avatarUrl?: string | null;
 };
 
 export const changeNameSchema = z.object({
