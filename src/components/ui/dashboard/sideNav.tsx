@@ -19,10 +19,18 @@ export default async function SideNav() {
             className="text-gray-500 p-3 rounded-2xl text-2xl text-center"
           >
             <Image
+              src={`/tech-trap-logos/techtrap-vert-full-logo.webp`}
+              alt={"vertical tech trap logo"}
+              width={100}
+              height={100}
+              className="hidden md:flex"
+            />
+            <Image
               src={`/tech-trap-logos/techtrap-logo.webp`}
               height={100}
               width={100}
               alt={`Tech Trap logo`}
+              className="md:hidden"
             />
           </Link>
           <ProfilePreview user={user} />
