@@ -1,6 +1,7 @@
 "use server";
 import z, { success } from "zod";
 import {
+  avatarUrlSchema,
   changeNameSchema,
   confirmEmailSchema,
   editNoteSchema,
@@ -625,20 +626,31 @@ export async function searchAction(prevState: any, formData: FormData) {
   };
 }
 
-export async function avatarAction(avatar: string) {
+export async function avatarAction(avatarStr: string) {
+  const result = avatarUrlSchema.safeParse(avatarStr);
+
+  if (!result.success) {
+    const flat = z.flattenError(result.error);
+    return {
+      success: false,
+      errors: flat.fieldErrors,
+    };
+  }
+
   const user = await getCurrentUser();
   if (!user) {
     return {
       errors: "No user found",
     };
   }
+
   try {
     await prisma.user.update({
       where: {
         id: user.id,
       },
       data: {
-        avatarUrl: avatar,
+        avatarUrl: result.data,
       },
     });
     revalidatePath(`/`);

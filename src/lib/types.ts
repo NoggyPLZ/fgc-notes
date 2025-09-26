@@ -13,7 +13,7 @@ export type TLoginSchema = z.infer<typeof loginSchema>;
 
 export const signUpSchema = z
   .object({
-    email: z.email(),
+    email: z.email().trim(),
     password: z.string().min(10, "Password must be at least 10 characters"),
     confirmPassword: z.string(),
   })
@@ -24,22 +24,24 @@ export const signUpSchema = z
 
 export type TSignUpSchema = z.infer<typeof signUpSchema>;
 
+const slugRegex = /^[a-z0-9-]{1,100}$/;
+
 export const noteSchema = z.discriminatedUnion("category", [
   z.object({
-    character: z.string(),
-    opponent: z.string(),
+    character: z.string().min(1),
+    opponent: z.string().min(1),
     category: z.enum(["MATCHUPS"]),
-    note: z.string(),
-    characterslug: z.string(),
-    gameslug: z.string(),
+    note: z.string().trim().min(1, "Note required").max(5000, "Note too long"),
+    characterslug: z.string().regex(slugRegex),
+    gameslug: z.string().regex(slugRegex),
   }),
   z.object({
-    character: z.string(),
+    character: z.string().min(1),
     opponent: z.string().optional(),
     category: z.enum(["NEUTRAL", "COMBOS", "SETPLAY"]),
-    note: z.string(),
-    characterslug: z.string(),
-    gameslug: z.string(),
+    note: z.string().trim().min(1, "Note required").max(5000, "Note too long"),
+    characterslug: z.string().regex(slugRegex),
+    gameslug: z.string().regex(slugRegex),
   }),
 ]);
 
@@ -78,7 +80,12 @@ export type TVoteSums = {
 
 export const editNoteSchema = z.object({
   id: z.string(),
-  content: z.string(),
+  content: z
+    .string()
+    .trim()
+    .min(1, "Note required")
+    .max(5000, "Note too long")
+    .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
 });
 
 export type TEditNoteSchema = z.infer<typeof editNoteSchema>;
@@ -96,7 +103,15 @@ export type UserForProfile = {
 
 export const changeNameSchema = z.object({
   id: z.string(),
-  name: z.string(),
+  name: z
+    .string()
+    .trim()
+    .min(2, "Name must be at least 2 characters long")
+    .max(25, "Name must be under 25 characters")
+    .regex(/^[a-zA-Z0-9 _-]+$/, {
+      message:
+        "Name can only contain alphanumeric characters, spaces, dashes, or underscores",
+    }),
 });
 
 export type TChangeNameSchema = z.infer<typeof changeNameSchema>;
@@ -124,7 +139,12 @@ export type TNewPasswordSchema = z.infer<typeof newPasswordSchema>;
 export const reportSchema = z.object({
   noteId: z.string().cuid(),
   reason: z.enum(["harrassment", "racism", "sexual"]),
-  info: z.string(),
+  info: z
+    .string()
+    .trim()
+    .min(5, "Be a little more descriptive 5 characters is too little")
+    .max(200, "A little too descriptive, keep the message under 200 characters")
+    .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
 });
 
 export type TReportSchema = z.infer<typeof reportSchema>;
@@ -173,14 +193,28 @@ export type ReportWithNoteSafe = Prisma.ReportsGetPayload<{
 }>;
 
 export const newsPostSchema = z.object({
-  title: z.string(),
+  title: z
+    .string()
+    .trim()
+    .min(3, "Title too small, need more than 3 characters")
+    .max(100, "Title too long, keep under 100 characters"),
   content: z.string(),
 });
 
 export type TNewsPostSchema = z.infer<typeof newsPostSchema>;
 
 export const searchSchema = z.object({
-  query: z.string().min(3),
+  query: z
+    .string()
+    .min(3)
+    .max(100)
+    .regex(/^[a-zA-Z0-9 ]+$/, "Invalid characters, keep it to alphanumeric"),
 });
 
 export type TSearchSchema = z.infer<typeof searchSchema>;
+
+export const avatarUrlSchema = z
+  .string()
+  .regex(/^\/character-icons\/.*\.(png|webp|jpg|gif)$/, {
+    message: "Invalid avatar path",
+  });

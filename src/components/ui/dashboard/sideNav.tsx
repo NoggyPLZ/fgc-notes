@@ -5,6 +5,7 @@ import { Power } from "lucide-react";
 import ProfilePreview from "../ProfilePreview";
 import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
+import Image from "next/image";
 
 export default async function SideNav() {
   const user = await getCurrentUser();
@@ -17,7 +18,12 @@ export default async function SideNav() {
             href={"/"}
             className="text-gray-500 p-3 rounded-2xl text-2xl text-center"
           >
-            Logo
+            <Image
+              src={`/tech-trap-logos/techtrap-logo.webp`}
+              height={100}
+              width={100}
+              alt={`Tech Trap logo`}
+            />
           </Link>
           <ProfilePreview user={user} />
         </div>

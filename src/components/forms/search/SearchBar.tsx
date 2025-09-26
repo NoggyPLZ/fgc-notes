@@ -55,7 +55,7 @@ export default function SearchBar({
       )}
       <input
         {...register("query")}
-        className="bg-gray-900 border-1 border-gray-300 rounded-2xl p-2 focus:outline-0 focus:border-rose-500"
+        className="bg-gray-900 border-1 border-gray-300 rounded-2xl p-2 focus:outline-0 focus:border-rose-500 lg:w-[400px]"
       />
       <Button type="submit" style="primary" disabled={isSubmitting}>
         <div className="flex">
