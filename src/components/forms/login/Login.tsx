@@ -18,7 +18,7 @@ export default function Login(props: LoginProps) {
 
   return (
     <div className="flex flex-col mx-auto gap-5">
-      Login
+      <span className="font-semibold text-center text-2xl">Login</span>
       <form action={loginAction} className="flex flex-col gap-5">
         <input
           name="email"

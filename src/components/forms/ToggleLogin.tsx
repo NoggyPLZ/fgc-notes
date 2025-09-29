@@ -16,7 +16,7 @@ export default function ToggleLogin() {
   };
 
   return (
-    <div className="bg-gray-100 rounded-2xl md:max-w-[600px] mx-auto p-5 md:p-5">
+    <div className="bg-neutral-900 rounded-2xl md:max-w-[600px] mx-auto p-5 md:p-5 text-gray-100">
       {!toggleForm && (
         <div className="flex flex-col p-2 md:p-5 rounded-2xl mx-auto gap-5">
           <Button onClick={handleClick} value="login" style="primary">
@@ -25,9 +25,9 @@ export default function ToggleLogin() {
           <Button onClick={handleClick} value="signup" style="secondary">
             Sign Up
           </Button>
-          <Button onClick={handleClick} value="forgot" style="secondary">
+          {/* <Button onClick={handleClick} value="forgot" style="secondary">
             Forgot password ?
-          </Button>
+          </Button> */}
         </div>
       )}
 
