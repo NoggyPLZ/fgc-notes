@@ -3,7 +3,7 @@ import LandingCard from "./LandingCard";
 
 export default function ThreeSection() {
   return (
-    <div className="bg-rose-500 md:mt-130 mt-130">
+    <div className="bg-rose-500">
       <div className="flex flex-col xl:w-[80%] w-[90%] mx-auto py-10">
         <div className="flex lg:flex-row flex-col justify-between xl:gap-10 gap-5 ">
           <LandingCard>
