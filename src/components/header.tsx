@@ -8,8 +8,8 @@ export default function Header() {
         <Image
           src="/tech-trap-logos/techtrap-horz-full-logo.webp"
           alt="TechTrap logo"
-          width={75}
-          height={75}
+          width={100}
+          height={100}
         />
       </div>
     </header>
