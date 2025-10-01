@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import Image from "next/image";
 import Link from "next/link";
+import CharacterArtWithSkeleton from "../PopularCharacters/CharacterArtWithSkeleton";
 
 export default async function FavoriteCharacter() {
   const currentUser = await getCurrentUser();
@@ -64,23 +65,24 @@ export default async function FavoriteCharacter() {
   }
 
   return (
-    <DashboardCard>
-      <p className="text-center font-bold uppercase text-sm md:text-md">
+    <DashboardCard bg="magenta">
+      <p className="text-center font-bold uppercase text-sm md:text-md text-gray-100">
         Favorite Character
       </p>
-      <div className="flex flex-col md:flex-row items-center justify-center md:gap-2">
-        <Image
-          src={`/character-icons/${result.name.toLowerCase()}-sml.webp`}
-          alt={`Character portrait for ${result.name}`}
-          width={100}
-          height={100}
-          className="rounded-2xl hidden md:flex"
-        />
+      <div className="flex flex-col md:flex-row items-center justify-center md:gap-2 pt-2">
+        <div className="hidden xl:flex">
+          <CharacterArtWithSkeleton
+            src={`/character-icons/${result.name.toLowerCase()}-sml.webp`}
+            alt={`Character portrait for ${result.name}`}
+            width={100}
+            height={100}
+          />
+        </div>
         <div className="flex flex-col">
-          <h3 className="text-center font-medium text-sm hidden md:flex">
+          <h3 className="text-xs text-center font-medium lg:text-sm hidden md:flex text-gray-100">
             {result.Game.name}
           </h3>
-          <h2 className="text-2xl md:text-5xl font-black text-rose-500 text-center hover:text-rose-600">
+          <h2 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-100 text-center hover:text-gray-200">
             <Link href={`/select/${result.Game.slug}/${result.slug}`}>
               {result.name}
             </Link>

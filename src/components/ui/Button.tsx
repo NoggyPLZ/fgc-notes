@@ -26,7 +26,7 @@ export default function Button({
       className={`rounded-2xl text-gray-100 p-3 cursor-pointer disabled:bg-gray-500 disabled:cursor-default font-bold
         ${style === "primary" && "bg-rose-500 hover:bg-rose-600"}
         ${style === "secondary" && "bg-cyan-500 hover:bg-cyan-600"}
-        ${style === "cancel" && "bg-neutral-500 hover:bg-neutral-600"}
+        ${style === "cancel" && "bg-neutral-600 hover:bg-neutral-700"}
         `}
     >
       {children}

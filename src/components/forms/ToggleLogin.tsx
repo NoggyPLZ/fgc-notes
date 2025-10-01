@@ -5,10 +5,10 @@ import Button from "../ui/Button";
 import { useState } from "react";
 import ConfirmEmail from "./pwreset/ConfirmEmail";
 
-type ToggleFormType = "signup" | "login" | "forgot" | null;
+type ToggleFormType = "signup" | "login" | "forgot";
 
 export default function ToggleLogin() {
-  const [toggleForm, setToggleForm] = useState<ToggleFormType>(null);
+  const [toggleForm, setToggleForm] = useState<ToggleFormType>("signup");
 
   const handleClick = (e: any) => {
     const value: ToggleFormType = e.target.value;

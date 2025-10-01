@@ -12,14 +12,15 @@ export default async function NumberOfUpVotes() {
   const upVoteCount = await prisma.votes.findMany({
     where: {
       userId: currentUser.id,
+      value: 1,
     },
   });
   return (
-    <DashboardCard>
-      <p className="text-center font-bold uppercase text-sm md:text-md">
-        Total Up Votes
+    <DashboardCard bg="magenta">
+      <p className="text-center font-bold uppercase text-sm md:text-md text-gray-100">
+        UpVotes Made
       </p>
-      <h2 className="md:text-8xl text-5xl font-black text-rose-500 text-center">
+      <h2 className="md:text-8xl text-5xl font-black text-gray-100 text-center">
         {upVoteCount.length}
       </h2>
     </DashboardCard>
