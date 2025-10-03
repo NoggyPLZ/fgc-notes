@@ -558,6 +558,7 @@ export async function setNewPassword(prevState: any, formData: FormData) {
   }
 }
 
+//REPORT ACTION
 export async function reportAction(prevState: any, formData: FormData) {
   const results = reportSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
@@ -592,7 +593,8 @@ export async function reportAction(prevState: any, formData: FormData) {
   }
 }
 
-export async function createNewsAction(prevState: any, formData: FormData) {
+//CREATE NEWS ACTION
+export async function createNews(prevState: any, formData: FormData) {
   console.log("Starting newsPost parsing...");
   const results = newsPostSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
@@ -605,7 +607,9 @@ export async function createNewsAction(prevState: any, formData: FormData) {
   const user = await getCurrentUser();
   if (!user || user.role !== "ADMIN") {
     return {
+      success: false,
       errors: {
+        title: [],
         content: [
           "Not logged in or user is not authorized to make a news post.",
         ],
@@ -628,10 +632,16 @@ export async function createNewsAction(prevState: any, formData: FormData) {
       },
     });
     revalidatePath("/dashboard/");
+    return {
+      success: true,
+      errors: {},
+    };
   } catch (error) {
     console.log("Failed to create a news post. ", error);
     return {
+      success: false,
       errors: {
+        title: [],
         content: ["Failed to create a new Post"],
       },
     };

@@ -198,7 +198,11 @@ export const newsPostSchema = z.object({
     .trim()
     .min(3, "Title too small, need more than 3 characters")
     .max(100, "Title too long, keep under 100 characters"),
-  content: z.string(),
+  content: z
+    .string()
+    .trim()
+    .min(3, "Content needs something")
+    .max(1000, "Try and keep it under 1000 characters"),
 });
 
 export type TNewsPostSchema = z.infer<typeof newsPostSchema>;
