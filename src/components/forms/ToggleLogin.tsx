@@ -10,8 +10,8 @@ type ToggleFormType = "signup" | "login" | "forgot";
 export default function ToggleLogin() {
   const [toggleForm, setToggleForm] = useState<ToggleFormType>("signup");
 
-  const handleClick = (e: any) => {
-    const value: ToggleFormType = e.target.value;
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const value = e.currentTarget.value as ToggleFormType;
     setToggleForm(value);
   };
 

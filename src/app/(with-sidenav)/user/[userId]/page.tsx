@@ -1,8 +1,6 @@
 import ChangeName from "@/components/forms/profileEdit/ChangeName";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import Image from "next/image";
-import { UserPen } from "lucide-react";
 import ChangeAvatar from "@/components/forms/profileEdit/ChangeAvatar";
 import ChangeTheme from "@/components/forms/profileEdit/ChangeTheme";
 import VerifyEmail from "@/components/dashboard/VerifyEmail";
@@ -10,7 +8,7 @@ import VerifyEmail from "@/components/dashboard/VerifyEmail";
 export default async function UserProfile({
   params,
 }: {
-  params: { userId: string };
+  params: Promise<{ userId: string }>;
 }) {
   const { userId: userId } = await params;
   const user = await prisma.user.findUnique({
@@ -37,12 +35,12 @@ export default async function UserProfile({
     return <p>You are not logged in.</p>;
   }
 
-  const profileImageCheck = user.avatarUrl !== null;
+  // const profileImageCheck = user.avatarUrl !== null;
 
   const owner = currentUser.id === user.id;
 
   return (
-    <div className=" p-5 rounded-2xl flex md:flex-row flex-col gap-10">
+    <div className=" p-5 rounded-2xl flex lg:flex-row flex-col gap-10">
       <div className="flex flex-col gap-10 bg-gray-200 dark:bg-gray-800 p-10 rounded-2xl max-w-[800px]">
         <ChangeAvatar avatar={user.avatarUrl} name={user.name} />
         <div>

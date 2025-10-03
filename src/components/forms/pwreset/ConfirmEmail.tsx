@@ -9,7 +9,7 @@ import { confirmEmailForPW } from "@/actions/actions";
 export default function ConfirmEmail({
   handleClick,
 }: {
-  handleClick: (e: any) => void;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   const {
     register,

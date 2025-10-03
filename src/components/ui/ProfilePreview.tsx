@@ -1,6 +1,4 @@
 import Image from "next/image";
-import { getCurrentUser } from "@/lib/auth";
-import { User } from "@prisma/client";
 import { UserForProfile } from "@/lib/types";
 
 export default async function ProfilePreview({
@@ -15,7 +13,7 @@ export default async function ProfilePreview({
   const avatar = user.avatarUrl || "/profile-image-placeholder.gif";
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2">
       <Image
         src={avatar}
         alt={"profile image placholder"}
@@ -24,8 +22,10 @@ export default async function ProfilePreview({
         className="rounded-full border-1 mx-auto"
       />
       <div className="text-center">
-        <p className="text-center text-rose-500">Welcome back,</p>
-        <h4 className="text-xl dark:text-gray-300 text-gray-800 ">
+        <p className="text-center text-sm dark:text-gray-100 text-gray-800">
+          Welcome back,
+        </p>
+        <h4 className="text-xl dark:text-rose-500 text-rose-500 font-semibold">
           {user && user.name}
         </h4>
       </div>

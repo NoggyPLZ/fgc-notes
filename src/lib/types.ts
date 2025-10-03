@@ -95,7 +95,7 @@ export type UserForProfile = {
   name: string;
   email?: string;
   createdAt?: Date;
-  verified?: Boolean;
+  verified?: boolean;
   status?: "ACTIVE" | "DISABLED";
   votes?: Votes[];
   avatarUrl?: string | null;

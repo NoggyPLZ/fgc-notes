@@ -1,16 +1,7 @@
 import { RecentNote } from "@/lib/types";
 
 export default function DashboardNote({ note }: { note: RecentNote }) {
-  const {
-    content,
-    category,
-    opponentId,
-    characterId,
-    createdAt,
-    rating,
-    Character,
-    Opponent,
-  } = note;
+  const { content, category, createdAt, rating, Character, Opponent } = note;
 
   const date = new Date(createdAt);
   const formattedDate = date.toLocaleDateString("en-US", {

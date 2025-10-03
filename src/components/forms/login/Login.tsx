@@ -1,14 +1,11 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "../../ui/Button";
-import { useForm } from "react-hook-form";
-import { TLoginSchema, loginSchema } from "@/lib/types";
 import { useActionState } from "react";
 import { login } from "@/actions/actions";
 
 type LoginProps = {
-  handleClick: (e: any) => void;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export default function Login(props: LoginProps) {

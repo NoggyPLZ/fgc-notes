@@ -1,7 +1,6 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import Image from "next/image";
 import Link from "next/link";
 import CharacterArtWithSkeleton from "../PopularCharacters/CharacterArtWithSkeleton";
 
@@ -18,19 +17,19 @@ export default async function FavoriteCharacter() {
     },
   });
 
-  const characterNums = new Map();
+  const characterNums = new Map<string, number>();
   currentFavChar.forEach((char) => {
     if (characterNums.has(char.characterId)) {
-      const value = characterNums.get(char.characterId);
+      const value = characterNums.get(char.characterId) ?? 0;
       characterNums.set(char.characterId, value + 1);
     } else {
       characterNums.set(char.characterId, 1);
     }
   });
 
-  const countArr = Array.from(characterNums.entries());
-  const charMax = (arr: any) => {
-    let max = ["", 0];
+  const countArr: [string, number][] = Array.from(characterNums.entries());
+  const charMax = (arr: [string, number][]) => {
+    let max: [string, number] = ["", 0];
     for (const num of arr) {
       if (num[1] > max[1]) {
         max = num;

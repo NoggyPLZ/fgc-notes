@@ -1,5 +1,5 @@
 "use server";
-import z, { success } from "zod";
+import z from "zod";
 import {
   avatarUrlSchema,
   changeNameSchema,
@@ -22,21 +22,25 @@ import { getCurrentUser } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import crypto from "crypto";
+import { Prisma } from "@prisma/client";
 
-const testUser = {
-  id: "1",
-  email: "contact@contact.com",
-  password: "1234567890",
-};
+type loginPrev =
+  | {
+      errors: {
+        email?: string[] | undefined;
+        password?: string[] | undefined;
+      };
+    }
+  | undefined;
 
 //LOGIN FUNCTION
-export async function login(prevState: any, formData: FormData) {
+export async function login(prevState: loginPrev, formData: FormData) {
   console.log("running check now...");
   console.log(formData);
   const result = loginSchema.safeParse(Object.fromEntries(formData));
   console.log("check for result finished...");
   console.log(result);
-  if (!result.success) {
+  if (!result.success && result.error) {
     const flat = z.flattenError(result.error);
     return {
       errors: flat.fieldErrors,
@@ -84,7 +88,7 @@ export async function logout() {
 }
 
 //SIGNUP FUNCTION
-export async function signUp(prevState: any, formData: FormData) {
+export async function signUp(formData: FormData) {
   console.log("Beginning sign up validation");
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
 
@@ -181,8 +185,15 @@ export async function noteSubmit(prevState: any, formData: FormData) {
   }
 }
 
+type ActiveValueType = "1" | "-1" | null;
+
+type VoteEntry = {
+  noteId: string;
+  value: ActiveValueType;
+};
+
 //UPVOTE/DOWNVOTE ACTION
-export async function voteHandle(voteEntry: any) {
+export async function voteHandle(voteEntry: VoteEntry) {
   console.log("starting vote validation...");
   const results = voteSchema.safeParse(voteEntry);
 
@@ -337,6 +348,16 @@ export async function editName(prevState: any, formData: FormData) {
   const results = changeNameSchema.safeParse(Object.fromEntries(formData));
   console.log("Name change passed validation...");
 
+  const user = await getCurrentUser();
+
+  if (!user) {
+    return {
+      errors: {
+        name: "No user logged in.",
+      },
+    };
+  }
+
   if (!results.success) {
     const flat = z.flattenError(results.error);
     console.log(flat.fieldErrors);
@@ -360,6 +381,15 @@ export async function editName(prevState: any, formData: FormData) {
     return { success: true };
   } catch (error) {
     console.log("Failed to update name: ", error);
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return {
+          errors: {
+            name: ["Name is not available"],
+          },
+        };
+      }
+    }
   }
 }
 
@@ -656,7 +686,7 @@ export async function avatarAction(avatarStr: string) {
     revalidatePath(`/`);
   } catch (error) {
     return {
-      errors: "Failed to update Avatar",
+      errors: `Failed to update Avatar: ${error},`,
     };
   }
 }

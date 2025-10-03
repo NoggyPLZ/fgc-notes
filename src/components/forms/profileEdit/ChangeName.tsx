@@ -10,13 +10,10 @@ import { PenLine } from "lucide-react";
 
 export default function ChangeName({ id }: { id: string }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [newName, setNewName] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
-    getValues,
     setError,
   } = useForm<TChangeNameSchema>({
     resolver: zodResolver(changeNameSchema),
@@ -36,12 +33,12 @@ export default function ChangeName({ id }: { id: string }) {
     const results = await editName(undefined, formData);
     if (results?.errors) {
       const errors = results.errors;
-      if (errors.id) {
-        setError("id", {
-          type: "server",
-          message: errors.id[0],
-        });
-      }
+      // if (errors.id) {
+      //   setError("id", {
+      //     type: "server",
+      //     message: errors.id[0],
+      //   });
+      // }
       if (errors.name) {
         setError("name", {
           type: "server",
@@ -74,7 +71,11 @@ export default function ChangeName({ id }: { id: string }) {
             name="name"
             className="border-1 border-gray-300 rounded-2xl p-2"
           />
-          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
+          {errors.name && (
+            <p className="text-red-500 px-2 py-2 font-semibold bg-gray-300 rounded-2xl">
+              {errors.name.message}
+            </p>
+          )}
           <Button style="primary" type="submit" disabled={isSubmitting}>
             Submit
           </Button>

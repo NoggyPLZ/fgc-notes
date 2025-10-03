@@ -1,10 +1,8 @@
 "use client";
 
-import { Filter, SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-
-type Toggle = "ALL" | "USER";
 
 export default function NoteToggle({
   characterSlug,

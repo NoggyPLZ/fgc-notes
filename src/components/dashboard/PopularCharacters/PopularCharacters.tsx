@@ -1,6 +1,5 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
-import Image from "next/image";
 import CharacterArtWithSkeleton from "./CharacterArtWithSkeleton";
 
 export default async function PopularCharacters() {

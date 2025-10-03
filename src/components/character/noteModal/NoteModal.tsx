@@ -1,6 +1,5 @@
 "use client";
 
-import NoteForm from "@/components/forms/note/NoteForm";
 import Modal from "@/components/ui/Modal";
 import { PenBox } from "lucide-react";
 import { useState } from "react";

@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function CharacterSelect({
   params,
 }: {
-  params: { game: string };
+  params: Promise<{ game: string }>;
 }) {
   const { game: gameId } = await params;
   const game = await prisma.game.findUnique({

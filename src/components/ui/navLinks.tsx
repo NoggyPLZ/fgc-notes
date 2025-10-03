@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Joystick, LayoutGrid, NotepadText, Settings } from "lucide-react";
+import { Joystick, LayoutGrid, Settings } from "lucide-react";
 
 export default function NavLinks({ userId }: { userId: string }) {
   const links = [

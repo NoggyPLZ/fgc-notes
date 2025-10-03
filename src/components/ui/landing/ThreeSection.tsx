@@ -14,9 +14,9 @@ export default function ThreeSection() {
             <p className="text-lg">
               Remember that tech you developed? Or, do you remember that
               solution you found to that annoying situation in neutral? How
-              about that new setup you haven't quite got down yet, well panic no
-              more. TechTrap lets users create a set of organized notes about a
-              character you're interested in.
+              about that new setup you haven&apos;t quite got down yet, well
+              panic no more. TechTrap lets users create a set of organized notes
+              about a character you&apos;re interested in.
             </p>
           </LandingCard>
           <LandingCard>
@@ -25,18 +25,18 @@ export default function ThreeSection() {
               Contribute to Others
             </h1>
             <p className="text-lg">
-              Ever have that problem in your fighting game you just couldn't
-              figure out? You search Google but the search engine is borderline
-              useless at finding the answer? When you or others write a note,
-              they're not just working to improve their own library of tech.
-              TechTrap shares your notes with others letting everyone see
-              possible solutions to a common problem or situation.
+              Ever have that problem in your fighting game you just
+              couldn&apos;t figure out? You search Google but the search engine
+              is borderline useless at finding the answer? When you or others
+              write a note, they&apos;re not just working to improve their own
+              library of tech. TechTrap shares your notes with others letting
+              everyone see possible solutions to a common problem or situation.
             </p>
           </LandingCard>
           <LandingCard>
             <FileChartColumnIncreasing size={220} className="mx-auto py-10" />
             <h1 className="font-black text-2xl xl:text-3xl uppercase text-gray-100 pb-5">
-              FGC's Living Document
+              FGC&apos;s Living Document
             </h1>
             <p className="text-lg">
               Instead of having to type or write out other peoples notes,

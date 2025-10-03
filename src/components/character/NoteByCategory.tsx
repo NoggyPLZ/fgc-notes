@@ -1,6 +1,6 @@
 import SingleNote from "@/components/character/SingleNote";
 import { NoteWithUserSafe, TVoteSums } from "@/lib/types";
-import { Character, Note, NoteCategory } from "@prisma/client";
+import { Character, NoteCategory } from "@prisma/client";
 
 type NoteByCategoryProps = {
   category: NoteCategory;
@@ -35,7 +35,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
               <h2 className="font-black text-2xl text-rose-500 uppercase">
                 {char.name}
               </h2>
-              {matchupNotes.map((note, midx) => (
+              {matchupNotes.map((note) => (
                 <div key={note.id}>
                   {note.opponentId === char.id && (
                     <SingleNote
@@ -53,7 +53,7 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
         </div>
       ) : (
         <>
-          {notes.map((note, i) => (
+          {notes.map((note) => (
             <SingleNote
               key={note.id}
               note={note}

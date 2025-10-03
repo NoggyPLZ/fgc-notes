@@ -1,14 +1,8 @@
-import { Note } from "@/generated/prisma";
 import { prisma } from "@/lib/db";
 import { Character, NoteCategory } from "@prisma/client";
 import NoteByCategory from "./NoteByCategory";
 import { NoteWithUserSafe } from "@/lib/types";
 import { getCurrentUser } from "@/lib/auth";
-
-type NoteSectionProps = {
-  category: NoteCategory;
-  note: Note;
-};
 
 export default async function NoteSection({
   characterId,

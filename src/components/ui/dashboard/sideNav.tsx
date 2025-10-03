@@ -3,7 +3,6 @@ import Link from "next/link";
 import NavLinks from "../navLinks";
 import { Power } from "lucide-react";
 import ProfilePreview from "../ProfilePreview";
-import { prisma } from "@/lib/db";
 import { getCurrentUser } from "@/lib/auth";
 import Image from "next/image";
 
@@ -12,7 +11,7 @@ export default async function SideNav() {
   if (!user) return <p>no user found</p>;
   return (
     <div className="flex flex-col h-full p-2">
-      <div className="bg-gray-200 dark:bg-gray-800 flex flex-col rounded-2xl grow ">
+      <div className="bg-gray-200 dark:bg-gray-800 flex flex-col rounded-2xl grow">
         <div className="flex md:flex-col flex-row items-center gap-4 pt-3 pb-4 justify-center">
           <Link
             href={"/"}

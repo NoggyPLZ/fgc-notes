@@ -9,8 +9,8 @@ export default async function CharacterPage({
   params,
   searchParams,
 }: {
-  params: { game: string; character: string };
-  searchParams?: { filter?: string; query?: string };
+  params: Promise<{ game: string; character: string }>;
+  searchParams?: Promise<{ filter?: string; query?: string }>;
 }) {
   const { game: gameId, character: characterId } = await params;
   const filterSearch = await searchParams;

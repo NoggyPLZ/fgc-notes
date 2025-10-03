@@ -3,7 +3,6 @@ import Button from "@/components/ui/Button";
 import { newsPostSchema, TNewsPostSchema } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { createNewsAction } from "@/actions/actions";
 
 export default function CreateNewsForm({

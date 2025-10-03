@@ -45,11 +45,6 @@ export async function deleteNote(noteId: NoteWithUserSafe) {
   }
 }
 
-export async function editNote(noteId: NoteWithUserSafe) {
-  try {
-  } catch (error) {}
-}
-
 export async function verificationProcess(verifyId: string): Promise<{
   success: boolean;
   message: string;
@@ -111,12 +106,12 @@ export async function verificationProcess(verifyId: string): Promise<{
   }
 }
 
-export default async function passwordResetProcess(passW: string) {
-  const user = await getCurrentUser();
-  if (!user) {
-    return {
-      success: false,
-      message: "No logged in user",
-    };
-  }
-}
+// export default async function passwordResetProcess(passW: string) {
+//   const user = await getCurrentUser();
+//   if (!user) {
+//     return {
+//       success: false,
+//       message: "No logged in user",
+//     };
+//   }
+// }
