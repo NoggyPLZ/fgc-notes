@@ -1,12 +1,9 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@/components/ui/Button";
-import { useForm } from "react-hook-form";
-import { TNoteSchema, noteSchema } from "@/lib/types";
 import { noteSubmit } from "@/actions/actions";
 import { useState } from "react";
-import { Character, Note, NoteCategory } from "@prisma/client";
+import { Character, NoteCategory } from "@prisma/client";
 import { useActionState } from "react";
 
 type NoteFormProps = {
@@ -26,18 +23,10 @@ export default function NoteForm(props: NoteFormProps) {
   const [opponent, setOpponent] = useState(
     latestOpponent ?? characterList[0].id
   );
-  const [state, noteSubmitAction] = useActionState(noteSubmit, undefined);
-  const [numberOfNotes, setNumberOfNotes] = useState<number>(1);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-    getValues,
-    setError,
-  } = useForm<TNoteSchema>({
-    resolver: zodResolver(noteSchema),
-  });
+  const [state, noteSubmitAction, pending] = useActionState(
+    noteSubmit,
+    undefined
+  );
 
   return (
     <div>
@@ -98,13 +87,15 @@ export default function NoteForm(props: NoteFormProps) {
             name="note"
             id="note"
             placeholder="Type note here..."
-            className="border-1 border-gray-400 rounded-2xl p-5"
+            className="border-1 border-gray-400 rounded-2xl p-5 field-sizing-content min-h-40"
+            minLength={5}
+            maxLength={2000}
           />
           {state?.errors?.note && (
             <p className="text-red-500">{state.errors.note}</p>
           )}
           <div className="flex flex-row">
-            <Button type="submit" style={"primary"}>
+            <Button type="submit" style={"primary"} disabled={pending}>
               Submit Note
             </Button>
           </div>

@@ -1,5 +1,5 @@
 "use server";
-import z from "zod";
+import z, { success } from "zod";
 import {
   avatarUrlSchema,
   changeNameSchema,
@@ -142,18 +142,38 @@ type NoteErrors = {
   category?: string[];
   note?: string[];
   user?: string[];
+  characterslug?: string[];
+  gameslug?: string[];
 };
 
+type NoteActionResult = { success: boolean; errors: NoteErrors };
+
 //NOTE SUBMISSION FUNCTION
-export async function noteSubmit(prevState: any, formData: FormData) {
+export async function noteSubmit(
+  prevState: NoteActionResult | undefined,
+  formData: FormData
+) {
   console.log("checking against type schema...");
   const results = noteSchema.safeParse(Object.fromEntries(formData));
   console.log("checking results...");
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat.fieldErrors);
+    const fieldErrors = flat.fieldErrors as Record<
+      string,
+      string[] | undefined
+    >;
+    const errors: NoteErrors = {
+      character: fieldErrors.character,
+      opponent: fieldErrors.opponent,
+      category: fieldErrors.category,
+      note: fieldErrors.note,
+      user: fieldErrors.user,
+      characterslug: fieldErrors.characterslug,
+      gameslug: fieldErrors.gameslug,
+    };
     return {
-      errors: flat.fieldErrors as NoteErrors,
+      success: false,
+      errors,
     };
   }
   console.log("validation passed.");
@@ -163,6 +183,7 @@ export async function noteSubmit(prevState: any, formData: FormData) {
 
   if (!user) {
     return {
+      success: false,
       errors: {
         user: ["User not found"],
       },
@@ -180,8 +201,18 @@ export async function noteSubmit(prevState: any, formData: FormData) {
       },
     });
     revalidatePath(`/select/${gameslug}/${characterslug}`);
+    return {
+      success: true,
+      errors: {},
+    };
   } catch (error) {
     console.log("Error making note:", error);
+    return {
+      success: false,
+      errors: {
+        note: ["Failed to create a note"],
+      },
+    };
   }
 }
 
@@ -284,8 +315,19 @@ export async function voteHandle(voteEntry: VoteEntry) {
   }
 }
 
+type EditNoteType = {
+  success: boolean;
+  errors: {
+    id?: string[];
+    content?: string[];
+  };
+};
+
 //EDIT NOTE FUNCTION
-export async function editSubmit(prevState: any, formData: FormData) {
+export async function editSubmit(
+  prevState: EditNoteType | undefined,
+  formData: FormData
+) {
   console.log("checking against edit schema...");
   console.log(Object.fromEntries(formData));
   const results = editNoteSchema.safeParse(Object.fromEntries(formData));
@@ -294,6 +336,7 @@ export async function editSubmit(prevState: any, formData: FormData) {
     const flat = z.flattenError(results.error);
     console.log(flat.fieldErrors);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
@@ -336,9 +379,15 @@ export async function editSubmit(prevState: any, formData: FormData) {
       `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
     );
     console.log("ravlidated.");
-    return { success: true };
+    return { success: true, errors: {} };
   } catch (error) {
     console.log("Failed to update note: ", error);
+    return {
+      success: false,
+      errors: {
+        content: ["Failed to updated note."],
+      },
+    };
   }
 }
 
@@ -593,13 +642,25 @@ export async function reportAction(prevState: any, formData: FormData) {
   }
 }
 
+type NewsFormState = {
+  success: boolean;
+  errors: {
+    title?: string[];
+    content?: string[];
+  };
+};
+
 //CREATE NEWS ACTION
-export async function createNews(prevState: any, formData: FormData) {
+export async function createNews(
+  prevState: NewsFormState | undefined,
+  formData: FormData
+) {
   console.log("Starting newsPost parsing...");
   const results = newsPostSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
@@ -609,7 +670,6 @@ export async function createNews(prevState: any, formData: FormData) {
     return {
       success: false,
       errors: {
-        title: [],
         content: [
           "Not logged in or user is not authorized to make a news post.",
         ],
@@ -641,7 +701,6 @@ export async function createNews(prevState: any, formData: FormData) {
     return {
       success: false,
       errors: {
-        title: [],
         content: ["Failed to create a new Post"],
       },
     };

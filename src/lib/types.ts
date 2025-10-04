@@ -31,7 +31,11 @@ export const noteSchema = z.discriminatedUnion("category", [
     character: z.string().min(1),
     opponent: z.string().min(1),
     category: z.enum(["MATCHUPS"]),
-    note: z.string().trim().min(1, "Note required").max(5000, "Note too long"),
+    note: z
+      .string()
+      .trim()
+      .min(5, "Note required to be at least 5 characters long")
+      .max(2000, "Note too long"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -39,7 +43,11 @@ export const noteSchema = z.discriminatedUnion("category", [
     character: z.string().min(1),
     opponent: z.string().optional(),
     category: z.enum(["NEUTRAL", "COMBOS", "SETPLAY"]),
-    note: z.string().trim().min(1, "Note required").max(5000, "Note too long"),
+    note: z
+      .string()
+      .trim()
+      .min(5, "Note required to be at least 5 characters long")
+      .max(2000, "Note too long"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -84,7 +92,7 @@ export const editNoteSchema = z.object({
     .string()
     .trim()
     .min(1, "Note required")
-    .max(5000, "Note too long")
+    .max(1000, "Note too long")
     .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
 });
 
