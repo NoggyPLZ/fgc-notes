@@ -1,10 +1,9 @@
 import { logout } from "@/actions/actions";
-import Link from "next/link";
 import NavLinks from "../navLinks";
 import { Power } from "lucide-react";
 import ProfilePreview from "../ProfilePreview";
 import { getCurrentUser } from "@/lib/auth";
-import Image from "next/image";
+import LogoWrapper from "./logoWrapper";
 
 export default async function SideNav() {
   const user = await getCurrentUser();
@@ -13,39 +12,7 @@ export default async function SideNav() {
     <div className="flex flex-col h-full p-2">
       <div className="bg-gray-200 dark:bg-gray-800 flex flex-col rounded-2xl grow">
         <div className="flex md:flex-col flex-row items-center gap-4 pt-3 pb-4 justify-center">
-          <Link
-            href={"/"}
-            className="text-gray-500 p-3 rounded-2xl text-2xl text-center"
-          >
-            <Image
-              src={`/tech-trap-logos/techtrap-vert-full-logo-lm.webp`}
-              alt={"vertical tech trap logo"}
-              width={100}
-              height={100}
-              className="hidden dark:md:flex"
-            />
-            <Image
-              src={`/tech-trap-logos/techtrap-logo-lm.webp`}
-              height={100}
-              width={100}
-              alt={`Tech Trap logo`}
-              className="hidden dark:flex dark:md:hidden"
-            />
-            <Image
-              src={`/tech-trap-logos/techtrap-vert-full-logo.webp`}
-              alt={"vertical tech trap logo"}
-              width={100}
-              height={100}
-              className="hidden md:flex dark:hidden"
-            />
-            <Image
-              src={`/tech-trap-logos/techtrap-logo.webp`}
-              height={100}
-              width={100}
-              alt={`Tech Trap logo`}
-              className="md:hidden dark:hidden"
-            />
-          </Link>
+          <LogoWrapper />
           <ProfilePreview user={user} />
         </div>
         <div className="flex grow flex-row md:flex-col justify-between">
