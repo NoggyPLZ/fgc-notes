@@ -557,6 +557,7 @@ export async function confirmEmailForPW(prevState: any, formData: FormData) {
   }
 }
 
+//SET NEW PASSWORD
 export async function setNewPassword(prevState: any, formData: FormData) {
   console.log("Starting password reset...");
   const results = newPasswordSchema.safeParse(Object.fromEntries(formData));
@@ -620,12 +621,25 @@ export async function setNewPassword(prevState: any, formData: FormData) {
   }
 }
 
+type ReportNoteType = {
+  success: boolean;
+  errors: {
+    noteId?: string[];
+    reason?: string[];
+    info?: string[];
+  };
+};
+
 //REPORT ACTION
-export async function reportAction(prevState: any, formData: FormData) {
+export async function reportNote(
+  prevState: ReportNoteType | undefined,
+  formData: FormData
+) {
   const results = reportSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
@@ -633,8 +647,9 @@ export async function reportAction(prevState: any, formData: FormData) {
   const user = await getCurrentUser();
   if (!user || !user.verified) {
     return {
+      success: false,
       errors: {
-        user: ["User not logged in, or not verified."],
+        info: ["User not logged in, or not verified."],
       },
     };
   }
@@ -650,8 +665,15 @@ export async function reportAction(prevState: any, formData: FormData) {
         info,
       },
     });
+    return { success: true, errors: {} };
   } catch (error) {
     console.log("Failed to make a report: ", error);
+    return {
+      success: false,
+      errors: {
+        info: ["Failed to make a report"],
+      },
+    };
   }
 }
 

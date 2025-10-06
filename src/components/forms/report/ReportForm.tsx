@@ -1,9 +1,8 @@
 "use client";
-import { reportAction } from "@/actions/actions";
+import { reportNote } from "@/actions/actions";
 import Button from "@/components/ui/Button";
-import { NoteWithUserSafe, reportSchema, TReportSchema } from "@/lib/types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { NoteWithUserSafe } from "@/lib/types";
+import { useActionState, useEffect } from "react";
 
 export default function ReportForm({
   note,
@@ -12,44 +11,27 @@ export default function ReportForm({
   note: NoteWithUserSafe;
   clickHandler: () => void;
 }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-    getValues,
-    setError,
-  } = useForm<TReportSchema>({
-    defaultValues: {
-      noteId: note.id,
-    },
-    resolver: zodResolver(reportSchema),
-  });
+  const [state, reportAction, pending] = useActionState(reportNote, undefined);
 
-  const onSubmit = async (data: TReportSchema) => {
-    const formData = new FormData();
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, value);
-    });
-    console.log("formData", formData);
-
-    const result = await reportAction(undefined, formData);
-    if (!result?.errors) {
+  useEffect(() => {
+    if (state?.success) {
       clickHandler();
     }
-  };
+  }, [state?.success, clickHandler]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-      <input {...register("noteId")} type="hidden" />
+    <form action={reportAction} className="flex flex-col gap-3">
+      <input name="noteId" type="hidden" value={note.id} />
       <label htmlFor="reason" className="font-semibold">
         Reason for Report
       </label>
       <select
-        {...register("reason")}
         className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-gray-800 bg-gray-100"
+        name="reason"
       >
-        <option value="harrassment">Harrassment</option>
+        <option selected value="harrassment">
+          Harrassment
+        </option>
         <option value="racism">Racism/Bigotry</option>
         <option value="sexual">Sexual Violence</option>
       </select>
@@ -57,10 +39,11 @@ export default function ReportForm({
         Additional Info:
       </label>
       <input
-        {...register("info")}
+        name="info"
         className="border-1 border-gray-300 rounded-2xl p-3 focus:outline-rose-600 focus:outline-1"
       />
-      <Button type="submit" style="primary" disabled={isSubmitting}>
+      {state?.errors.info && <p>{state.errors.info}</p>}
+      <Button type="submit" style="primary" disabled={pending}>
         Submit
       </Button>
     </form>
