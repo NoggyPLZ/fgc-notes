@@ -391,8 +391,18 @@ export async function editSubmit(
   }
 }
 
+type EditNameActionType = {
+  success: boolean;
+  errors: {
+    id?: string[];
+    name?: string[];
+  };
+};
 //CHANGE NAME FUNCTION
-export async function editName(prevState: any, formData: FormData) {
+export async function editName(
+  prevState: EditNameActionType | undefined,
+  formData: FormData
+) {
   console.log("Name change validation starting...");
   const results = changeNameSchema.safeParse(Object.fromEntries(formData));
   console.log("Name change passed validation...");
@@ -401,8 +411,9 @@ export async function editName(prevState: any, formData: FormData) {
 
   if (!user) {
     return {
+      success: false,
       errors: {
-        name: "No user logged in.",
+        name: ["No user logged in."],
       },
     };
   }
@@ -411,6 +422,7 @@ export async function editName(prevState: any, formData: FormData) {
     const flat = z.flattenError(results.error);
     console.log(flat.fieldErrors);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
@@ -427,12 +439,13 @@ export async function editName(prevState: any, formData: FormData) {
       },
     });
     revalidatePath(`/user/${id}`);
-    return { success: true };
+    return { success: true, errors: {} };
   } catch (error) {
     console.log("Failed to update name: ", error);
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
         return {
+          success: false,
           errors: {
             name: ["Name is not available"],
           },
