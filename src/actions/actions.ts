@@ -1,5 +1,5 @@
 "use server";
-import z, { success } from "zod";
+import z from "zod";
 import {
   avatarUrlSchema,
   changeNameSchema,
