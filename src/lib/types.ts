@@ -218,9 +218,11 @@ export type TNewsPostSchema = z.infer<typeof newsPostSchema>;
 export const searchSchema = z.object({
   query: z
     .string()
-    .min(3)
     .max(100)
-    .regex(/^[a-zA-Z0-9 ]+$/, "Invalid characters, keep it to alphanumeric"),
+    .regex(/^[a-zA-Z0-9 .]*$/, "Invalid characters, keep it to alphanumeric")
+    .refine((val) => val === "" || val.length >= 3, {
+      message: "Type at least 3 characters",
+    }),
 });
 
 export type TSearchSchema = z.infer<typeof searchSchema>;

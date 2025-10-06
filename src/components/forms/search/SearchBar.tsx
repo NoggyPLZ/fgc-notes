@@ -32,11 +32,11 @@ export default function SearchBar({
 
     const result = await searchAction(formData);
     if (!result.errors) {
-      router.push(
-        `/select/${gameSlug}/${characterSlug}?query=${encodeURIComponent(
-          result.data.query
-        )}`
-      );
+      const queryParam =
+        result.data.query.length > 0
+          ? `?query=${encodeURIComponent(result.data.query)}`
+          : "";
+      router.push(`/select/${gameSlug}/${characterSlug}${queryParam}`);
     }
   };
 
