@@ -87,8 +87,19 @@ export async function logout() {
   redirect("/");
 }
 
+type SignUpActionType = {
+  errors: {
+    email?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  };
+};
+
 //SIGNUP FUNCTION
-export async function signUp(formData: FormData) {
+export async function signUp(
+  prevState: SignUpActionType | undefined,
+  formData: FormData
+) {
   console.log("Beginning sign up validation");
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
 
@@ -742,7 +753,7 @@ export async function createNews(
   }
 }
 
-export async function searchAction(prevState: any, formData: FormData) {
+export async function searchAction(formData: FormData) {
   const results = searchSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);

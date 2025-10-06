@@ -13,7 +13,7 @@ export type TLoginSchema = z.infer<typeof loginSchema>;
 
 export const signUpSchema = z
   .object({
-    email: z.email().trim(),
+    email: z.email("Please enter a real email address").trim(),
     password: z.string().min(10, "Password must be at least 10 characters"),
     confirmPassword: z.string(),
   })

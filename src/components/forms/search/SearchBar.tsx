@@ -19,9 +19,6 @@ export default function SearchBar({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    reset,
-    getValues,
-    setError,
   } = useForm<TSearchSchema>({
     resolver: zodResolver(searchSchema),
   });
@@ -33,7 +30,7 @@ export default function SearchBar({
       formData.append(key, value);
     });
 
-    const result = await searchAction(undefined, formData);
+    const result = await searchAction(formData);
     if (!result.errors) {
       router.push(
         `/select/${gameSlug}/${characterSlug}?query=${encodeURIComponent(
