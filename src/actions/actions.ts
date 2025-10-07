@@ -509,8 +509,18 @@ export async function sendVerifyEmail(prevState: any, formData: FormData) {
   }
 }
 
+type ConfirmEmailForPWType = {
+  success: boolean;
+  errors: {
+    email?: string[] | undefined;
+  };
+};
+
 //ACTION TO RESET PASSWORD FROM FORM
-export async function confirmEmailForPW(prevState: any, formData: FormData) {
+export async function confirmEmailForPW(
+  prevState: ConfirmEmailForPWType | undefined,
+  formData: FormData
+) {
   console.log("confirming email...");
   const results = confirmEmailSchema.safeParse(Object.fromEntries(formData));
   console.log(results);
@@ -518,6 +528,7 @@ export async function confirmEmailForPW(prevState: any, formData: FormData) {
     const flat = z.flattenError(results.error);
     console.log(flat.fieldErrors);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
@@ -539,6 +550,7 @@ export async function confirmEmailForPW(prevState: any, formData: FormData) {
   });
   if (!user) {
     return {
+      success: false,
       errors: {
         email: ["No user found"],
       },
@@ -563,19 +575,43 @@ export async function confirmEmailForPW(prevState: any, formData: FormData) {
       subject: "Password Reset Request",
       html: `<p>A password reset was requested for this email. <a href="http://localhost:3000/reset/${token}?user=${user.id}">Click here to reset password</a>. If you didn't request this, please disregard</p>`,
     });
+    return {
+      success: true,
+      errors: {},
+    };
   } catch (error) {
     console.log("Errors: ", error);
+    return {
+      success: false,
+      errors: {
+        email: ["Failed to send a reset email."],
+      },
+    };
   }
 }
 
+type SetNewPasswordType = {
+  success: boolean;
+  errors: {
+    resetId?: string[];
+    userId?: string[];
+    password?: string[];
+    confirmPassword?: string[];
+  };
+};
+
 //SET NEW PASSWORD
-export async function setNewPassword(prevState: any, formData: FormData) {
+export async function setNewPassword(
+  prevState: SetNewPasswordType | undefined,
+  formData: FormData
+) {
   console.log("Starting password reset...");
   const results = newPasswordSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
     console.log(flat.fieldErrors);
     return {
+      success: true,
       errors: flat.fieldErrors,
     };
   }
@@ -590,8 +626,9 @@ export async function setNewPassword(prevState: any, formData: FormData) {
 
   if (!hashedToken) {
     return {
+      success: false,
       errors: {
-        password: "Token is expired or missing",
+        password: ["Token is expired or missing"],
       },
     };
   }
@@ -600,6 +637,7 @@ export async function setNewPassword(prevState: any, formData: FormData) {
 
   if (!isMatch) {
     return {
+      success: false,
       errors: {
         password: ["No user found or reset token exired"],
       },
@@ -622,9 +660,14 @@ export async function setNewPassword(prevState: any, formData: FormData) {
         token: hashedToken.token,
       },
     });
+    return {
+      success: true,
+      errors: {},
+    };
   } catch (error) {
     console.log("Failed to reset password: ", error);
     return {
+      success: false,
       errors: {
         password: [`Failed to reset password: ${error}`],
       },
