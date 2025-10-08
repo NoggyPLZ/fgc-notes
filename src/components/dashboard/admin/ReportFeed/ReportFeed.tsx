@@ -1,4 +1,3 @@
-import EditNote from "@/components/character/EditNote";
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
 import ReportedNote from "./ReportedNote";

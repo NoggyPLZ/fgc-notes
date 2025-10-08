@@ -29,9 +29,7 @@ export default function ReportForm({
         className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-gray-800 bg-gray-100"
         name="reason"
       >
-        <option selected value="harrassment">
-          Harrassment
-        </option>
+        <option defaultValue="harrassment">Harrassment</option>
         <option value="racism">Racism/Bigotry</option>
         <option value="sexual">Sexual Violence</option>
       </select>

@@ -232,3 +232,7 @@ export const avatarUrlSchema = z
   .regex(/^\/character-icons\/.*\.(png|webp|jpg|gif)$/, {
     message: "Invalid avatar path",
   });
+
+export const removeReportSchema = z.string().cuid();
+
+export type TRemoveReportSchema = z.infer<typeof removeReportSchema>;

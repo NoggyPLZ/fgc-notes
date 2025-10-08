@@ -9,6 +9,7 @@ import {
   newPasswordSchema,
   newsPostSchema,
   noteSchema,
+  removeReportSchema,
   reportSchema,
   searchSchema,
   signUpSchema,
@@ -472,7 +473,10 @@ export type VerifyActionType = {
 };
 
 //SEND VERIFICATION EMAIL
-export async function sendVerifyEmail(prevState: any, formData: FormData) {
+export async function sendVerifyEmail(
+  prevState: VerifyActionType | undefined,
+  formData: FormData
+) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   console.log("Email verification action pew");
 
@@ -731,6 +735,43 @@ export async function reportNote(
   }
 }
 
+export async function removeReport(reportId: string) {
+  const results = removeReportSchema.safeParse(reportId);
+  if (!results.success) {
+    const flat = z.flattenError(results.error);
+    console.log(flat);
+    return {
+      success: false,
+      error: flat.fieldErrors,
+    };
+  }
+
+  const user = await getCurrentUser();
+  if (user?.role !== "ADMIN") {
+    return {
+      success: false,
+      error: ["User is not an Admin."],
+    };
+  }
+
+  try {
+    await prisma.reports.delete({
+      where: {
+        id: reportId,
+      },
+    });
+    revalidatePath("/dashboard/");
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: [`Failed to delete report, ${error}`],
+    };
+  }
+}
+
 type NewsFormState = {
   success: boolean;
   errors: {
@@ -796,6 +837,7 @@ export async function createNews(
   }
 }
 
+//SEARCH BAR
 export async function searchAction(formData: FormData) {
   const results = searchSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
@@ -814,6 +856,7 @@ export async function searchAction(formData: FormData) {
   };
 }
 
+//AVATAR SELECT
 export async function avatarAction(avatarStr: string) {
   const result = avatarUrlSchema.safeParse(avatarStr);
 
