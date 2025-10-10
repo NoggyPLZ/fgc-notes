@@ -8,6 +8,13 @@ import { revalidatePath } from "next/cache";
 
 export async function deleteNote(noteId: NoteWithUserSafe) {
   console.log("DELETING NOTE...");
+  const user = await getCurrentUser();
+
+  const authorized = user?.id === noteId.userId || user?.role === "ADMIN";
+
+  if (!authorized) {
+    return;
+  }
 
   const noteForPath = await prisma.note.findUnique({
     where: {
@@ -105,13 +112,3 @@ export async function verificationProcess(verifyId: string): Promise<{
     };
   }
 }
-
-// export default async function passwordResetProcess(passW: string) {
-//   const user = await getCurrentUser();
-//   if (!user) {
-//     return {
-//       success: false,
-//       message: "No logged in user",
-//     };
-//   }
-// }

@@ -33,3 +33,7 @@ body {
 img.loaded + .image-skeleton {
   opacity: 0;
 }
+
+.grecaptcha-badge {
+  visibility: hidden;
+}

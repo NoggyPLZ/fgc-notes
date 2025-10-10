@@ -24,6 +24,7 @@ import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import crypto from "crypto";
 import { Prisma } from "@prisma/client";
+import { verifyCaptchaToken } from "@/lib/recaptcha";
 
 type loginPrev =
   | {
@@ -88,35 +89,66 @@ export async function logout() {
   redirect("/");
 }
 
-type SignUpActionType = {
-  errors: {
-    email?: string[];
-    password?: string[];
-    confirmPassword?: string[];
-  };
-};
+// type SignUpActionType = {
+//   errors: {
+//     email?: string[];
+//     password?: string[];
+//     confirmPassword?: string[];
+//   };
+// };
 
 //SIGNUP FUNCTION
-export async function signUp(
-  prevState: SignUpActionType | undefined,
-  formData: FormData
-) {
+export async function signUp(token: string | null, formData: FormData) {
   console.log("Beginning sign up validation");
+  console.log("validating: ", formData);
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
 
   console.log("schema check complete, moving to errors if any...");
   if (!result.success) {
     const flat = z.flattenError(result.error);
     return {
+      success: false,
       errors: flat.fieldErrors,
     };
   }
+
+  if (!token) {
+    return {
+      success: false,
+      errors: {
+        email: ["Token is null"],
+      },
+    };
+  }
+  console.log("token check passed. We have that now for captchaData");
+  const captchaData = await verifyCaptchaToken(token);
+  console.log("Captcha data: ", captchaData);
+  if (!captchaData) {
+    console.log("Captcha Failed");
+    return {
+      success: false,
+      message: "Captcha Failed.",
+    };
+  }
+  console.log("starting check if captchaData is successful...");
+  if (!captchaData.success || captchaData.score < 0.5) {
+    return {
+      success: false,
+      message: "Captcha Failed",
+      errors: {
+        email: [],
+        password: [],
+        confirmPassword: [],
+        captcha: captchaData.success ? [] : captchaData["error-codes"] || [],
+      },
+    };
+  }
+  console.log("Human detected. moving on.");
 
   console.log("No immediate errors moving on...");
   const { email, password } = result.data;
 
   const hashedPassword = await bcrypt.hash(password, 10);
-
   const emailCheck = await prisma.user.findUnique({
     where: {
       email: email,
@@ -126,6 +158,7 @@ export async function signUp(
   if (emailCheck) {
     console.log("email exists");
     return {
+      success: false,
       errors: {
         email: ["Email already exists."],
       },
@@ -142,10 +175,20 @@ export async function signUp(
     });
 
     await createSession(user.id);
+    return {
+      success: true,
+      errors: {},
+    };
   } catch (error) {
     console.log("Error:", error);
+    return {
+      success: false,
+      errors: {
+        email: ["Failed to create new account."],
+      },
+    };
   }
-  redirect("/dashboard");
+  // redirect("/dashboard");
 }
 
 type NoteErrors = {
