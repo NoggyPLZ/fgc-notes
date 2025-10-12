@@ -42,7 +42,7 @@ export default function SingleNote(props: SingleNoteProps) {
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center relative">
             <NoteRating rating={total} note={note as NoteWithUserAndVote} />
-            <h5 className="text-xs font-light">{note.User.name}</h5>
+            <h5 className="text-xs font-light truncate">{note.User.name}</h5>
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
             {canEdit && <DeleteNote note={note} />}
             {verified && <ReportNote note={note} />}

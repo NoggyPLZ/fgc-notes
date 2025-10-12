@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { UserForProfile } from "@/lib/types";
+import UserGreeting from "./ProfilePreview/UserGreeting";
 
 export default async function ProfilePreview({
   user,
@@ -21,14 +22,7 @@ export default async function ProfilePreview({
         width={100}
         className="rounded-full border-1 mx-auto"
       />
-      <div className="text-center">
-        <p className="text-center text-sm dark:text-gray-100 text-gray-800">
-          Welcome back,
-        </p>
-        <h4 className="text-xl dark:text-rose-500 text-rose-500 font-semibold">
-          {user && user.name}
-        </h4>
-      </div>
+      <UserGreeting username={user.name} />
     </div>
   );
 }

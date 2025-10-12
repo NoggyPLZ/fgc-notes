@@ -2,6 +2,7 @@ import NoteModal from "@/components/character/noteModal/NoteModal";
 import NoteOptionsContainer from "@/components/character/NoteOptionsContainer";
 import NoteSection from "@/components/character/NoteSection";
 import NoteForm from "@/components/forms/note/NoteForm";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import Image from "next/image";
 
@@ -46,6 +47,12 @@ export default async function CharacterPage({
     return <div>no character found</div>;
   }
 
+  const user = await getCurrentUser();
+  if (!user) {
+    console.log("no user found.");
+  }
+  const verified = user?.verified;
+
   return (
     <div
       style={{
@@ -87,6 +94,7 @@ export default async function CharacterPage({
           game={game.slug}
           latestCategory={latestNote?.category}
           latestOpponent={latestNote?.opponentId}
+          verified={verified ?? false}
         />
       </NoteModal>
     </div>
