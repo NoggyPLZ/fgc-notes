@@ -1,7 +1,7 @@
 "use client";
 export default function UserGreeting({ username }: { username: string }) {
   return (
-    <div className="text-center w-[80%] mx-auto">
+    <div className="text-center md:w-55 mx-auto">
       <p className="text-center text-sm dark:text-gray-100 text-gray-800">
         Welcome back,
       </p>

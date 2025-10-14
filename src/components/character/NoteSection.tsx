@@ -23,6 +23,7 @@ export default async function NoteSection({
   if (query) {
     console.log(decodeURIComponent(query));
   }
+
   //Get notes from db
   const notes = await prisma.character.findUnique({
     where: {
