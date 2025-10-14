@@ -119,7 +119,7 @@ export default function NoteForm(props: NoteFormProps) {
       ) : (
         <div className="pb-2">
           <h1 className="text-rose-500 font-black uppercase text-3xl">
-            I see you're not verfied yet
+            I see you&apos;re not verfied yet
           </h1>
           <p>
             To prevent abuses from bots and hooligans, we ask before making new
