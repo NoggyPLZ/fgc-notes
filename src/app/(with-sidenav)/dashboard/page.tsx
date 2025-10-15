@@ -1,4 +1,6 @@
+import BugReportFeed from "@/components/dashboard/admin/BugReportFeed/BugReportFeed";
 import ReportFeed from "@/components/dashboard/admin/ReportFeed/ReportFeed";
+import BugReport from "@/components/dashboard/BugReport/BugReport";
 import FavoriteCharacter from "@/components/dashboard/FavoriteCharacter/FavoriteCharacter";
 import NoteCount from "@/components/dashboard/NoteCount/NoteCount";
 import NumberOfUpVotes from "@/components/dashboard/NumberOfUpVotes/NumberOfUpVotes";
@@ -39,21 +41,31 @@ export default async function Dashboard() {
       </div>
       <div className={`row-span-5 grid grid-cols-6 md:gap-5 gap-2`}>
         <div
-          className={`col-span-full lg:col-span-4 ${
-            admin && `grid-rows-6 grid gap-2 md:gap-5`
-          }`}
+          className={`col-span-full lg:col-span-4 grid-rows-6 grid gap-2 md:gap-5`}
         >
           {admin ? (
             <>
               <div className="row-span-3">
                 <SiteNews admin={admin} />
               </div>
-              <div className="row-span-3">
-                <ReportFeed />
+              <div className="row-span-3 flex flex-row gap-5">
+                <div className="lg:w-[50%]">
+                  <ReportFeed />
+                </div>
+                <div className="lg:w-[50%]">
+                  <BugReportFeed />
+                </div>
               </div>
             </>
           ) : (
-            <SiteNews />
+            <>
+              <div className="row-span-3">
+                <SiteNews />
+              </div>
+              <div className="row-span-3">
+                <BugReport />
+              </div>
+            </>
           )}
         </div>
         <div className="col-span-full lg:col-span-2">

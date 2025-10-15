@@ -72,6 +72,7 @@ model User {
   passwordreset PasswordReset?
   Reports       Reports[]      @relation("ReportsByUser")
   News          News[]
+  BugReport     BugReport[]
 }
 
 enum Status {
@@ -128,4 +129,32 @@ model News {
   title     String
   content   String
   createdAt DateTime @default(now())
+}
+
+model BugReport {
+  id       String      @id @default(cuid())
+  userId   String
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category BugCategory
+  status   BugStatus
+  content  String
+}
+
+enum BugCategory {
+  UI
+  UX
+  PERFORMANCE
+  FUNCTIONALITY
+  DATA
+  AUTH
+  NETWORK
+  ACCESSIBILITY
+  OTHER
+}
+
+enum BugStatus {
+  OPEN
+  IN_PROGRESS
+  FIXED
+  CLOSED
 }

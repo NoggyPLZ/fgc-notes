@@ -10,6 +10,7 @@ import {
   newsPostSchema,
   noteSchema,
   removeReportSchema,
+  reportBugSchema,
   reportSchema,
   searchSchema,
   signUpSchema,
@@ -931,6 +932,122 @@ export async function avatarAction(avatarStr: string) {
   } catch (error) {
     return {
       errors: `Failed to update Avatar: ${error},`,
+    };
+  }
+}
+
+type ReportBugFormType = {
+  success: boolean;
+  errors: {
+    category?: string[];
+    content?: string[];
+  };
+};
+
+export async function reportBugForm(
+  prevState: ReportBugFormType | undefined,
+  formData: FormData
+) {
+  const result = reportBugSchema.safeParse(Object.fromEntries(formData));
+  if (!result.success) {
+    const flat = z.flattenError(result.error);
+    return {
+      success: false,
+      errors: flat.fieldErrors,
+    };
+  }
+
+  const user = await getCurrentUser();
+  if (!user) {
+    return {
+      success: false,
+      errors: {
+        content: ["No user logged in"],
+      },
+    };
+  }
+
+  const { category, content } = result.data;
+  try {
+    await prisma.bugReport.create({
+      data: {
+        userId: user.id,
+        category,
+        content,
+        status: "OPEN",
+      },
+    });
+    return {
+      success: true,
+      errors: {},
+    };
+  } catch (error) {
+    console.log("Failed to create a bug report");
+    return {
+      success: false,
+      errors: {
+        content: [
+          "Failed to create a bug report. Oh boy, now the bug report is bugged.",
+        ],
+      },
+    };
+  }
+}
+
+type RemoveBugType = {
+  success: boolean;
+  errors: string;
+};
+
+export async function removeBug(
+  prevState: RemoveBugType | undefined,
+  formData: FormData
+) {
+  const value = formData.get("reportId");
+  const result = z
+    .string()
+    .cuid()
+    .safeParse(value ?? "");
+
+  if (!result.success) {
+    return {
+      success: false,
+      errors: "Invalid bug ID",
+    };
+  }
+
+  const user = await getCurrentUser();
+  if (!user) {
+    return {
+      success: false,
+      errors: "No user logged in",
+    };
+  }
+
+  if (user.role !== "ADMIN") {
+    return {
+      success: false,
+      errors: "Failed to clear bug",
+    };
+  }
+
+  const bugId = result.data;
+
+  try {
+    await prisma.bugReport.delete({
+      where: {
+        id: bugId,
+      },
+    });
+    revalidatePath("/dashboard/");
+    return {
+      success: true,
+      errors: "",
+    };
+  } catch (error) {
+    return {
+      success: false,
+      errors: `Failed to clear bug, ${error}`,
     };
   }
 }

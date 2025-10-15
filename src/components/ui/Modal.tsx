@@ -23,7 +23,7 @@ export default function Modal({
       } ${
         type === "note" &&
         `right-0 bottom-40 md:bottom-10 md:right-30 md:rounded-2xl rounded-l-2xl fixed w-[90%] md:w-[600px] ring`
-      } p-5 dark:bg-gray-900 bg-gray-100 z-10`}
+      } p-5 dark:bg-gray-900 bg-gray-200 z-10`}
     >
       {children}
       <button

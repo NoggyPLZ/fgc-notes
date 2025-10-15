@@ -236,3 +236,24 @@ export const avatarUrlSchema = z
 export const removeReportSchema = z.string().cuid();
 
 export type TRemoveReportSchema = z.infer<typeof removeReportSchema>;
+
+export const reportBugSchema = z.object({
+  category: z.enum([
+    "UI",
+    "UX",
+    "PERFORMANCE",
+    "FUNCTIONALITY",
+    "DATA",
+    "AUTH",
+    "NETWORK",
+    "ACCESSIBILITY",
+    "OTHER",
+  ]),
+  content: z
+    .string()
+    .trim()
+    .min(5, "Try to be more descriptive. More than a word or two")
+    .max(1000, "Try to keep it under 1000 characters"),
+});
+
+export type TReportBugSchema = z.infer<typeof reportBugSchema>;

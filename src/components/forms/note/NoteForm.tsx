@@ -40,7 +40,7 @@ export default function NoteForm(props: NoteFormProps) {
     <>
       {verified ? (
         <div>
-          <form action={noteSubmitAction} className="flex flex-col gap-5">
+          <form action={noteSubmitAction} className="flex flex-col gap-5 pb-2">
             <input
               type="hidden"
               name="characterslug"
@@ -52,7 +52,7 @@ export default function NoteForm(props: NoteFormProps) {
               <p className="text-red-500">{state.errors.user}</p>
             )}
             <div className="flex flex-row gap-5">
-              <div className="flex flex-col">
+              <div className="flex flex-col basis-1/2 gap-2">
                 <label htmlFor="category" className="font-bold">
                   Category
                 </label>
@@ -61,7 +61,7 @@ export default function NoteForm(props: NoteFormProps) {
                   name="category"
                   id="category"
                   value={category}
-                  className="dark:bg-gray-900"
+                  className="dark:bg-neutral-950 border-1 border-gray-400 rounded-2xl p-4 bg-gray-100"
                 >
                   <option value="NEUTRAL">Neutral</option>
                   <option value="COMBOS">Combos</option>
@@ -73,7 +73,7 @@ export default function NoteForm(props: NoteFormProps) {
                 )}
               </div>
               {category === "MATCHUPS" && (
-                <div className="flex flex-col">
+                <div className="flex flex-col basis-1/2 gap-2">
                   <label htmlFor="opponent" className="font-bold">
                     Matchup
                   </label>
@@ -81,7 +81,7 @@ export default function NoteForm(props: NoteFormProps) {
                     name="opponent"
                     id="opponent"
                     value={opponent}
-                    className="dark:bg-gray-900"
+                    className="dark:bg-neutral-950 border-1 border-gray-400 rounded-2xl p-4 bg-gray-100"
                     onChange={(e) => setOpponent(e.target.value)}
                   >
                     {characterList.map((char) => (
@@ -101,9 +101,10 @@ export default function NoteForm(props: NoteFormProps) {
                 name="note"
                 id="note"
                 placeholder="Type note here..."
-                className="border-1 border-gray-400 rounded-2xl p-5 field-sizing-content min-h-40"
+                className="border-1 border-gray-400 rounded-l-2xl rounded-tr-2xl p-5 field-sizing-content min-h-40 bg-gray-100 focus:outline-rose-600 focus:outline-1 dark:bg-neutral-950 caret-rose-500 focus:border-0"
                 minLength={5}
                 maxLength={2000}
+                rows={5}
               />
               {state?.errors?.note && (
                 <p className="text-red-500">{state.errors.note}</p>
