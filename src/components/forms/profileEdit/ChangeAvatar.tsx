@@ -19,6 +19,7 @@ export default function ChangeAvatar({
             alt={`Profile image for ${name}.`}
             height={200}
             width={200}
+            className="rounded-2xl"
           />
         ) : (
           <p>No profile image.</p>

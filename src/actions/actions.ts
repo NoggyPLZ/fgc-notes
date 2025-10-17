@@ -532,12 +532,28 @@ export async function sendVerifyEmail(
     return { success: false, message: "No user is logged in." };
   }
 
+  const email = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      email: true,
+    },
+  });
+
+  if (!email) {
+    return {
+      success: false,
+      message: "No email found",
+    };
+  }
+
   const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000);
 
   try {
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: "bhicksdesigndev@gmail.com",
+      from: "TechTrap Notifications <no-reply@notifications.techtrap.app>",
+      to: email.email,
       subject: "test",
       html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">to verify your account</a></p>`,
     });
@@ -604,7 +620,6 @@ export async function confirmEmailForPW(
       },
     };
   }
-
   const expiresAt = new Date(Date.now() + 1 * 60 * 60 * 1000);
 
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -618,8 +633,8 @@ export async function confirmEmailForPW(
       },
     });
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: "bhicksdesigndev@gmail.com",
+      from: "TechTrap Notifications <no-reply@notifications.techtrap.app>",
+      to: email,
       subject: "Password Reset Request",
       html: `<p>A password reset was requested for this email. <a href="http://localhost:3000/reset/${token}?user=${user.id}">Click here to reset password</a>. If you didn't request this, please disregard</p>`,
     });
