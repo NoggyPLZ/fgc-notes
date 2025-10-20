@@ -19,8 +19,6 @@ export default async function BugReportFeed() {
     </DashboardCard>;
   }
 
-  console.log(bugReports);
-
   return (
     <DashboardCard>
       <>

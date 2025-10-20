@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model Game {
@@ -29,6 +30,8 @@ model Character {
   story           String?
   avatarUrl       String?
   profileImageUrl String?
+
+  @@index([gameId])
 }
 
 model Note {
@@ -36,7 +39,7 @@ model Note {
   content     String
   rating      Int          @default(1)
   updatedAt   DateTime     @updatedAt
-  createdAt   DateTime     @default(now())
+  createdAt   DateTime     @default(now()) @db.Timestamp(6)
   Character   Character    @relation("MainCharacterNotes", fields: [characterId], references: [id])
   characterId String
   opponentId  String?
@@ -46,6 +49,10 @@ model Note {
   category    NoteCategory
   votes       Votes[]
   reports     Reports[]    @relation("ReportsOnNote")
+
+  @@index([characterId])
+  @@index([opponentId])
+  @@index([userId])
 }
 
 enum NoteCategory {
@@ -60,7 +67,7 @@ model User {
   name          String         @unique
   email         String         @unique
   password      String
-  createdAt     DateTime       @default(now())
+  createdAt     DateTime       @default(now()) @db.Timestamp(6)
   verified      Boolean        @default(false)
   rating        Int            @default(1)
   role          Role           @default(USER)
@@ -94,6 +101,7 @@ model Votes {
   value  Int
 
   @@unique([userId, noteId])
+  @@index([noteId])
 }
 
 model Verfication {
@@ -120,6 +128,9 @@ model Reports {
   Note       Note   @relation("ReportsOnNote", fields: [noteId], references: [id], onDelete: Cascade)
   reason     String
   info       String
+
+  @@index([noteId])
+  @@index([reportedBy])
 }
 
 model News {
@@ -128,7 +139,9 @@ model News {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   title     String
   content   String
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamp(6)
+
+  @@index([userId])
 }
 
 model BugReport {
@@ -138,6 +151,8 @@ model BugReport {
   category BugCategory
   status   BugStatus
   content  String
+
+  @@index([userId])
 }
 
 enum BugCategory {

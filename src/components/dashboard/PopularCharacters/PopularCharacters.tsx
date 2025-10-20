@@ -25,7 +25,11 @@ export default async function PopularCharacters() {
         {characters.map((char) => (
           <div key={char.id} className="flex-row flex items-center gap-2">
             <CharacterArtWithSkeleton
-              src={`/character-icons/${char.name.toLowerCase()}-sml.webp`}
+              src={`${
+                char.avatarUrl
+                  ? `/character-icons/${char.avatarUrl.toLowerCase()}-sml.webp`
+                  : `/profile-image-placeholder.gif`
+              }`}
               alt={`Character portrait for ${char.name}`}
               width={100}
               height={100}
@@ -38,12 +42,12 @@ export default async function PopularCharacters() {
             </div>
           </div>
         ))}
-        <div className="flex-row flex items-center">
+        {/* <div className="flex-row flex items-center">
           <h2 className="text-5xl font-black text-rose-500 text-center">
             asdf
           </h2>
           <p>3 Notes</p>
-        </div>
+        </div> */}
       </div>
     </DashboardCard>
   );

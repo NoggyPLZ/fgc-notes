@@ -53,6 +53,10 @@ export default async function CharacterPage({
   }
   const verified = user?.verified;
 
+  const avatarImage = characterChoice.avatarUrl
+    ? `/character-icons/${characterChoice.avatarUrl.toLowerCase()}-sml.webp`
+    : `/profile-image-placeholder.gif`;
+
   return (
     <div
       style={{
@@ -62,7 +66,7 @@ export default async function CharacterPage({
     >
       <div className="flex flex-col lg:flex-row gap-2 p-5">
         <Image
-          src={`/character-icons/${characterChoice.name.toLocaleLowerCase()}-sml.webp`}
+          src={avatarImage}
           alt={`Character portrait of ${characterChoice.name}`}
           width={200}
           height={200}

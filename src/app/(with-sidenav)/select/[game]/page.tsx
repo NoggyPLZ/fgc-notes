@@ -36,7 +36,11 @@ export default async function CharacterSelect({
           >
             <Link href={`/select/${game.slug}/${character.slug}`}>
               <Image
-                src={`/character-icons/${character.name.toLocaleLowerCase()}-sml.webp`}
+                src={
+                  character.avatarUrl
+                    ? `/character-icons/${character.avatarUrl.toLocaleLowerCase()}-sml.webp`
+                    : `/profile-image-placeholder.gif`
+                }
                 className="rounded-2xl"
                 width={200}
                 height={200}
