@@ -45,7 +45,7 @@ model Note {
   opponentId  String?
   Opponent    Character?   @relation("OpponentCharacterNotes", fields: [opponentId], references: [id])
   userId      String
-  User        User         @relation(fields: [userId], references: [id])
+  User        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   category    NoteCategory
   votes       Votes[]
   reports     Reports[]    @relation("ReportsOnNote")

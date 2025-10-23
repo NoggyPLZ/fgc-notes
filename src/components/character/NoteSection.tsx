@@ -111,7 +111,7 @@ export default async function NoteSection({
       {category.map((cat, i) => (
         <div
           key={i}
-          className={`${cat === "MATCHUPS" ? "w-full" : "lg:w-1/2"}`}
+          className={`${cat === "MATCHUPS" ? "w-full" : "xl:w-1/2 w-full"}`}
         >
           <NoteByCategory
             category={cat}

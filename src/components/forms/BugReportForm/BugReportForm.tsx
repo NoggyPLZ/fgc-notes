@@ -9,6 +9,7 @@ export default function BugReportForm() {
     reportBugForm,
     undefined
   );
+
   return (
     <div>
       {state?.success && <p>good job</p>}

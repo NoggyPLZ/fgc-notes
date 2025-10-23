@@ -22,16 +22,15 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
     verified,
     role,
   } = props;
-  // console.log(voteSums);
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   return (
-    <div>
+    <>
       <h1 className="font-black text-rose-500 text-5xl pb-5">{category}</h1>
-      {notes.length < 1 && `No notes for ${category}, be the first!`}
+      {notes.length < 1 && <p>{`No notes for ${category}, be the first!`}</p>}
       {category === "MATCHUPS" ? (
-        <div className="flex lg:flex-row flex-col gap-4">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 w-full">
           {characterList.map((char, i) => (
-            <div key={i} className="flex flex-col lg:w-1/2">
+            <div key={i} className="flex flex-col basis-1/2">
               <h2 className="font-black text-2xl text-rose-500 uppercase">
                 {char.name}
               </h2>
@@ -65,6 +64,6 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
           ))}
         </>
       )}
-    </div>
+    </>
   );
 }

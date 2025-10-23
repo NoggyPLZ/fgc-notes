@@ -37,3 +37,10 @@ img.loaded + .image-skeleton {
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+.tiptap,
+.tiptap-output {
+  ul {
+    @apply list-disc ml-5;
+  }
+}
