@@ -1,6 +1,7 @@
 import NoteModal from "@/components/character/noteModal/NoteModal";
 import NoteOptionsContainer from "@/components/character/NoteOptionsContainer";
 import NoteSection from "@/components/character/NoteSection";
+import NoteTabs from "@/components/character/NoteTabs/NoteTabs";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
@@ -11,7 +12,12 @@ export default async function CharacterPage({
   searchParams,
 }: {
   params: Promise<{ game: string; character: string }>;
-  searchParams?: Promise<{ filter?: string; query?: string }>;
+  searchParams?: Promise<{
+    filter?: string;
+    query?: string;
+    tab?: string;
+    opponent?: string;
+  }>;
 }) {
   const { game: gameId, character: characterId } = await params;
   const filterSearch = await searchParams;
@@ -84,11 +90,20 @@ export default async function CharacterPage({
         gameSlug={game.slug}
         filter={filterSearch?.filter || "ALL"}
       />
+      <NoteTabs
+        characterSlug={characterChoice.slug}
+        gameSlug={game.slug}
+        tab={filterSearch?.tab || ""}
+        opponent={filterSearch?.opponent || ""}
+        characterList={characterList}
+      />
       <NoteSection
         characterId={characterId}
         characterList={characterList}
         filter={filterSearch?.filter || "ALL"}
         query={filterSearch?.query}
+        tab={filterSearch?.tab}
+        opponent={filterSearch?.opponent}
       />
       <NoteModal>
         <NoteForm

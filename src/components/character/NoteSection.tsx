@@ -9,11 +9,15 @@ export default async function NoteSection({
   characterList,
   filter,
   query,
+  tab,
+  opponent,
 }: {
   characterId: string;
   characterList: Character[];
   filter?: string;
   query?: string;
+  tab?: string;
+  opponent?: string;
 }) {
   //Check for current user
   const user = await getCurrentUser();
