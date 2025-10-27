@@ -3,6 +3,7 @@ import { Character, NoteCategory } from "@prisma/client";
 import NoteByCategory from "./NoteByCategory";
 import { NoteWithUserSafe } from "@/lib/types";
 import { getCurrentUser } from "@/lib/auth";
+import NoteCategorySection from "./NoteCategorySection";
 
 export default async function NoteSection({
   characterId,
@@ -110,24 +111,40 @@ export default async function NoteSection({
 
   const grouped = notesByCategory(notes.notesAsMain);
 
+  const cat = tab ? tab : "NEUTRAL";
+
   return (
-    <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 rounded-b-2xl p-5 shadow-xl">
-      {category.map((cat, i) => (
-        <div
-          key={i}
-          className={`${cat === "MATCHUPS" ? "w-full" : "xl:w-1/2 w-full"}`}
-        >
-          <NoteByCategory
-            category={cat}
-            notes={grouped[cat] ?? []}
-            characterList={characterList}
-            voteSums={voteSums}
-            currentUserId={user?.id}
-            verified={user?.verified}
-            role={user?.role}
-          />
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 rounded-b-2xl p-5 shadow-xl">
+        <NoteCategorySection
+          tab={cat}
+          notes={grouped[cat] ?? []}
+          opponent={opponent}
+          characterList={characterList}
+          voteSums={voteSums}
+          currentUserId={user?.id}
+          verified={user?.verified}
+          role={user?.role}
+        />
+      </div>
+      {/* <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 rounded-b-2xl p-5 shadow-xl">
+        {category.map((cat, i) => (
+          <div
+            key={i}
+            className={`${cat === "MATCHUPS" ? "w-full" : "xl:w-1/2 w-full"}`}
+          >
+            <NoteByCategory
+              category={cat}
+              notes={grouped[cat] ?? []}
+              characterList={characterList}
+              voteSums={voteSums}
+              currentUserId={user?.id}
+              verified={user?.verified}
+              role={user?.role}
+            />
+          </div>
+        ))}
+      </div> */}
+    </>
   );
 }

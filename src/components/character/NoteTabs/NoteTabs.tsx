@@ -1,7 +1,7 @@
 "use client";
 
 import { Character } from "@prisma/client";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useTransition } from "react";
 import NoteTabOpponent from "./NoteTabOpponent";
 
@@ -11,34 +11,56 @@ export default function NoteTabs({
   tab,
   opponent,
   characterList,
+  filter,
 }: {
   characterSlug: string;
   gameSlug: string;
   tab: string;
   opponent?: string;
   characterList: Character[];
+  filter?: string;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
+
+  const isFilter = filter !== undefined ? `?filter=${filter}` : ``;
   const currentPath = `/select/${gameSlug}/${characterSlug}`;
   const tabLinks = [
     {
-      name: "neutral",
-      linkTo: `${currentPath}?tab=neutral`,
+      name: "NEUTRAL",
+      linkTo: `${currentPath}?tab=NEUTRAL`,
     },
     {
-      name: "combos",
-      linkTo: `${currentPath}?tab=combos`,
+      name: "COMBOS",
+      linkTo: `${currentPath}?tab=COMBOS`,
     },
     {
-      name: "setplay",
-      linkTo: `${currentPath}?tab=setplay`,
+      name: "SETPLAY",
+      linkTo: `${currentPath}?tab=SETPLAY`,
     },
     {
-      name: "matchup",
-      linkTo: `${currentPath}?tab=matchup`,
+      name: "MATCHUPS",
+      linkTo: `${currentPath}?tab=MATCHUPS`,
     },
   ];
+
+  const handleClick = (linkTab: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    console.log(params);
+    if (params.has("opponent") && linkTab !== "MATCHUPS") {
+      params.delete("opponent");
+    }
+    if (filter) {
+      params.set("filter", filter);
+    }
+    params.set("tab", linkTab);
+    const newQuery = params.toString();
+    startTransition(() => {
+      router.push(`${currentPath}?${newQuery}`);
+    });
+  };
 
   const popRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -48,7 +70,7 @@ export default function NoteTabs({
   return (
     <div className="dark:bg-gray-900 bg-gray-300 pt-2 flex gap-1">
       {tabLinks.map((link, i) =>
-        link.name === "matchup" ? (
+        link.name === "MATCHUPS" ? (
           <button
             key={i}
             className={`rounded-tr-2xl rounded-tl-md uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
@@ -69,11 +91,7 @@ export default function NoteTabs({
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
                 : "bg-gray-200 dark:bg-gray-900 cursor-pointer"
             }`}
-            onClick={() => {
-              startTransition(() => {
-                router.push(link.linkTo);
-              });
-            }}
+            onClick={() => handleClick(link.name)}
             disabled={isPending || tab === link.name}
           >
             {link.name}
@@ -90,6 +108,7 @@ export default function NoteTabs({
           characterList={characterList}
           currentPath={currentPath}
           opponent={opponent || ""}
+          filter={filter}
         />
       </div>
     </div>

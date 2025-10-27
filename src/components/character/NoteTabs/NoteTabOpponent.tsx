@@ -3,23 +3,40 @@
 import { Character } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 export default function NoteTabOpponent({
   characterList,
   currentPath,
   opponent,
+  filter,
 }: {
   characterList: Character[];
   currentPath: string;
   opponent: string;
+  filter?: string;
 }) {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleClick = (linkTab: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    console.log(params);
+    params.set("tab", "MATCHUPS");
+    params.set("opponent", linkTab);
+    if (filter) {
+      params.set("filter", filter);
+    }
+    const newQuery = params.toString();
+    router.push(`${currentPath}?${newQuery}`);
+  };
+
   return (
     <div className="flex gap-2 p-2 max-w-[500px] flex-wrap justify-center">
       {characterList.map((char) => (
-        <Link
-          href={`${currentPath}?tab=matchup&opponent=${char.slug}`}
-          key={char.id}
-        >
+        <button onClick={() => handleClick(char.id)} key={char.id}>
           <Image
             src={
               char.avatarUrl
@@ -31,7 +48,7 @@ export default function NoteTabOpponent({
             alt={`Character portrait for ${char.name}`}
             className="rounded-md"
           />
-        </Link>
+        </button>
       ))}
     </div>
   );

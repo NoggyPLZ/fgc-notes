@@ -16,7 +16,7 @@ export default function RemoveBugEntry({ report }: { report: BugReport }) {
     <form action={removeBugAction}>
       <input type="hidden" name="reportId" value={id} />
       <button
-        className="text-sm py-1 px-2 bg-rose-500 rounded-md hover:bg-rose-700 cursor-pointer"
+        className="text-md text-gray-100 py-1 px-2 bg-rose-500 rounded-md hover:bg-rose-700 cursor-pointer"
         type="submit"
         disabled={pending}
       >

@@ -34,10 +34,19 @@ export default async function CharacterPage({
     return <div>no game found</div>;
   }
 
+  const user = await getCurrentUser();
+  if (!user) {
+    console.log("no user found.");
+    return <p>No user found.</p>;
+  }
+
   const latestNote = await prisma.note.findFirst({
     where: {
       Character: {
         slug: characterId,
+      },
+      User: {
+        id: user.id,
       },
     },
     orderBy: { createdAt: "desc" },
@@ -53,10 +62,6 @@ export default async function CharacterPage({
     return <div>no character found</div>;
   }
 
-  const user = await getCurrentUser();
-  if (!user) {
-    console.log("no user found.");
-  }
   const verified = user?.verified;
 
   const avatarImage = characterChoice.avatarUrl
@@ -96,6 +101,7 @@ export default async function CharacterPage({
         tab={filterSearch?.tab || ""}
         opponent={filterSearch?.opponent || ""}
         characterList={characterList}
+        filter={filterSearch?.filter}
       />
       <NoteSection
         characterId={characterId}
