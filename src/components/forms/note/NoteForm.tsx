@@ -61,7 +61,7 @@ export default function NoteForm(props: NoteFormProps) {
                   name="category"
                   id="category"
                   value={category}
-                  className="dark:bg-neutral-950 border-1 border-gray-400 rounded-2xl p-4 bg-gray-100"
+                  className="dark:bg-neutral-950 border-b-3 border-gray-400  p-4 bg-neutral-100 border-b-rose-500 text-rose-500 dark:text-gray-100 font-bold"
                 >
                   <option value="NEUTRAL">Neutral</option>
                   <option value="COMBOS">Combos</option>
@@ -81,11 +81,15 @@ export default function NoteForm(props: NoteFormProps) {
                     name="opponent"
                     id="opponent"
                     value={opponent}
-                    className="dark:bg-neutral-950 border-1 border-gray-400 rounded-2xl p-4 bg-gray-100"
+                    className="dark:bg-neutral-950 border-b-3 border-gray-400 p-4 bg-neutral-100 border-b-rose-500 text-rose-500 dark:text-gray-100 font-bold capitalize"
                     onChange={(e) => setOpponent(e.target.value)}
                   >
                     {characterList.map((char) => (
-                      <option key={char.slug} value={char.id}>
+                      <option
+                        key={char.slug}
+                        value={char.id}
+                        className="capitalize"
+                      >
                         {char.name}
                       </option>
                     ))}
@@ -101,7 +105,7 @@ export default function NoteForm(props: NoteFormProps) {
                 name="note"
                 id="note"
                 placeholder="Type note here..."
-                className="border-1 border-gray-400 rounded-l-2xl rounded-tr-2xl p-5 field-sizing-content min-h-40 bg-gray-100 focus:outline-rose-600 focus:outline-1 dark:bg-neutral-950 caret-rose-500 focus:border-0"
+                className="border-b-3 border-b-rose-500 border-gray-400  p-5 field-sizing-content min-h-40 bg-gray-100 focus:outline-rose-600 focus:outline-1 outline-transparent outline-1 dark:bg-neutral-950 caret-rose-500"
                 minLength={5}
                 maxLength={2000}
                 rows={5}

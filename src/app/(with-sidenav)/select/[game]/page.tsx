@@ -35,7 +35,7 @@ export default async function CharacterSelect({
             className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-800"
           >
             <Link href={`/select/${game.slug}/${character.slug}`}>
-              <Image
+              <img
                 src={
                   character.avatarUrl
                     ? `/character-icons/${character.avatarUrl.toLocaleLowerCase()}-sml.webp`

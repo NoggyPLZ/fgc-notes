@@ -37,16 +37,16 @@ export default function NoteTabOpponent({
     <div className="flex gap-2 p-2 max-w-[500px] flex-wrap justify-center">
       {characterList.map((char) => (
         <button onClick={() => handleClick(char.id)} key={char.id}>
-          <Image
+          <img
             src={
               char.avatarUrl
                 ? `/character-icons/${char.avatarUrl.toLowerCase()}-sml.webp`
                 : `/profile-image-placeholder.gif`
             }
-            width={75}
-            height={75}
+            width={80}
+            height={80}
             alt={`Character portrait for ${char.name}`}
-            className="rounded-md"
+            className="rounded-md border-transparent hover:border-rose-500 cursor-pointer border-2"
           />
         </button>
       ))}

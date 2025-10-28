@@ -554,7 +554,7 @@ export async function sendVerifyEmail(
     const data = await resend.emails.send({
       from: "TechTrap Notifications <no-reply@notifications.techtrap.app>",
       to: email.email,
-      subject: "test",
+      subject: "Account Verification",
       html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">to verify your account</a></p>`,
     });
 

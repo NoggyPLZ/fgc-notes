@@ -48,7 +48,7 @@ export default async function Dashboard() {
               <div className="row-span-3">
                 <SiteNews admin={admin} />
               </div>
-              <div className="row-span-3 flex flex-row gap-5">
+              <div className="row-span-3 flex lg:flex-row flex-col lg:gap-5 gap-2">
                 <div className="lg:w-[50%]">
                   <ReportFeed />
                 </div>

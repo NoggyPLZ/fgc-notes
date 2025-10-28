@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="flex mt-auto py-10 text-center px-5 bg-neutral-950 place-items-center text-gray-100 font-light">
       <div className="flex flex-row w-[90%] mx-auto items-center justify-center gap-10">
         <div>
-          <Image
+          <img
             src="/tech-trap-logos/techtrap-horz-full-logo-lm.webp"
             alt="TechTrap logo"
             width={100}

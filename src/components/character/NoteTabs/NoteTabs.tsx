@@ -73,10 +73,10 @@ export default function NoteTabs({
         link.name === "MATCHUPS" ? (
           <button
             key={i}
-            className={`rounded-tr-2xl rounded-tl-md uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`rounded-tr-2xl border-l-10 border-l-rose-500 uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
-                : "bg-gray-200 dark:bg-gray-900"
+                : "bg-gray-200 dark:bg-gray-950"
             }`}
             popoverTarget="opponentsPopup"
             disabled={isPending}
@@ -86,10 +86,10 @@ export default function NoteTabs({
         ) : (
           <button
             key={i}
-            className={`rounded-tr-2xl rounded-tl-md uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`rounded-tr-2xl border-l-10 border-l-rose-500 uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
-                : "bg-gray-200 dark:bg-gray-900 cursor-pointer"
+                : "bg-gray-200 dark:bg-gray-950 cursor-pointer"
             }`}
             onClick={() => handleClick(link.name)}
             disabled={isPending || tab === link.name}
@@ -101,7 +101,7 @@ export default function NoteTabs({
       <div
         popover="auto"
         id="opponentsPopup"
-        className="relative inset-y-0 mx-auto my-auto transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left opacity-0 shadow-xl transition-all [transition-behavior:allow-discrete] duration-500 sm:w-full sm:max-w-96 sm:p-6 dark:bg-gray-800 [&:is([open],:popover-open)]:opacity-100 [@starting-style]:[&:is([open],:popover-open)]:opacity-0"
+        className="relative inset-y-0 mx-auto my-auto transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left opacity-0 shadow-lg/50 transition-all [transition-behavior:allow-discrete] duration-500 sm:w-full sm:max-w-96 sm:p-6 dark:bg-gray-900 dark:border-1 dark:border-gray-950 [&:is([open],:popover-open)]:opacity-100 [@starting-style]:[&:is([open],:popover-open)]:opacity-0"
         ref={popRef}
       >
         <NoteTabOpponent

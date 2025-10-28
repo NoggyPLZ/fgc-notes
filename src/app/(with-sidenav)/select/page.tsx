@@ -22,7 +22,7 @@ export default async function GameSelect() {
           >
             <Link href={`select/${game.slug}/`}>
               <div className="flex flex-col basis-1/2 md:basis-1/6 bg-gray-200 dark:bg-gray-800 rounded-2xl  h-full p-5 shadow-sm hover:bg-rose-700">
-                <Image
+                <img
                   src={`/logos/${game.slug}-logo.webp`}
                   width={300}
                   height={300}

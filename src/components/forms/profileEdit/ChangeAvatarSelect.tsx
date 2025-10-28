@@ -24,7 +24,7 @@ export default function ChangeAvatarSelect({ avatars }: { avatars: string[] }) {
           <div className="flex flex-wrap gap-5 max-h-[350px] overflow-y-scroll">
             {avatars.map((avatar, i) => (
               <div key={i}>
-                <Image
+                <img
                   src={`/${avatar}`}
                   width={100}
                   height={100}

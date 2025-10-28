@@ -76,7 +76,7 @@ export default async function CharacterPage({
       className="rounded-2xl bg-blend-multiply bg-cyan-500"
     >
       <div className="flex flex-col lg:flex-row gap-2 p-5">
-        <Image
+        <img
           src={avatarImage}
           alt={`Character portrait of ${characterChoice.name}`}
           width={200}

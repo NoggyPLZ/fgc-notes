@@ -15,7 +15,7 @@ export default async function ProfilePreview({
 
   return (
     <div className="flex flex-col gap-2">
-      <Image
+      <img
         src={avatar}
         alt={"profile image placholder"}
         height={100}

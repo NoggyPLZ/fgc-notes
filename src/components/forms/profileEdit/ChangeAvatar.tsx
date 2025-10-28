@@ -14,7 +14,7 @@ export default function ChangeAvatar({
     <>
       <div className="flex w-[200px] h-[200px] items-center justify-center border-1 border-gray-300 rounded-2xl">
         {avatar !== null ? (
-          <Image
+          <img
             src={avatar}
             alt={`Profile image for ${name}.`}
             height={200}
