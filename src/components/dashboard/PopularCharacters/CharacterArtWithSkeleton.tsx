@@ -17,7 +17,7 @@ export default function CharacterArtWithSkeleton({
   const [loaded, setLoaded] = useState(false);
   return (
     <div className="relative">
-      <img
+      <Image
         src={src}
         alt={alt}
         width={width}

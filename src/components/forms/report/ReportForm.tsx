@@ -26,19 +26,21 @@ export default function ReportForm({
         Reason for Report
       </label>
       <select
-        className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-gray-800 bg-gray-100"
+        className="dark:bg-neutral-950 border-b-3 border-gray-400  p-4 bg-neutral-100 border-b-rose-500 text-rose-500 dark:text-gray-100 font-bold"
         name="reason"
+        defaultValue="harrassment"
       >
-        <option defaultValue="harrassment">Harrassment</option>
+        <option value="harrassment">Harrassment</option>
         <option value="racism">Racism/Bigotry</option>
         <option value="sexual">Sexual Violence</option>
       </select>
+      {state?.errors.reason && <p>{state.errors.reason}</p>}
       <label htmlFor="info" className="font-semibold">
         Additional Info:
       </label>
       <input
         name="info"
-        className="border-1 border-gray-300 rounded-2xl p-3 focus:outline-rose-600 focus:outline-1"
+        className="border-b-3 border-b-rose-500 border-gray-400 p-5 field-sizing-content bg-gray-100 focus:outline-rose-600 focus:outline-1 outline-transparent outline-1 dark:bg-neutral-950 caret-rose-500"
       />
       {state?.errors.info && <p>{state.errors.info}</p>}
       <Button type="submit" style="primary" disabled={pending}>

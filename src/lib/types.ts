@@ -36,7 +36,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()\-\n\r]+$/, "Contains invalid characters"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -49,7 +49,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()\-\n\r]+$/, "Contains invalid characters"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),

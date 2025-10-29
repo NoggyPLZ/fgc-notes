@@ -12,7 +12,7 @@ type NoteByCategoryProps = {
   role: "USER" | "ADMIN";
 };
 
-export default function NoteByCategory(props: NoteByCategoryProps) {
+export default function NoteSearchResults(props: NoteByCategoryProps) {
   const {
     category,
     notes,
@@ -23,14 +23,15 @@ export default function NoteByCategory(props: NoteByCategoryProps) {
     role,
   } = props;
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
+  if (notes.length < 1) return;
   return (
     <>
       <h1 className="font-black text-rose-500 text-5xl pb-5">{category}</h1>
       {notes.length < 1 && <p>{`No notes for ${category}, be the first!`}</p>}
       {category === "MATCHUPS" ? (
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-4 w-full">
+        <div className="grid grid-cols-1 gap-4 w-full">
           {characterList.map((char, i) => (
-            <div key={i} className="flex flex-col basis-1/2">
+            <div key={i} className="flex flex-col">
               <h2 className="font-black text-2xl text-rose-500 uppercase">
                 {char.name}
               </h2>

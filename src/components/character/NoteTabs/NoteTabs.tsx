@@ -1,7 +1,7 @@
 "use client";
 
 import { Character } from "@prisma/client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useTransition } from "react";
 import NoteTabOpponent from "./NoteTabOpponent";
 
@@ -22,10 +22,7 @@ export default function NoteTabs({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
-
-  const isFilter = filter !== undefined ? `?filter=${filter}` : ``;
   const currentPath = `/select/${gameSlug}/${characterSlug}`;
   const tabLinks = [
     {
@@ -54,6 +51,9 @@ export default function NoteTabs({
     }
     if (filter) {
       params.set("filter", filter);
+    }
+    if (params.has("query")) {
+      params.delete("query");
     }
     params.set("tab", linkTab);
     const newQuery = params.toString();

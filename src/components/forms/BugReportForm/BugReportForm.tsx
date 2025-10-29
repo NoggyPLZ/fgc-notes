@@ -21,8 +21,9 @@ export default function BugReportForm() {
           <select
             name="category"
             className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-neutral-950 bg-gray-100"
+            defaultValue="UI"
           >
-            <option defaultValue="UI">Layout Issues, broken styles</option>
+            <option value="UI">Layout Issues, broken styles</option>
             <option value="UX">Confusing flows, unclear about something</option>
             <option value="PERFORMANCE">Lag, slowness, load times</option>
             <option value="FUNCTIONALITY">Feature not working</option>

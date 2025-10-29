@@ -755,6 +755,7 @@ export async function reportNote(
   const results = reportSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
+    console.log(flat);
     return {
       success: false,
       errors: flat.fieldErrors,

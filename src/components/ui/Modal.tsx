@@ -19,11 +19,11 @@ export default function Modal({
     <div
       className={`absolute flex flex-col gap-2 ${
         type === "report" &&
-        `right-0 top-8 rounded-l-2xl rounded-br-2xl shadow-xl/30`
+        `right-0 top-8 border-l-10 border-l-rose-500 shadow-xl/30`
       } ${
         type === "note" &&
-        `right-0 bottom-30 md:bottom-30 md:right-10 md:rounded-2xl rounded-l-2xl fixed w-[90%] md:w-[600px] ring`
-      } p-5 dark:bg-gray-900 bg-gray-200 z-10 shadow-lg/50`}
+        `right-0 bottom-30 md:bottom-30 md:right-10 border-l-10 border-l-rose-500 fixed w-[90%] md:w-[600px]`
+      } p-5 dark:bg-gray-900 bg-gray-300 z-10 shadow-lg/80`}
     >
       {children}
       <button

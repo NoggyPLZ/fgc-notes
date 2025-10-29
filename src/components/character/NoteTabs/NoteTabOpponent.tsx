@@ -1,10 +1,7 @@
 "use client";
 
 import { Character } from "@prisma/client";
-import Image from "next/image";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 
 export default function NoteTabOpponent({
@@ -28,6 +25,9 @@ export default function NoteTabOpponent({
     params.set("opponent", linkTab);
     if (filter) {
       params.set("filter", filter);
+    }
+    if (params.has("query")) {
+      params.delete("query");
     }
     const newQuery = params.toString();
     router.push(`${currentPath}?${newQuery}`);
