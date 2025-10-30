@@ -10,7 +10,6 @@ export default function ReportedNote({
   report: ReportWithNoteSafe;
   note: NoteWithUserSafe;
 }) {
-  console.log(note.id);
   return (
     <div
       key={report.id}

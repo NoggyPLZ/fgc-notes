@@ -14,7 +14,7 @@ export async function getSession() {
     const { payload } = await jwtVerify(cookie, encodedKey);
     return payload;
   } catch (error) {
-    console.log("Error gettign session", error);
+    console.log("Error gettign session");
     return null;
   }
 }

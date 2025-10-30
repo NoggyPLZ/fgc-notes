@@ -19,8 +19,8 @@ export default function NoteTabOpponent({
   const router = useRouter();
 
   const handleClick = (linkTab: string) => {
+    if (linkTab === opponent) return;
     const params = new URLSearchParams(searchParams.toString());
-    console.log(params);
     params.set("tab", "MATCHUPS");
     params.set("opponent", linkTab);
     if (filter) {
@@ -46,7 +46,12 @@ export default function NoteTabOpponent({
             width={80}
             height={80}
             alt={`Character portrait for ${char.name}`}
-            className="rounded-md border-transparent hover:border-rose-500 cursor-pointer border-2"
+            className={`rounded-md  
+              ${
+                opponent === char.id
+                  ? `border-rose-500`
+                  : `hover:border-rose-500 cursor-pointer border-transparent`
+              }  border-2`}
           />
         </button>
       ))}

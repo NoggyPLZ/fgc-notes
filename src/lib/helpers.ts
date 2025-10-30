@@ -48,7 +48,7 @@ export async function deleteNote(noteId: NoteWithUserSafe) {
       `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
     );
   } catch (error) {
-    console.log("Deleting note failed: ", error);
+    console.log("Deleting note failed");
   }
 }
 
@@ -105,7 +105,7 @@ export async function verificationProcess(verifyId: string): Promise<{
       message: "Successfully verified!",
     };
   } catch (error) {
-    console.log("Verification process failed: ", error);
+    console.log("Verification process failed");
     return {
       success: false,
       message: `Verification failed ${error}`,

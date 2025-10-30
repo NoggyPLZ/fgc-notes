@@ -14,7 +14,6 @@ export default function Modal({
   type: ModalType;
   clickHandler: () => void;
 }) {
-  console.log(direction);
   return (
     <div
       className={`absolute flex flex-col gap-2 ${

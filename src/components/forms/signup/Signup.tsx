@@ -32,7 +32,7 @@ export default function Signup(props: SignupProps) {
 
     const token = await reCaptchaToken();
     if (!token) {
-      console.log("Error with token");
+      // console.log("Error with token");
       return;
     }
 

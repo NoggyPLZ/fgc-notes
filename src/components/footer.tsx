@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Footer() {
   return (
     <footer className="flex mt-auto py-10 text-center px-5 bg-neutral-950 place-items-center text-gray-100 font-light">

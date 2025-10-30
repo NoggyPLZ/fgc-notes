@@ -39,10 +39,8 @@ type loginPrev =
 //LOGIN FUNCTION
 export async function login(prevState: loginPrev, formData: FormData) {
   console.log("running check now...");
-  console.log(formData);
   const result = loginSchema.safeParse(Object.fromEntries(formData));
   console.log("check for result finished...");
-  console.log(result);
   if (!result.success && result.error) {
     const flat = z.flattenError(result.error);
     return {
@@ -101,7 +99,7 @@ export async function logout() {
 //SIGNUP FUNCTION
 export async function signUp(token: string | null, formData: FormData) {
   console.log("Beginning sign up validation");
-  console.log("validating: ", formData);
+  console.log("validating...");
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
 
   console.log("schema check complete, moving to errors if any...");
@@ -123,7 +121,6 @@ export async function signUp(token: string | null, formData: FormData) {
   }
   console.log("token check passed. We have that now for captchaData");
   const captchaData = await verifyCaptchaToken(token);
-  console.log("Captcha data: ", captchaData);
   if (!captchaData) {
     console.log("Captcha Failed");
     return {
@@ -181,7 +178,6 @@ export async function signUp(token: string | null, formData: FormData) {
       errors: {},
     };
   } catch (error) {
-    console.log("Error:", error);
     return {
       success: false,
       errors: {
@@ -262,7 +258,6 @@ export async function noteSubmit(
       errors: {},
     };
   } catch (error) {
-    console.log("Error making note:", error);
     return {
       success: false,
       errors: {
@@ -286,7 +281,6 @@ export async function voteHandle(voteEntry: VoteEntry) {
 
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat);
     return {
       errors: flat.fieldErrors,
     };
@@ -305,11 +299,11 @@ export async function voteHandle(voteEntry: VoteEntry) {
   const userVote = user.votes.find((vote) => vote.noteId === noteId);
 
   // console.log(user.votes);
-  console.log("Note id: ", noteId);
-  console.log(userVote);
+  // console.log("Note id: ", noteId);
+  // console.log(userVote);
   if (userVote && userVote.value === value) {
-    console.log("userVote value: ", userVote.value);
-    console.log("value: ", value);
+    // console.log("userVote value: ", userVote.value);
+    // console.log("value: ", value);
     try {
       console.log("DELETING RECORD");
       await prisma.votes.delete({
@@ -332,11 +326,11 @@ export async function voteHandle(voteEntry: VoteEntry) {
         },
       });
     } catch (error) {
-      console.log("Error deleting vote ", error);
+      console.log("Failed to delete Note");
     }
   } else {
     try {
-      console.log("UPDATING OR INSERTING VOTE ", value);
+      // console.log("UPDATING OR INSERTING VOTE ", value);
       await prisma.votes.upsert({
         where: {
           userId_noteId: { userId: user.id, noteId },
@@ -356,7 +350,7 @@ export async function voteHandle(voteEntry: VoteEntry) {
         },
         _sum: { value: true },
       });
-      console.log("new rating: ", newRating._sum.value);
+      // console.log("new rating: ", newRating._sum.value);
       await prisma.note.update({
         where: {
           id: noteId,
@@ -366,7 +360,7 @@ export async function voteHandle(voteEntry: VoteEntry) {
         },
       });
     } catch (error) {
-      console.log("Error updating/inserting vote ", error);
+      console.log("Error updating/inserting vote");
     }
   }
 }
@@ -385,12 +379,10 @@ export async function editSubmit(
   formData: FormData
 ) {
   console.log("checking against edit schema...");
-  console.log(Object.fromEntries(formData));
   const results = editNoteSchema.safeParse(Object.fromEntries(formData));
   console.log("checking results...");
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat.fieldErrors);
     return {
       success: false,
       errors: flat.fieldErrors,
@@ -437,7 +429,6 @@ export async function editSubmit(
     console.log("ravlidated.");
     return { success: true, errors: {} };
   } catch (error) {
-    console.log("Failed to update note: ", error);
     return {
       success: false,
       errors: {
@@ -476,7 +467,6 @@ export async function editName(
 
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat.fieldErrors);
     return {
       success: false,
       errors: flat.fieldErrors,
@@ -497,7 +487,7 @@ export async function editName(
     revalidatePath(`/user/${id}`);
     return { success: true, errors: {} };
   } catch (error) {
-    console.log("Failed to update name: ", error);
+    console.log("Failed to update name");
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === "P2002") {
         return {
@@ -565,10 +555,9 @@ export async function sendVerifyEmail(
         expiresAt,
       },
     });
-    console.log(`Email sent `, data);
+    console.log(`Email sent`);
     return { success: true, message: "Email sent!" };
   } catch (error) {
-    console.log(error);
     return { success: false, message: "Failed to send email." };
   }
 }
@@ -587,10 +576,8 @@ export async function confirmEmailForPW(
 ) {
   console.log("confirming email...");
   const results = confirmEmailSchema.safeParse(Object.fromEntries(formData));
-  console.log(results);
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat.fieldErrors);
     return {
       success: false,
       errors: flat.fieldErrors,
@@ -643,7 +630,6 @@ export async function confirmEmailForPW(
       errors: {},
     };
   } catch (error) {
-    console.log("Errors: ", error);
     return {
       success: false,
       errors: {
@@ -672,7 +658,6 @@ export async function setNewPassword(
   const results = newPasswordSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat.fieldErrors);
     return {
       success: true,
       errors: flat.fieldErrors,
@@ -728,7 +713,6 @@ export async function setNewPassword(
       errors: {},
     };
   } catch (error) {
-    console.log("Failed to reset password: ", error);
     return {
       success: false,
       errors: {
@@ -755,7 +739,6 @@ export async function reportNote(
   const results = reportSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat);
     return {
       success: false,
       errors: flat.fieldErrors,
@@ -785,7 +768,7 @@ export async function reportNote(
     });
     return { success: true, errors: {} };
   } catch (error) {
-    console.log("Failed to make a report: ", error);
+    console.log("Failed to make a report");
     return {
       success: false,
       errors: {
@@ -799,7 +782,6 @@ export async function removeReport(reportId: string) {
   const results = removeReportSchema.safeParse(reportId);
   if (!results.success) {
     const flat = z.flattenError(results.error);
-    console.log(flat);
     return {
       success: false,
       error: flat.fieldErrors,
@@ -870,8 +852,6 @@ export async function createNews(
   console.log("Current user acquired. Begin try/catch...");
 
   const { title, content } = results.data;
-  console.log("extracting title ", title);
-  console.log("extracting content ", content);
   try {
     console.log("Try block starting...");
     await prisma.news.create({
@@ -887,7 +867,7 @@ export async function createNews(
       errors: {},
     };
   } catch (error) {
-    console.log("Failed to create a news post. ", error);
+    console.log("Failed to create a news post.");
     return {
       success: false,
       errors: {

@@ -5,7 +5,6 @@ import NoteTabs from "@/components/character/NoteTabs/NoteTabs";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
-import Image from "next/image";
 
 export default async function CharacterPage({
   params,

@@ -45,7 +45,6 @@ export default function NoteTabs({
 
   const handleClick = (linkTab: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    console.log(params);
     if (params.has("opponent") && linkTab !== "MATCHUPS") {
       params.delete("opponent");
     }

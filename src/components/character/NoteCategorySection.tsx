@@ -1,6 +1,6 @@
 import SingleNote from "@/components/character/SingleNote";
 import { NoteWithUserSafe, TVoteSums } from "@/lib/types";
-import { Character, NoteCategory } from "@prisma/client";
+import { Character } from "@prisma/client";
 
 type NoteByCategoryProps = {
   notes: NoteWithUserSafe[];
@@ -34,7 +34,7 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
       <h1 className="font-black text-rose-500 text-5xl pb-5">{tab}</h1>
       {tab === "MATCHUPS" ? (
         <>
-          <h2 className="font-black text-neutral-500 text-4xl pb-5 capitalize pl-5">
+          <h2 className="font-black  text-5xl pb-5 capitalize pl-5">
             {oppChar[0].name}
           </h2>
           <div className="grid grid-cols-1 gap-4 w-full">

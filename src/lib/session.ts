@@ -48,6 +48,6 @@ export async function decrypt(session?: string) {
     });
     return payload;
   } catch (error) {
-    console.log("failed to verify session ", error);
+    console.log("failed to verify session");
   }
 }
