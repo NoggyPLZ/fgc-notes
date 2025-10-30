@@ -15,10 +15,10 @@ export default function ReportedNote({
       key={report.id}
       className="py-5 border-b-1 border-gray-300 dark:border-gray-900 flex flex-col gap-2"
     >
-      <p className="font-semibold">
+      <div className="font-semibold">
         {report.Note.content}
         <EditNote note={note} />
-      </p>
+      </div>
       <div className="flex text-gray-100 justify-between">
         <div className="flex items-center">
           <h3 className="px-3 py-2 bg-rose-500 rounded-l-2xl font-bold">
