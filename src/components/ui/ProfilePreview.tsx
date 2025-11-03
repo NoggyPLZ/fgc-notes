@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { UserForProfile } from "@/lib/types";
 import UserGreeting from "./ProfilePreview/UserGreeting";
 

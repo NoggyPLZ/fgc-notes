@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { getAvatars } from "@/lib/getAvatars";
 import ChangeAvatarSelect from "./ChangeAvatarSelect";
 

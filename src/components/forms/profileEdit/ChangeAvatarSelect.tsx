@@ -3,7 +3,6 @@
 import { avatarAction } from "@/actions/actions";
 import Button from "@/components/ui/Button";
 import { UserPen } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
 
 export default function ChangeAvatarSelect({ avatars }: { avatars: string[] }) {
@@ -42,8 +41,11 @@ export default function ChangeAvatarSelect({ avatars }: { avatars: string[] }) {
           <div>
             <Button
               style="primary"
-              type="submit"
-              onClick={() => avatarAction(select)}
+              type="button"
+              onClick={() => {
+                setToggle(false);
+                avatarAction(select);
+              }}
             >
               Save Avatar
             </Button>

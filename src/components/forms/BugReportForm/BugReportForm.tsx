@@ -2,7 +2,8 @@
 
 import { reportBugForm } from "@/actions/actions";
 import Button from "@/components/ui/Button";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function BugReportForm() {
   const [state, reportBugAction, pending] = useActionState(
@@ -10,9 +11,14 @@ export default function BugReportForm() {
     undefined
   );
 
+  useEffect(() => {
+    if (state?.success) {
+      toast.success("Issue Reported.", { autoClose: 2000 });
+    }
+  }, [state]);
+
   return (
     <div>
-      {state?.success && <p>good job</p>}
       <form action={reportBugAction} className="flex flex-col gap-5 pt-5">
         <div className="flex flex-col gap-2">
           <label htmlFor="category" className="font-semibold">

@@ -1,10 +1,11 @@
 "use client";
 
 import Button from "@/components/ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { editName } from "@/actions/actions";
 import { PenLine } from "lucide-react";
 import { useActionState } from "react";
+import { toast } from "react-toastify";
 
 export default function ChangeName({ id }: { id: string }) {
   const [state, editNameAction, pending] = useActionState(editName, undefined);
@@ -13,6 +14,13 @@ export default function ChangeName({ id }: { id: string }) {
   const handleToggle = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (state?.success) {
+      setIsOpen(false);
+      toast.success("Name Changed!", { autoClose: 2000 });
+    }
+  }, [state]);
 
   return (
     <>
