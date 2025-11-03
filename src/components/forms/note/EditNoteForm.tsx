@@ -4,6 +4,7 @@ import { NoteWithUserSafe } from "@/lib/types";
 import Button from "@/components/ui/Button";
 import { editSubmit } from "@/actions/actions";
 import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function EditNoteForm({
   note,
@@ -21,6 +22,7 @@ export default function EditNoteForm({
 
   useEffect(() => {
     if (state?.success) {
+      toast.success("Edit success!");
       onSuccess();
     }
   }, [state?.success, onSuccess]);
@@ -42,7 +44,7 @@ export default function EditNoteForm({
       )}
       <div>
         <Button style={"primary"} type="submit" disabled={pending}>
-          Submit
+          {pending ? `Submitting...` : `Submit`}
         </Button>
       </div>
     </form>

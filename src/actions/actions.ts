@@ -498,6 +498,12 @@ export async function editName(
         };
       }
     }
+    return {
+      success: false,
+      errors: {
+        name: ["Failed to update name. Please try again"],
+      },
+    };
   }
 }
 
@@ -778,6 +784,7 @@ export async function reportNote(
   }
 }
 
+//Admin action remove report
 export async function removeReport(reportId: string) {
   const results = removeReportSchema.safeParse(reportId);
   if (!results.success) {
@@ -940,6 +947,7 @@ type ReportBugFormType = {
   };
 };
 
+//Report Bug Form
 export async function reportBugForm(
   prevState: ReportBugFormType | undefined,
   formData: FormData
@@ -995,6 +1003,7 @@ type RemoveBugType = {
   errors: string;
 };
 
+//Admin action remove bug
 export async function removeBug(
   prevState: RemoveBugType | undefined,
   formData: FormData

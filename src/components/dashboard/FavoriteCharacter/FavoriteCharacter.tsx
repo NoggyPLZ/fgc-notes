@@ -71,7 +71,7 @@ export default async function FavoriteCharacter() {
       <div className="flex flex-col md:flex-row items-center justify-center md:gap-2 pt-2">
         <div className="hidden xl:flex">
           <CharacterArtWithSkeleton
-            src={`/character-icons/${result.name.toLowerCase()}-sml.webp`}
+            src={`/character-icons/${result.avatarUrl?.toLowerCase()}-sml.webp`}
             alt={`Character portrait for ${result.name}`}
             width={100}
             height={100}

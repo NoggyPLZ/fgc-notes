@@ -115,7 +115,7 @@ export default function NoteForm(props: NoteFormProps) {
               )}
               <div className="flex flex-row">
                 <Button type="submit" style={"primary"} disabled={pending}>
-                  Submit Note
+                  {pending ? `Submitting Note...` : `Submit Note`}
                 </Button>
               </div>
             </div>

@@ -27,7 +27,7 @@ export default async function CharacterSelect({
       <h1 className="text-5xl md:text-8xl text-rose-600 font-black">
         Character Select
       </h1>
-      <div className="flex flex-row gap-5 pt-5">
+      <div className="flex flex-row flex-wrap gap-5 pt-5">
         {game.characters.map((character) => (
           <div
             key={character.id}
