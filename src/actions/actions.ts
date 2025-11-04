@@ -551,7 +551,7 @@ export async function sendVerifyEmail(
       from: "TechTrap Notifications <no-reply@notifications.techtrap.app>",
       to: email.email,
       subject: "Account Verification",
-      html: `<p>To verify your account, follow the link <a href="http://localhost:3000/verify/${token}">to verify your account</a></p>`,
+      html: `<p>To verify your account, follow the link <a href="https://www.techtrap.app/verify/${token}">to verify your account</a></p>`,
     });
 
     await prisma.verfication.create({
@@ -629,7 +629,7 @@ export async function confirmEmailForPW(
       from: "TechTrap Notifications <no-reply@notifications.techtrap.app>",
       to: email,
       subject: "Password Reset Request",
-      html: `<p>A password reset was requested for this email. <a href="http://localhost:3000/reset/${token}?user=${user.id}">Click here to reset password</a>. If you didn't request this, please disregard</p>`,
+      html: `<p>A password reset was requested for this email. <a href="https://www.techtrap.app/reset/${token}?user=${user.id}">Click here to reset password</a>. If you didn't request this, please disregard</p>`,
     });
     return {
       success: true,
