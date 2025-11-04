@@ -212,7 +212,8 @@ export const newsPostSchema = z.object({
     .string()
     .trim()
     .min(3, "Content needs something")
-    .max(1000, "Try and keep it under 1000 characters"),
+    .max(1000, "Try and keep it under 1000 characters")
+    .regex(/^[\w\s.,!?'":;()\-\n\r]+$/, "Contains invalid characters"),
 });
 
 export type TNewsPostSchema = z.infer<typeof newsPostSchema>;
