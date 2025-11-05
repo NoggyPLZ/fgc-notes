@@ -35,7 +35,7 @@ export default function NoteToggle({
         }}
         disabled={isPending || filter === "ALL"}
       >
-        ALL
+        ALL NOTES
       </button>
       <button
         className={`  px-3 py-2 rounded-r-2xl hover:bg-rose-500 hover:text-gray-100 font-black border-1 border-gray-900 ${
@@ -50,7 +50,7 @@ export default function NoteToggle({
         }}
         disabled={isPending || filter === "USER"}
       >
-        USER
+        MY NOTES
       </button>
     </div>
   );
