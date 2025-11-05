@@ -1,5 +1,6 @@
 import { Prisma, Votes } from "@prisma/client";
 import z from "zod";
+import { containsProfanity } from "./filter";
 
 export const loginSchema = z.object({
   email: z.email({ message: "Invalid email address" }).trim(),
@@ -36,7 +37,10 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters")
+      .refine((val) => !containsProfanity(val), {
+        message: "Your message contains prohibited words.",
+      }),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -49,7 +53,10 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters")
+      .refine((val) => !containsProfanity(val), {
+        message: "Your message contains prohibited words.",
+      }),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -95,7 +102,10 @@ export const editNoteSchema = z.object({
     .trim()
     .min(1, "Note required")
     .max(1000, "Note too long")
-    .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
+    .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters")
+    .refine((val) => !containsProfanity(val), {
+      message: "Your message contains prohibited words.",
+    }),
 });
 
 export type TEditNoteSchema = z.infer<typeof editNoteSchema>;
