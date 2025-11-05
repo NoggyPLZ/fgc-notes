@@ -36,7 +36,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()\-\n\r]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -49,7 +49,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()\-\n\r]+$/, "Contains invalid characters"),
+      .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
     characterslug: z.string().regex(slugRegex),
     gameslug: z.string().regex(slugRegex),
   }),
@@ -95,7 +95,7 @@ export const editNoteSchema = z.object({
     .trim()
     .min(1, "Note required")
     .max(1000, "Note too long")
-    .regex(/^[\w\s.,!?'":;()\-]+$/, "Contains invalid characters"),
+    .regex(/^[\w\s.,!?'":;()<>\-\+\n\r]+$/, "Contains invalid characters"),
 });
 
 export type TEditNoteSchema = z.infer<typeof editNoteSchema>;
