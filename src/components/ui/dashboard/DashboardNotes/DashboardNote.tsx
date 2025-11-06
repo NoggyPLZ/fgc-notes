@@ -11,7 +11,9 @@ export default function DashboardNote({ note }: { note: RecentNote }) {
 
   return (
     <div className="p-3 border-b-1 dark:border-b-gray-900 border-b-gray-300 flex flex-col gap-3 drop-shadow-sm">
-      <p className="font-semibold">{content}</p>
+      <p className="font-semibold whitespace-pre-wrap note-content">
+        {content}
+      </p>
       <div className="flex flex-row text-xs italic gap-2">
         <p className="text-rose-600 dark:text-rose-100 dark:bg-rose-700 dark:px-2 dark:rounded-sm font-black">
           {rating}

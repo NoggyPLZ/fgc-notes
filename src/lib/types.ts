@@ -37,7 +37,10 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()<>~+\-\n\r]+$/, "Contains invalid characters")
+      .regex(
+        /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+        "Contains invalid characters"
+      )
       .refine((val) => !containsProfanity(val), {
         message: "Your message contains prohibited words.",
       }),
@@ -53,7 +56,10 @@ export const noteSchema = z.discriminatedUnion("category", [
       .trim()
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
-      .regex(/^[\w\s.,!?'":;()<>~+\-\n\r]+$/, "Contains invalid characters")
+      .regex(
+        /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+        "Contains invalid characters"
+      )
       .refine((val) => !containsProfanity(val), {
         message: "Your message contains prohibited words.",
       }),
@@ -102,7 +108,10 @@ export const editNoteSchema = z.object({
     .trim()
     .min(1, "Note required")
     .max(1000, "Note too long")
-    .regex(/^[\w\s.,!?'":;()<>~+\-\n\r]+$/, "Contains invalid characters")
+    .regex(
+      /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+      "Contains invalid characters"
+    )
     .refine((val) => !containsProfanity(val), {
       message: "Your message contains prohibited words.",
     }),

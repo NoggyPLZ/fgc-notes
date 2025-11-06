@@ -2,7 +2,7 @@
 
 import Button from "@/components/ui/Button";
 import { noteSubmit } from "@/actions/actions";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Character, NoteCategory } from "@prisma/client";
 import { useActionState } from "react";
 import VerifyEmail from "@/components/dashboard/VerifyEmail";
@@ -25,6 +25,7 @@ export default function NoteForm(props: NoteFormProps) {
     latestOpponent,
     verified,
   } = props;
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [category, setCategory] = useState<NoteCategory>(
     latestCategory ?? "NEUTRAL"
   );
@@ -35,6 +36,19 @@ export default function NoteForm(props: NoteFormProps) {
     noteSubmit,
     undefined
   );
+
+  const notationHelper = (symbol: string) => {
+    const textarea = textAreaRef.current;
+    if (!textarea) return;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const value = textarea.value;
+
+    textarea.value = value.slice(0, start) + symbol + value.slice(end);
+    textarea.selectionStart = textarea.selectionEnd = start + symbol.length;
+
+    textarea.focus();
+  };
 
   return (
     <>
@@ -101,6 +115,56 @@ export default function NoteForm(props: NoteFormProps) {
               )}
             </div>
             <div className="flex flex-col gap-5">
+              <div className="flex gap-2">
+                <div className="grid grid-rows-3 grid-cols-3 gap-1">
+                  {["↖", "↑", "↗", "←", "", "→", "↙", "↓", "↘"].map(
+                    (symbol, i) => (
+                      <>
+                        {symbol.length === 0 ? (
+                          <div className="bg-gray-100"></div>
+                        ) : (
+                          <button
+                            type="button"
+                            className="py-2 px-3 font-black text-lg bg-neutral-900 text-gray-100 font-sans cursor-pointer hover:bg-rose-500"
+                            onClick={() => notationHelper(symbol)}
+                            key={i}
+                          >
+                            {symbol}
+                          </button>
+                        )}
+                      </>
+                    )
+                  )}
+                </div>
+
+                <div className="grid grid-rows-3 grid-cols-4 gap-1">
+                  {[
+                    "DRC",
+                    "DR",
+                    "SJC",
+                    "DI",
+                    "LP",
+                    "MP",
+                    "HP",
+                    "PP",
+                    "LK",
+                    "MK",
+                    "HK",
+                    "KK",
+                  ].map((attackBut, i) => (
+                    <>
+                      <button
+                        className="bg-neutral-900 text-gray-100 p-3 rounded-2xl cursor-pointer hover:bg-rose-500 font-black"
+                        type="button"
+                        key={i}
+                        onClick={() => notationHelper(attackBut)}
+                      >
+                        {attackBut}
+                      </button>
+                    </>
+                  ))}
+                </div>
+              </div>
               <textarea
                 name="note"
                 id="note"
@@ -109,6 +173,7 @@ export default function NoteForm(props: NoteFormProps) {
                 minLength={5}
                 maxLength={2000}
                 rows={5}
+                ref={textAreaRef}
               />
               {state?.errors?.note && (
                 <p className="text-red-500">{state.errors.note}</p>

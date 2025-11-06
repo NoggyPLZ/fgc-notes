@@ -54,3 +54,9 @@ img.loaded + .image-skeleton {
 .animate-spin-slow {
   animation: spin-slow 2s linear infinite;
 }
+
+textarea,
+button,
+.note-content {
+  font-family: "Noto Sans Symbols", "Segoe UI Symbol", sans-serif;
+}
