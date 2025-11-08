@@ -37,7 +37,7 @@ model Character {
 model Note {
   id          String       @id @default(cuid())
   content     String
-  rating      Int          @default(1)
+  rating      Int          @default(0)
   updatedAt   DateTime     @updatedAt
   createdAt   DateTime     @default(now()) @db.Timestamp(6)
   Character   Character    @relation("MainCharacterNotes", fields: [characterId], references: [id])
