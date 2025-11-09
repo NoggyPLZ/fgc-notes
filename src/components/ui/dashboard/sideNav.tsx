@@ -23,9 +23,9 @@ export default async function SideNav() {
               "use server";
               await logout();
             }}
-            className=" md:p-0"
+            className=" md:p-0 hidden md:block"
           >
-            <button className="px-10 py-5 md:p-5 grow h-auto md:rounded-b-2xl md:py-5 w-full hover:bg-rose-500 md:bg-rose-500 text-gray-800 dark:text-gray-100 md:text-gray-100 cursor-pointer flex flex-col items-center md:flex-row justify-center gap-3 md:hover:bg-rose-700 hover:text-gray-100 border-gray-300 md:border-0 border-t-1 dark:border-gray-950 rounded-br-2xl font-semibold">
+            <button className="px-3 py-5 md:p-5 grow h-auto md:rounded-b-2xl md:py-5 w-full hover:bg-rose-500 md:bg-rose-500 text-gray-800 dark:text-gray-100 md:text-gray-100 cursor-pointer flex flex-col items-center md:flex-row justify-center gap-3 md:hover:bg-rose-700 hover:text-gray-100 border-gray-300 md:border-0 border-t-1 dark:border-gray-950 rounded-br-2xl font-semibold">
               <Power strokeWidth={3} />
               Sign Out
             </button>

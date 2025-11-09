@@ -41,11 +41,24 @@ export default function SingleNote(props: SingleNoteProps) {
             </h3>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center relative bg-gray-300 dark:bg-gray-900 p-1">
-            <NoteRating rating={total} note={note as NoteWithUserAndVote} />
-            <h5 className="text-xs font-light truncate">{note.User.name}</h5>
+            {canEdit ? (
+              <div className="dark:bg-gray-900 bg-gray-800 text-gray-100 dark:border-gray-700 border-1 border-gray-400 px-2 py-1 rounded-lg font-semibold">
+                {total + 1}
+              </div>
+            ) : (
+              <>
+                <NoteRating rating={total} note={note as NoteWithUserAndVote} />
+                <h5 className="text-xs font-light truncate">
+                  {note.User.name}
+                </h5>
+              </>
+            )}
             <span className="text-xs italic">{`last edited ${formattedDate}`}</span>
-            {canEdit && <DeleteNote note={note} />}
-            {verified && <ReportNote note={note} />}
+            {canEdit ? (
+              <DeleteNote note={note} />
+            ) : (
+              <>{verified && <ReportNote note={note} />}</>
+            )}
           </div>
         </div>
       </div>

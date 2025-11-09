@@ -34,7 +34,7 @@ export default function NoteTabOpponent({
   };
 
   return (
-    <div className="flex gap-2 p-2 w-full flex-wrap justify-center">
+    <div className="flex gap-2 p-2 w-full flex-wrap justify-center max-w-[90%] overflow-x-scroll">
       {characterList.map((char) => (
         <button onClick={() => handleClick(char.id)} key={char.id}>
           <img

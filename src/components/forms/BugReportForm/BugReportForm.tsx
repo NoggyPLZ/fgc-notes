@@ -26,7 +26,7 @@ export default function BugReportForm() {
           </label>
           <select
             name="category"
-            className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-neutral-950 bg-gray-100"
+            className="border-1 border-gray-300 rounded-2xl p-3 dark:bg-neutral-950 bg-gray-100 w-full max-w-full"
             defaultValue="UI"
           >
             <option value="UI">Layout Issues, broken styles</option>

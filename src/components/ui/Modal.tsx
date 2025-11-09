@@ -21,7 +21,7 @@ export default function Modal({
         `right-0 top-8 border-l-10 border-l-rose-500 shadow-xl/30`
       } ${
         type === "note" &&
-        `right-0 bottom-30 md:bottom-30 md:right-10 border-l-10 border-l-rose-500 fixed w-[90%] md:w-[600px]`
+        `right-0 bottom-30 md:bottom-30 md:right-10 border-l-10 border-l-rose-500 fixed w-[96%] md:w-[600px]`
       } p-5 dark:bg-gray-900 bg-gray-300 z-10 shadow-lg/80`}
     >
       {children}

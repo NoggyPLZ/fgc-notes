@@ -67,12 +67,12 @@ export default function NoteTabs({
   }, [opponent]);
 
   return (
-    <div className="dark:bg-gray-900 bg-gray-300 pt-2 flex gap-1">
+    <div className="dark:bg-gray-900 bg-gray-300 pt-2 md:flex md:gap-1 pb-2 md:pb-0 grid grid-cols-2 gap-2">
       {tabLinks.map((link, i) =>
         link.name === "MATCHUPS" ? (
           <button
             key={i}
-            className={`rounded-tr-2xl border-l-10 border-l-rose-500 uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`ring-1 md:ring-0 rounded-xl md:rounded-l-none md:rounded-br-none md:rounded-tr-2xl md:w-auto md:border-l-10 md:border-l-rose-500 uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
                 : "bg-gray-200 dark:bg-gray-950"
@@ -85,7 +85,7 @@ export default function NoteTabs({
         ) : (
           <button
             key={i}
-            className={`rounded-tr-2xl border-l-10 border-l-rose-500 uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`ring-1 md:ring-0 rounded-xl md:rounded-l-none md:rounded-br-none md:rounded-tr-2xl  md:w-auto md:border-l-10 md:border-l-rose-500 uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
                 : "bg-gray-200 dark:bg-gray-950 cursor-pointer"

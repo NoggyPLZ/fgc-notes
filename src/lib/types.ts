@@ -38,7 +38,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
       .regex(
-        /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+        /^[\w\s.,!?'":;()<>[\]~+\-\u2190-\u2199\n\r]+$/,
         "Contains invalid characters"
       )
       .refine((val) => !containsProfanity(val), {
@@ -57,7 +57,7 @@ export const noteSchema = z.discriminatedUnion("category", [
       .min(5, "Note required to be at least 5 characters long")
       .max(2000, "Note too long")
       .regex(
-        /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+        /^[\w\s.,!?'":;()<>[\]~+\-\u2190-\u2199\n\r]+$/,
         "Contains invalid characters"
       )
       .refine((val) => !containsProfanity(val), {
@@ -109,7 +109,7 @@ export const editNoteSchema = z.object({
     .min(1, "Note required")
     .max(1000, "Note too long")
     .regex(
-      /^[\w\s.,!?'":;()<>~+\-\u2190-\u2199\n\r]+$/,
+      /^[\w\s.,!?'":;()<>[\]~+\-\u2190-\u2199\n\r]+$/,
       "Contains invalid characters"
     )
     .refine((val) => !containsProfanity(val), {
