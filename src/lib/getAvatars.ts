@@ -14,7 +14,7 @@ export function getAvatars() {
         .readdirSync(gameDir)
         .filter((file) => file.endsWith(".webp"));
 
-      avatarsByGame[gameSlug].map(
+      avatarsByGame[gameSlug] = files.map(
         (file) => `character-icons/${gameSlug}/${file}`
       );
     }
