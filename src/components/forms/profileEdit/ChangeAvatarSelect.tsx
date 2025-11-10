@@ -5,7 +5,11 @@ import Button from "@/components/ui/Button";
 import { UserPen } from "lucide-react";
 import { useState } from "react";
 
-export default function ChangeAvatarSelect({ avatars }: { avatars: string[] }) {
+export default function ChangeAvatarSelect({
+  avatars,
+}: {
+  avatars: Record<string, string[]>;
+}) {
   const [toggle, setToggle] = useState(false);
   const [select, setSelect] = useState("");
   return (
@@ -21,21 +25,26 @@ export default function ChangeAvatarSelect({ avatars }: { avatars: string[] }) {
       {toggle && (
         <>
           <div className="flex flex-wrap gap-5 max-h-[350px] overflow-y-scroll">
-            {avatars.map((avatar, i) => (
-              <div key={i}>
-                <img
-                  src={`/${avatar}`}
-                  width={100}
-                  height={100}
-                  alt={`avatar for ${avatar}`}
-                  className={`rounded-2xl ${
-                    select === `/${avatar}`
-                      ? "border-2 border-rose-500 shadow-md/50"
-                      : "border-2 border-transparent"
-                  }`}
-                  onClick={() => setSelect(`/${avatar}`)}
-                />
-              </div>
+            {Object.entries(avatars).map(([game, avatarlist]) => (
+              <section key={game}>
+                <h3>{game.toUpperCase()}</h3>
+                {avatarlist.map((avatar, i) => (
+                  <div key={i}>
+                    <img
+                      src={`/${avatar}`}
+                      width={100}
+                      height={100}
+                      alt={`avatar for ${avatar}`}
+                      className={`rounded-2xl ${
+                        select === `/${avatar}`
+                          ? "border-2 border-rose-500 shadow-md/50"
+                          : "border-2 border-transparent"
+                      }`}
+                      onClick={() => setSelect(`/${avatar}`)}
+                    />
+                  </div>
+                ))}
+              </section>
             ))}
           </div>
           <div>
