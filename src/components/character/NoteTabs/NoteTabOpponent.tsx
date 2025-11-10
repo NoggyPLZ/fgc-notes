@@ -9,11 +9,13 @@ export default function NoteTabOpponent({
   currentPath,
   opponent,
   filter,
+  gameSlug,
 }: {
   characterList: Character[];
   currentPath: string;
   opponent: string;
   filter?: string;
+  gameSlug: string;
 }) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -34,13 +36,13 @@ export default function NoteTabOpponent({
   };
 
   return (
-    <div className="flex gap-2 p-2 w-full flex-wrap justify-center max-w-[90%] overflow-x-scroll">
+    <div className="flex gap-2 p-2 w-full flex-wrap justify-center max-w-[90%] mx-auto">
       {characterList.map((char) => (
         <button onClick={() => handleClick(char.id)} key={char.id}>
           <img
             src={
               char.avatarUrl
-                ? `/character-icons/${char.avatarUrl.toLowerCase()}-sml.webp`
+                ? `/character-icons/${gameSlug}/${char.avatarUrl.toLowerCase()}-sml.webp`
                 : `/profile-image-placeholder.gif`
             }
             width={80}

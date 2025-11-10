@@ -20,7 +20,12 @@ export default async function GameSelect() {
             className="flex flex-col gap-5 p-5 justify-center items-center"
           >
             <Link href={`select/${game.slug}/`}>
-              <div className="flex flex-col basis-1/2 md:basis-1/6 bg-gray-200 dark:bg-gray-800 rounded-2xl  h-full p-5 shadow-sm hover:bg-rose-700">
+              <div
+                style={{
+                  backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
+                }}
+                className="flex flex-col basis-1/2 md:basis-1/6 bg-neutral-900 dark:bg-gray-800 rounded-2xl  h-full p-5 shadow-sm border-transparent hover:border-rose-500 border-4 bg-center bg-size-[auto_300px]"
+              >
                 <img
                   src={`/logos/${game.slug}-logo.webp`}
                   width={300}

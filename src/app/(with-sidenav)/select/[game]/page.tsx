@@ -37,7 +37,9 @@ export default async function CharacterSelect({
               <img
                 src={
                   character.avatarUrl
-                    ? `/character-icons/${character.avatarUrl.toLocaleLowerCase()}-sml.webp`
+                    ? `/character-icons/${
+                        game.slug
+                      }/${character.avatarUrl.toLocaleLowerCase()}-sml.webp`
                     : `/profile-image-placeholder.gif`
                 }
                 className="rounded-2xl"

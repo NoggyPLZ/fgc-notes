@@ -100,7 +100,7 @@ export default function NoteTabs({
       <div
         popover="auto"
         id="opponentsPopup"
-        className="relative inset-y-0 mx-auto my-auto transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left opacity-0 shadow-lg/50 transition-all [transition-behavior:allow-discrete] duration-500 sm:w-full sm:max-w-[600px] sm:p-6 w-[90%] dark:bg-gray-900 dark:border-1 dark:border-gray-950 [&:is([open],:popover-open)]:opacity-100 [@starting-style]:[&:is([open],:popover-open)]:opacity-0"
+        className="relative inset-y-0 mx-auto my-auto transform overflow-x-scroll rounded-lg bg-white px-4 pt-5 pb-4 text-left opacity-0 shadow-lg/50 transition-all [transition-behavior:allow-discrete] duration-500 sm:w-full sm:max-w-[600px] sm:p-6 w-[90%] max-h-[90%] dark:bg-gray-900 dark:border-1 dark:border-gray-950 [&:is([open],:popover-open)]:opacity-100 [@starting-style]:[&:is([open],:popover-open)]:opacity-0"
         ref={popRef}
       >
         <NoteTabOpponent
@@ -108,6 +108,7 @@ export default function NoteTabs({
           currentPath={currentPath}
           opponent={opponent || ""}
           filter={filter}
+          gameSlug={gameSlug}
         />
       </div>
     </div>

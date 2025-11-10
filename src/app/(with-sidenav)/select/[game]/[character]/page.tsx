@@ -64,7 +64,9 @@ export default async function CharacterPage({
   const verified = user?.verified;
 
   const avatarImage = characterChoice.avatarUrl
-    ? `/character-icons/${characterChoice.avatarUrl.toLowerCase()}-sml.webp`
+    ? `/character-icons/${
+        game.slug
+      }/${characterChoice.avatarUrl.toLowerCase()}-sml.webp`
     : `/profile-image-placeholder.gif`;
 
   return (
@@ -72,9 +74,13 @@ export default async function CharacterPage({
       style={{
         backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
       }}
-      className="rounded-2xl bg-blend-multiply bg-cyan-500"
+      className={`rounded-2xl ${
+        game.slug === "cotw"
+          ? "bg-neutral-900 bg-center bg-blend-soft-light"
+          : "bg-cyan-500 bg-blend-multiply"
+      }`}
     >
-      <div className="flex flex-col lg:flex-row gap-2 p-5">
+      <div className="flex flex-col lg:flex-row gap-5 p-5">
         <img
           src={avatarImage}
           alt={`Character portrait of ${characterChoice.name}`}

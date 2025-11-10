@@ -69,19 +69,21 @@ export default async function FavoriteCharacter() {
         Favorite Character
       </p>
       <div className="flex flex-col md:flex-row items-center justify-center md:gap-2 pt-2">
-        <div className="hidden xl:flex">
+        <div className="hidden xl:flex max-w-20">
           <CharacterArtWithSkeleton
-            src={`/character-icons/${result.avatarUrl?.toLowerCase()}-sml.webp`}
+            src={`/character-icons/${
+              result.Game.slug
+            }/${result.avatarUrl?.toLowerCase()}-sml.webp`}
             alt={`Character portrait for ${result.name}`}
-            width={100}
-            height={100}
+            width={80}
+            height={80}
           />
         </div>
         <div className="flex flex-col">
           <h3 className="text-xs text-center font-medium lg:text-sm hidden md:flex text-gray-100">
             {result.Game.name}
           </h3>
-          <h2 className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-gray-100 text-center hover:text-gray-200">
+          <h2 className="text-xl  xl:text-2xl font-black text-gray-100 text-center hover:text-gray-200">
             <Link href={`/select/${result.Game.slug}/${result.slug}`}>
               {result.name}
             </Link>

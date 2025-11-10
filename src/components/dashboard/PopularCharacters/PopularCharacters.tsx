@@ -16,6 +16,9 @@ export default async function PopularCharacters() {
           notesAsMain: true,
         },
       },
+      Game: {
+        select: { slug: true },
+      },
     },
   });
   return (
@@ -27,15 +30,17 @@ export default async function PopularCharacters() {
             <CharacterArtWithSkeleton
               src={`${
                 char.avatarUrl
-                  ? `/character-icons/${char.avatarUrl.toLowerCase()}-sml.webp`
+                  ? `/character-icons/${
+                      char.Game.slug
+                    }/${char.avatarUrl.toLowerCase()}-sml.webp`
                   : `/profile-image-placeholder.gif`
               }`}
               alt={`Character portrait for ${char.name}`}
-              width={100}
-              height={100}
+              width={80}
+              height={80}
             />
             <div className="flex flex-col gap-2">
-              <h2 className="text-5xl font-black text-rose-500 text-center">
+              <h2 className="text-2xl font-black text-rose-500 text-center capitalize">
                 {char.name}
               </h2>
               <p className="font-light">{char._count.notesAsMain} Notes</p>

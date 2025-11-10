@@ -21,7 +21,7 @@ export default async function Dashboard() {
 
   return (
     <div className="grid md:grid-rows-6 gap-2 md:gap-5">
-      <div className="grid xl:grid-cols-6 grid-rows-1 gap-2 md:gap-5">
+      <div className="grid 2xl:grid-cols-6 grid-rows-1 gap-2 md:gap-5">
         <div className="grid col-span-3 grid-cols-3 md:grid-cols-3 lg:grid-cols-3 row-span-1 grid-rows-1 md:grid-rows-1 gap-2 md:gap-5">
           <Suspense fallback={<SmallCardSKeleton />}>
             <NoteCount />
