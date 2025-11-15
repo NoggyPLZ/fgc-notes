@@ -8,7 +8,7 @@ export default function ThreeSection() {
         <div className="flex lg:flex-row flex-col justify-between xl:gap-10 gap-5 ">
           <LandingCard>
             <NotebookPen size={220} className="mx-auto py-10" />
-            <h1 className="font-black text-2xl xl:text-3xl uppercase text-gray-100 pb-5">
+            <h1 className="font-black text-2xl xl:text-3xl uppercase text-cyan-500 pb-5">
               Keep Your Own Notes
             </h1>
             <p className="text-lg">
@@ -21,7 +21,7 @@ export default function ThreeSection() {
           </LandingCard>
           <LandingCard>
             <ThumbsUp size={220} className="mx-auto py-10" />
-            <h1 className="font-black text-2xl xl:text-3xl uppercase text-gray-100 pb-5">
+            <h1 className="font-black text-2xl xl:text-3xl uppercase text-cyan-500 pb-5">
               Contribute to Others
             </h1>
             <p className="text-lg">
@@ -35,7 +35,7 @@ export default function ThreeSection() {
           </LandingCard>
           <LandingCard>
             <FileChartColumnIncreasing size={220} className="mx-auto py-10" />
-            <h1 className="font-black text-2xl xl:text-3xl uppercase text-gray-100 pb-5">
+            <h1 className="font-black text-2xl xl:text-3xl uppercase text-cyan-500 pb-5">
               FGC&apos;s Living Document
             </h1>
             <p className="text-lg">

@@ -4,7 +4,7 @@ export default function LandingCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="p-5 rounded-md bg-rose-500 text-white basis-1/3">
+    <div className="p-5 rounded-2xl bg-neutral-950 text-white basis-1/3 xl:p-10">
       {children}
     </div>
   );

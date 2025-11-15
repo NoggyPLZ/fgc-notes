@@ -2,12 +2,13 @@ import Footer from "@/components/footer";
 import ToggleLogin from "@/components/forms/ToggleLogin";
 import Header from "@/components/header";
 import ThreeSection from "@/components/ui/landing/ThreeSection";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <>
       <Header />
-      <div className="bg-gray-100 relative h-[700px] flex justify-center">
+      <div className="bg-gray-100 relative md:h-[700px] h-[800px] flex justify-center">
         {/* <div className="absolute inset-0 bg-[url(/images/index-ph-cover.webp)] mask-b-from-50% bg-cover"></div> */}
         <div className="absolute md:top-50 top-20 flex xl:flex-row flex-col gap-5 mt-auto mb-auto w-[90%] xl:w-[80%] mx-auto justify-center items-center py-10 rounded-2xl xl:min-h-[600px]">
           <div className="lg:basis-7/12 xl:text-left text-center">
@@ -22,12 +23,20 @@ export default function Home() {
               of FGC game knowledge.
             </p>
           </div>
-          <div className="md:basis-5/12 md:grow w-full">
+          <div className="md:basis-5/12 md:grow w-full z-10">
             <ToggleLogin />
           </div>
         </div>
       </div>
-      <div className="bg-[url(/landing/landing-banner.gif)] bg-cover md:bg-cover md:h-[700px] h-[250px] bg-top bg-no-repeat"></div>
+      <div className="relative md:h-[700px] h-[300px] w-full z-0">
+        <Image
+          src="/landing/landing-banner.gif"
+          alt="landing banner image"
+          fill
+          sizes="100vw"
+          className="object-cover object-top"
+        />
+      </div>
       <ThreeSection />
       <Footer />
     </>

@@ -24,8 +24,8 @@ export default function Button({
       disabled={disabled}
       value={value}
       className={`rounded-2xl text-gray-100 p-3 cursor-pointer disabled:bg-gray-500 disabled:cursor-default font-bold
-        ${style === "primary" && "bg-rose-500 hover:bg-rose-600"}
-        ${style === "secondary" && "bg-cyan-500 hover:bg-cyan-600"}
+        ${style === "secondary" && "bg-rose-600 hover:bg-rose-700"}
+        ${style === "primary" && "bg-cyan-600 hover:bg-cyan-700"}
         ${style === "cancel" && "bg-neutral-600 hover:bg-neutral-700"}
         `}
     >
