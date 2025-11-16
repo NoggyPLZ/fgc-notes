@@ -41,7 +41,7 @@ export default async function Dashboard() {
       </div>
       <div className={`row-span-5 grid grid-cols-6 md:gap-5 gap-2`}>
         <div
-          className={`col-span-full 2xl:col-span-4 grid-rows-6 grid gap-2 md:gap-5`}
+          className={`col-span-full 2xl:col-span-4 grid-rows-6 grid gap-2 md:gap-5 md:order-1 order-2`}
         >
           {admin ? (
             <>
@@ -68,7 +68,7 @@ export default async function Dashboard() {
             </>
           )}
         </div>
-        <div className="col-span-full 2xl:col-span-2">
+        <div className="col-span-full 2xl:col-span-2 md:order-2 order-1">
           <DashboardNoteSection />
         </div>
       </div>
