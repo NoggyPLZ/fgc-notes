@@ -20,7 +20,7 @@ export default function NotationInputHelper({
   return (
     <div className="flex gap-2">
       <div className="grid grid-rows-3 grid-cols-3 gap-1">
-        {["↖︎", "↑", "↗", "←", "", "→", "↙", "↓", "↘︎"].map((symbol, i) => (
+        {["↖︎", "↑", "↗︎", "←", "", "→", "↙︎", "↓", "↘︎"].map((symbol, i) => (
           <button
             type="button"
             className={`${
