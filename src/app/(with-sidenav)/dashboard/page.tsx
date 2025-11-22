@@ -44,7 +44,7 @@ export default async function Dashboard() {
         </div>
       </div>
       <div className="grid md:grid-rows-6 gap-2 md:gap-5">
-        <div className={`row-span-5 grid grid-cols-6 md:gap-5 gap-2`}>
+        <div className={`row-span-6 grid grid-cols-6 md:gap-5 gap-2`}>
           <div
             className={`col-span-full 2xl:col-span-4 grid-rows-6 grid gap-2 md:gap-5 md:order-1 order-2`}
           >
