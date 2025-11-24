@@ -45,18 +45,18 @@ export default async function Dashboard() {
       </div>
       <div className="flex flex-col xl:flex-row gap-2 md:gap-5">
         <div
-          className={`flex flex-col gap-2 md:gap-5 lg:order-2 order-2 2xl:min-w-[250px]`}
+          className={`flex flex-col gap-2 md:gap-5 lg:order-2 order-2 2xl:min-w-[250px] 2xl:max-w-[45%]`}
         >
           {admin ? (
             <>
               <div className="lg:min-h-[500px]">
                 <SiteNews admin={admin} />
               </div>
-              <div className="row-span-3 flex 2xl:flex-row flex-col lg:gap-5 gap-2">
-                <div className="2xl:w-[50%]">
+              <div className="row-span-3 flex flex-col lg:gap-5 gap-2">
+                <div className="">
                   <ReportFeed />
                 </div>
-                <div className="2xl:w-[50%]">
+                <div className="">
                   <BugReportFeed />
                 </div>
               </div>

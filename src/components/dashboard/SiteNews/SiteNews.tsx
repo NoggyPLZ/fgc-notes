@@ -55,7 +55,11 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
         </span>
       </div>
       <p className="text-lg pt-5 whitespace-pre-wrap">{news.content}</p>
-      {admin && <CreateNews />}
+      {admin && (
+        <div className="pt-5">
+          <CreateNews />
+        </div>
+      )}
     </DashboardCard>
   );
 }

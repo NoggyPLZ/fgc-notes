@@ -26,7 +26,7 @@ export default async function ReportFeed() {
   });
   if (!reports) {
     <DashboardCard>
-      <p>No reports found.</p>
+      <p className="py-15">No reports found.</p>
     </DashboardCard>;
   }
 
@@ -34,7 +34,9 @@ export default async function ReportFeed() {
     <DashboardCard>
       <h2 className="text-rose-500 font-black text-5xl">Reports</h2>
       {reports.length < 1 && (
-        <p className="text-center my-auto">There are current no reports.</p>
+        <p className="text-center my-auto py-15">
+          There are current no reports.
+        </p>
       )}
       {reports.map((report) => (
         <ReportedNote
