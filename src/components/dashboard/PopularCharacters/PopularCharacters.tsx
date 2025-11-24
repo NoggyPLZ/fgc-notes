@@ -1,6 +1,7 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
 import CharacterArtWithSkeleton from "./CharacterArtWithSkeleton";
+import Link from "next/link";
 
 export default async function PopularCharacters() {
   const characters = await prisma.character.findMany({
@@ -24,7 +25,7 @@ export default async function PopularCharacters() {
   return (
     <DashboardCard>
       <p className="text-center font-bold uppercase">Most popular characters</p>
-      <div className="flex md:flex-row flex-col justify-between">
+      <div className="flex md:flex-row flex-col gap-2 justify-between">
         {characters.map((char) => (
           <div key={char.id} className="flex-row flex items-center gap-2">
             <CharacterArtWithSkeleton
@@ -41,7 +42,9 @@ export default async function PopularCharacters() {
             />
             <div className="flex flex-col gap-2">
               <h2 className="text-2xl font-black text-rose-500 text-center capitalize">
-                {char.name}
+                <Link href={`/select/${char.Game.slug}/${char.slug}`}>
+                  {char.name}
+                </Link>
               </h2>
               <p className="font-light">{char._count.notesAsMain} Notes</p>
             </div>

@@ -43,39 +43,37 @@ export default async function Dashboard() {
           </Suspense>
         </div>
       </div>
-      <div className="grid md:grid-rows-6 gap-2 md:gap-5">
-        <div className={`row-span-6 grid grid-cols-6 md:gap-5 gap-2`}>
-          <div
-            className={`col-span-full 2xl:col-span-4 grid-rows-6 grid gap-2 md:gap-5 md:order-1 order-2`}
-          >
-            {admin ? (
-              <>
-                <div className="row-span-3">
-                  <SiteNews admin={admin} />
+      <div className="flex flex-col xl:flex-row gap-2 md:gap-5">
+        <div
+          className={`flex flex-col gap-2 md:gap-5 lg:order-2 order-2 2xl:min-w-[250px]`}
+        >
+          {admin ? (
+            <>
+              <div className="lg:min-h-[500px]">
+                <SiteNews admin={admin} />
+              </div>
+              <div className="row-span-3 flex 2xl:flex-row flex-col lg:gap-5 gap-2">
+                <div className="2xl:w-[50%]">
+                  <ReportFeed />
                 </div>
-                <div className="row-span-3 flex lg:flex-row flex-col lg:gap-5 gap-2">
-                  <div className="lg:w-[50%]">
-                    <ReportFeed />
-                  </div>
-                  <div className="lg:w-[50%]">
-                    <BugReportFeed />
-                  </div>
+                <div className="2xl:w-[50%]">
+                  <BugReportFeed />
                 </div>
-              </>
-            ) : (
-              <>
-                <div className="row-span-3">
-                  <SiteNews />
-                </div>
-                <div className="row-span-3">
-                  <BugReport />
-                </div>
-              </>
-            )}
-          </div>
-          <div className="col-span-full 2xl:col-span-2 md:order-2 order-1">
-            <DashboardNoteSection />
-          </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="lg:min-h-[500px]">
+                <SiteNews />
+              </div>
+              <div className="row-span-3">
+                <BugReport />
+              </div>
+            </>
+          )}
+        </div>
+        <div className="lg:order-1 order-1 grow xl:min-w-[500px]">
+          <DashboardNoteSection />
         </div>
       </div>
     </>
