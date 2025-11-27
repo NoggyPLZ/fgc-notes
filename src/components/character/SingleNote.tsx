@@ -41,7 +41,7 @@ export default function SingleNote(props: SingleNoteProps) {
             </h3>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center relative bg-gray-300 dark:bg-gray-900 p-1">
-            {canEdit ? (
+            {creatorPresent ? (
               <div className="dark:bg-gray-900 bg-gray-800 text-gray-100 dark:border-gray-700 border-1 border-gray-400 px-2 py-1 rounded-lg font-semibold">
                 {total + 1}
               </div>
