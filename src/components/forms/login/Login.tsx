@@ -9,7 +9,7 @@ type LoginProps = {
 };
 
 export default function Login(props: LoginProps) {
-  const [state, loginAction] = useActionState(login, undefined);
+  const [state, loginAction, isPending] = useActionState(login, undefined);
 
   const { handleClick } = props;
 
@@ -38,7 +38,7 @@ export default function Login(props: LoginProps) {
           <p className="text-red-500">{state.errors.password}</p>
         )}
         <Button type="submit" style={"primary"}>
-          Log In
+          {isPending ? "Logging in..." : "Log In"}
         </Button>
         <Button style={"secondary"} onClick={handleClick} value={"forgot"}>
           Forgot password?
