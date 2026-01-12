@@ -1,12 +1,10 @@
 # TechTrap
 
-TechTrap is a fighting game community note-sharing application.  
-The app acts as a "living document," allowing players to share tech, optimize situational knowledge, and improve their skill level in competitive fighting games.
+TechTrap is a fighting game community note-sharing application. The app acts as a "living document," allowing players to share tech, optimize situational knowledge, and improve their skill level in competitive fighting games.
 
 ## Purpose
 
-This project was built as a learning-focused application to practice building a production-like Next.js app with authentication, protected routes, and a backing database.  
-The focus was on practical implementation, authentication flows, and server-side logic rather than production-scale hardening.
+This project was built as a learning-focused application to practice building a production-like Next.js app with authentication, protected routes, and a backing database. The focus was on practical implementation, authentication flows, and server-side logic rather than production-scale hardening.
 
 ## Tech Stack
 
