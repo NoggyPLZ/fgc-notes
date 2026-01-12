@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TechTrap
 
-## Getting Started
+TechTrap is a fighting game community note-sharing application.  
+The app acts as a "living document," allowing players to share tech, optimize situational knowledge, and improve their skill level in competitive fighting games.
 
-First, run the development server:
+## Purpose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project was built as a learning-focused application to practice building a production-like Next.js app with authentication, protected routes, and a backing database.  
+The focus was on practical implementation, authentication flows, and server-side logic rather than production-scale hardening.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js (App Router)
+- TypeScript
+- JWT authentication using `jose`
+- Zod for input validation
+- Prisma ORM
+- Database: Postgres
+- Styling: TailwindCSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features
 
-## Learn More
+- JWT-based user sessions
+- Create, edit, and delete notes
+- Upvote and downvote notes
+- Auth-protected server actions for database operations (CRUD) via Prisma
+- Input validation using Zod
 
-To learn more about Next.js, take a look at the following resources:
+## Security Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Secrets are stored in environment variables and are not committed to the repository.
+- Authentication is implemented using standard JWT patterns appropriate for a small-scale, non-commercial application.
+- If this project were to scale or handle sensitive data, authentication would be migrated to a managed solution (e.g., Auth0, Clerk, Supabase Auth).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+##
+ Note: Running this project locally requires a Postgres database and proper environment variables.
