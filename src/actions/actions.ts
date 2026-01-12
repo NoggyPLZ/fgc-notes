@@ -26,6 +26,7 @@ import { Resend } from "resend";
 import crypto from "crypto";
 import { Prisma } from "@prisma/client";
 import { verifyCaptchaToken } from "@/lib/recaptcha";
+import { NoteWithUserSafe } from "@/lib/types";
 
 type loginPrev =
   | {
@@ -273,6 +274,52 @@ type VoteEntry = {
   noteId: string;
   value: ActiveValueType;
 };
+
+export async function deleteNote(noteId: NoteWithUserSafe) {
+  console.log("DELETING NOTE...");
+  const user = await getCurrentUser();
+
+  const authorized = user?.id === noteId.userId || user?.role === "ADMIN";
+
+  if (!authorized) {
+    return;
+  }
+
+  const noteForPath = await prisma.note.findUnique({
+    where: {
+      id: noteId.id,
+    },
+    select: {
+      Character: {
+        select: {
+          slug: true,
+          Game: {
+            select: {
+              slug: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
+  if (!noteForPath) {
+    console.log("No note found...");
+  }
+  try {
+    await prisma.note.delete({
+      where: {
+        id: noteId.id,
+      },
+    });
+    console.log("NOTE DELETED.");
+    revalidatePath(
+      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
+    );
+  } catch (error) {
+    console.log("Deleting note failed");
+  }
+}
 
 //UPVOTE/DOWNVOTE ACTION
 export async function voteHandle(voteEntry: VoteEntry) {

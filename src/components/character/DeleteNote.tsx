@@ -1,5 +1,5 @@
 "use client";
-import { deleteNote } from "@/lib/helpers";
+import { deleteNote } from "@/actions/actions";
 import { NoteWithUserSafe } from "@/lib/types";
 import { Loader2, LucideTrash } from "lucide-react";
 import { useTransition } from "react";
