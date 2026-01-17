@@ -26,8 +26,10 @@ export default function ChangeAvatarSelect({
         <>
           <div className="flex flex-wrap gap-5 max-h-[350px] overflow-y-scroll">
             {Object.entries(avatars).map(([game, avatarlist]) => (
-              <section key={game}>
-                <h3>{game.toUpperCase()}</h3>
+              <section key={game} className="flex flex-wrap">
+                <h3 className="w-full font-bold text-3xl border-b-1 mb-2">
+                  {game.toUpperCase()}
+                </h3>
                 {avatarlist.map((avatar, i) => (
                   <div key={i}>
                     <img
@@ -35,7 +37,7 @@ export default function ChangeAvatarSelect({
                       width={100}
                       height={100}
                       alt={`avatar for ${avatar}`}
-                      className={`rounded-2xl ${
+                      className={`rounded-2xl hover:border-2 hover:border-rose-500 hover:shadow-md/50 ${
                         select === `/${avatar}`
                           ? "border-2 border-rose-500 shadow-md/50"
                           : "border-2 border-transparent"
