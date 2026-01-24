@@ -6,9 +6,11 @@ import DeleteReport from "./DeleteReport";
 export default function ReportedNote({
   report,
   note,
+  game,
 }: {
   report: ReportWithNoteSafe;
   note: NoteWithUserSafe;
+  game: string;
 }) {
   return (
     <div
@@ -17,7 +19,7 @@ export default function ReportedNote({
     >
       <div className="font-semibold">
         {report.Note.content}
-        <EditNote note={note} />
+        <EditNote note={note} game={game} />
       </div>
       <div className="flex text-gray-100 justify-between">
         <div className="flex items-center">

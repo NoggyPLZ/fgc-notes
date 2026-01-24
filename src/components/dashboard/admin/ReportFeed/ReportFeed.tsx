@@ -14,6 +14,15 @@ export default async function ReportFeed() {
               name: true,
             },
           },
+          Character: {
+            include: {
+              Game: {
+                select: {
+                  slug: true,
+                },
+              },
+            },
+          },
         },
       },
       reporter: {
@@ -24,6 +33,7 @@ export default async function ReportFeed() {
       },
     },
   });
+
   if (!reports) {
     <DashboardCard>
       <p className="py-15">No reports found.</p>
@@ -43,6 +53,7 @@ export default async function ReportFeed() {
           key={report.id}
           report={report}
           note={report.Note as NoteWithUserSafe}
+          game={report.Note.Character.Game.slug}
         />
       ))}
     </DashboardCard>
