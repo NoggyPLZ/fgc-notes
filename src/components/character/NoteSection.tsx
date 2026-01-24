@@ -133,6 +133,7 @@ export default async function NoteSection({
                 currentUserId={user?.id}
                 verified={user?.verified}
                 role={user?.role}
+                game={game}
               />
             </div>
           ))}

@@ -10,6 +10,7 @@ type NoteByCategoryProps = {
   currentUserId: string;
   verified?: boolean;
   role: "USER" | "ADMIN";
+  game: string;
 };
 
 export default function NoteSearchResults(props: NoteByCategoryProps) {
@@ -21,6 +22,7 @@ export default function NoteSearchResults(props: NoteByCategoryProps) {
     currentUserId,
     verified,
     role,
+    game,
   } = props;
   const matchupNotes = notes.filter((note) => note.opponentId !== null);
   if (notes.length < 1) return;
@@ -44,6 +46,7 @@ export default function NoteSearchResults(props: NoteByCategoryProps) {
                       currentUserId={currentUserId}
                       verified={verified}
                       role={role}
+                      game={game}
                     />
                   )}
                 </div>
@@ -61,6 +64,7 @@ export default function NoteSearchResults(props: NoteByCategoryProps) {
               currentUserId={currentUserId}
               verified={verified}
               role={role}
+              game={game}
             />
           ))}
         </>
