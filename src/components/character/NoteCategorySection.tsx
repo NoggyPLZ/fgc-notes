@@ -10,6 +10,7 @@ type NoteByCategoryProps = {
   verified?: boolean;
   tab: string;
   opponent?: string;
+  game: string;
   role: "USER" | "ADMIN";
 };
 
@@ -23,6 +24,7 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
     role,
     tab,
     opponent,
+    game,
   } = props;
 
   const oppChar = characterList.filter((char) => char.id === opponent);
@@ -52,6 +54,7 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
                     currentUserId={currentUserId}
                     verified={verified}
                     role={role}
+                    game={game}
                   />
                 )}
               </div>
@@ -69,6 +72,7 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
               currentUserId={currentUserId}
               verified={verified}
               role={role}
+              game={game}
             />
           ))}
         </div>

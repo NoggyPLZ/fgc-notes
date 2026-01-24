@@ -5,7 +5,13 @@ import { SquarePen } from "lucide-react";
 import { useState } from "react";
 import EditNoteForm from "../forms/note/EditNoteForm";
 
-export default function EditNote({ note }: { note: NoteWithUserSafe }) {
+export default function EditNote({
+  note,
+  game,
+}: {
+  note: NoteWithUserSafe;
+  game: string;
+}) {
   const [editToggle, setEditToggle] = useState(false);
 
   return (
@@ -17,7 +23,11 @@ export default function EditNote({ note }: { note: NoteWithUserSafe }) {
         <SquarePen size={15} />
       </button>
       {editToggle && (
-        <EditNoteForm note={note} onSuccess={() => setEditToggle(false)} />
+        <EditNoteForm
+          note={note}
+          onSuccess={() => setEditToggle(false)}
+          game={game}
+        />
       )}
     </>
   );

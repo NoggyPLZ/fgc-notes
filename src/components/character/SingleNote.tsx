@@ -10,10 +10,11 @@ type SingleNoteProps = {
   currentUserId: string;
   verified?: boolean;
   role: "USER" | "ADMIN";
+  game: string;
 };
 
 export default function SingleNote(props: SingleNoteProps) {
-  const { note, voteSums, currentUserId, verified, role } = props;
+  const { note, voteSums, currentUserId, verified, role, game } = props;
 
   const creatorPresent = currentUserId === note.userId;
   const adminPresent = role === "ADMIN";
@@ -37,7 +38,7 @@ export default function SingleNote(props: SingleNoteProps) {
           <div className="flex flex-col gap-3">
             <h3 className="text-lg font-semibold whitespace-pre-wrap note-content">
               {note.content}
-              {canEdit && <EditNote note={note} />}
+              {canEdit && <EditNote note={note} game={game} />}
             </h3>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center relative bg-gray-300 dark:bg-gray-900 p-1">

@@ -12,10 +12,6 @@ export default function NotationInputHelper({
   const gameInputs = notationBank.filter((notation) => notation.name === game);
 
   const { rows, cols, inputs, styles } = gameInputs[0];
-  const gameRows = gameInputs[0].rows;
-  const gameCols = gameInputs[0].cols;
-  const notations = gameInputs[0].inputs;
-  const notationStyle = gameInputs[0].styles;
 
   return (
     <div className="flex gap-2">

@@ -54,7 +54,7 @@ export default async function CharacterPage({
   const characterList = game.characters;
 
   const characterChoice = game.characters.find(
-    (char) => char.slug === characterId
+    (char) => char.slug === characterId,
   );
 
   if (!characterChoice) {
@@ -115,6 +115,7 @@ export default async function CharacterPage({
         query={filterSearch?.query}
         tab={filterSearch?.tab}
         opponent={filterSearch?.opponent}
+        game={game.slug}
       />
       <NoteModal>
         <NoteForm

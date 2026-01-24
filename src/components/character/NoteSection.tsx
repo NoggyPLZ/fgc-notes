@@ -12,6 +12,7 @@ export default async function NoteSection({
   query,
   tab,
   opponent,
+  game,
 }: {
   characterId: string;
   characterList: Character[];
@@ -19,6 +20,7 @@ export default async function NoteSection({
   query?: string;
   tab?: string;
   opponent?: string;
+  game: string;
 }) {
   //Check for current user
   const user = await getCurrentUser();
@@ -146,6 +148,7 @@ export default async function NoteSection({
             currentUserId={user?.id}
             verified={user?.verified}
             role={user?.role}
+            game={game}
           />
         </div>
       )}
