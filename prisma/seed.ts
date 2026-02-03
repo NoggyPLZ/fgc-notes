@@ -82,14 +82,14 @@ const sfCharacters: CharacterType[] = [
     slug: "dhalsim-sf6",
     name: "dhalsim",
     story:
-      "A kindhearted defender of nature, Blanka has become an adventure tour guide, confident his intimate knowledge of the jungle will serve as a springboard to fame—and a comfortable life for his beloved mother.",
+      "A monk and yoga master from India who has served as a guide for countless suffering souls. Prefers to avoid conflict when possible, but his innate hatred of evil compels him to dispense stern justice.",
     avatarUrl: "dhalsim",
   },
   {
     slug: "honda-sf6",
     name: "e. honda",
     story:
-      "A kindhearted defender of nature, Blanka has become an adventure tour guide, confident his intimate knowledge of the jungle will serve as a springboard to fame—and a comfortable life for his beloved mother.",
+      "A sumo wrestler looking to bring the sport worldwide, E. Honda has the skills of a yokozuna, but his constant globetrotting has prevented his promotion. Also an expert chef renowned for mouthwatering chanko stew.",
     avatarUrl: "honda",
   },
   {
