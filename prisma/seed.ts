@@ -208,8 +208,15 @@ const sfCharacters: CharacterType[] = [
     slug: "cviper-sf6",
     name: "c. viper",
     story:
-      "The Emperor of Muay Thai. He was once one of the highest ranking members of Shadaloo, but has since left the criminal organization. He currently lives deep in the mountains, focusing only on his training.",
+      "An operative belonging to a certain intelligence organization. A cold, hard realist. She complements her fighting abilities using a number of gadgets hidden in her outfit.",
     avatarUrl: "cviper",
+  },
+  {
+    slug: "alex-sf6",
+    name: "alex",
+    story:
+      "A young wrestler considered to be the next big thing. He debuted with his adoptive father Tom as his trainer, but was quickly made a heel due to his perceived surliness.",
+    avatarUrl: "alex",
   },
 ];
 
