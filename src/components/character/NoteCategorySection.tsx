@@ -45,9 +45,9 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
                 oppChar[0].name
               }, be the first!`}</p>
             )}
-            {notes.map((note) => (
-              <div key={note.id}>
-                {note.opponentId === opponent && (
+            {notes.map(
+              (note) =>
+                note.opponentId === opponent && (
                   <SingleNote
                     note={note}
                     voteSums={voteSums}
@@ -55,10 +55,10 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
                     verified={verified}
                     role={role}
                     game={game}
+                    key={note.id}
                   />
-                )}
-              </div>
-            ))}
+                ),
+            )}
           </div>
         </>
       ) : (
