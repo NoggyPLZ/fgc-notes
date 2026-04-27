@@ -49,5 +49,6 @@ export async function verifySession(session?: string) {
     return payload;
   } catch (error) {
     console.log("failed to verify session");
+    return null;
   }
 }
