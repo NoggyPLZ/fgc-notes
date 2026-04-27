@@ -218,6 +218,13 @@ const sfCharacters: CharacterType[] = [
       "A young wrestler considered to be the next big thing. He debuted with his adoptive father Tom as his trainer, but was quickly made a heel due to his perceived surliness.",
     avatarUrl: "alex",
   },
+  {
+    slug: "ingrid-sf6",
+    name: "ingrid",
+    story:
+      "A pretty, mysterious young girl who claims to travel through parallel worlds. Using a sort of crest and code she manifests powers beyond the laws of the world. Talks like someone beyond her years.",
+    avatarUrl: "ingrid",
+  },
 ];
 
 const cotwCharacters: CharacterType[] = [
