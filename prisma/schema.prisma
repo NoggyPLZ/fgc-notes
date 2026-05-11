@@ -75,7 +75,7 @@ model User {
   avatarUrl     String?
   notes         Note[]
   votes         Votes[]
-  verification  Verfication?
+  verification  Verification?
   passwordreset PasswordReset?
   Reports       Reports[]      @relation("ReportsByUser")
   News          News[]
@@ -104,7 +104,7 @@ model Votes {
   @@index([noteId])
 }
 
-model Verfication {
+model Verification {
   id        String   @id @default(cuid())
   userId    String   @unique
   token     String   @unique

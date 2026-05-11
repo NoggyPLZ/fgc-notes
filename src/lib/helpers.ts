@@ -16,7 +16,7 @@ export async function verificationProcess(verifyId: string): Promise<{
     };
   }
 
-  const verificationEntry = await prisma.verfication.findFirst({
+  const verificationEntry = await prisma.verification.findFirst({
     where: {
       userId: user.id,
     },
@@ -47,7 +47,7 @@ export async function verificationProcess(verifyId: string): Promise<{
         verified: true,
       },
     });
-    await prisma.verfication.delete({
+    await prisma.verification.delete({
       where: {
         userId: user.id,
       },

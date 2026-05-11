@@ -204,7 +204,7 @@ type NoteActionResult = { success: boolean; errors: NoteErrors };
 //NOTE SUBMISSION FUNCTION
 export async function noteSubmit(
   prevState: NoteActionResult | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("checking against type schema...");
   const results = noteSchema.safeParse(Object.fromEntries(formData));
@@ -314,7 +314,7 @@ export async function deleteNote(noteId: NoteWithUserSafe) {
     });
     console.log("NOTE DELETED.");
     revalidatePath(
-      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
+      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`,
     );
   } catch (error) {
     console.log("Deleting note failed");
@@ -423,7 +423,7 @@ type EditNoteType = {
 //EDIT NOTE FUNCTION
 export async function editSubmit(
   prevState: EditNoteType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("checking against edit schema...");
   const results = editNoteSchema.safeParse(Object.fromEntries(formData));
@@ -471,7 +471,7 @@ export async function editSubmit(
     });
     console.log("revalidate...");
     revalidatePath(
-      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`
+      `/select/${noteForPath?.Character.slug}/${noteForPath?.Character.Game.slug}`,
     );
     console.log("ravlidated.");
     return { success: true, errors: {} };
@@ -495,7 +495,7 @@ type EditNameActionType = {
 //CHANGE NAME FUNCTION
 export async function editName(
   prevState: EditNameActionType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("Name change validation starting...");
   const results = changeNameSchema.safeParse(Object.fromEntries(formData));
@@ -562,7 +562,7 @@ export type VerifyActionType = {
 //SEND VERIFICATION EMAIL
 export async function sendVerifyEmail(
   prevState: VerifyActionType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   const resend = new Resend(process.env.RESEND_API_KEY);
   console.log("Email verification action pew");
@@ -601,7 +601,7 @@ export async function sendVerifyEmail(
       html: `<p>To verify your account, follow the link <a href="https://www.techtrap.app/verify/${token}">to verify your account</a></p>`,
     });
 
-    await prisma.verfication.create({
+    await prisma.verification.create({
       data: {
         userId: user.id,
         token: hashedVerify,
@@ -625,7 +625,7 @@ type ConfirmEmailForPWType = {
 //ACTION TO RESET PASSWORD FROM FORM
 export async function confirmEmailForPW(
   prevState: ConfirmEmailForPWType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("confirming email...");
   const results = confirmEmailSchema.safeParse(Object.fromEntries(formData));
@@ -705,7 +705,7 @@ type SetNewPasswordType = {
 //SET NEW PASSWORD
 export async function setNewPassword(
   prevState: SetNewPasswordType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("Starting password reset...");
   const results = newPasswordSchema.safeParse(Object.fromEntries(formData));
@@ -787,7 +787,7 @@ type ReportNoteType = {
 //REPORT ACTION
 export async function reportNote(
   prevState: ReportNoteType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   const results = reportSchema.safeParse(Object.fromEntries(formData));
   if (!results.success) {
@@ -879,7 +879,7 @@ type NewsFormState = {
 //CREATE NEWS ACTION
 export async function createNews(
   prevState: NewsFormState | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   console.log("Starting newsPost parsing...");
   const results = newsPostSchema.safeParse(Object.fromEntries(formData));
@@ -997,7 +997,7 @@ type ReportBugFormType = {
 //Report Bug Form
 export async function reportBugForm(
   prevState: ReportBugFormType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   const result = reportBugSchema.safeParse(Object.fromEntries(formData));
   if (!result.success) {
@@ -1053,7 +1053,7 @@ type RemoveBugType = {
 //Admin action remove bug
 export async function removeBug(
   prevState: RemoveBugType | undefined,
-  formData: FormData
+  formData: FormData,
 ) {
   const value = formData.get("reportId");
   const result = z
