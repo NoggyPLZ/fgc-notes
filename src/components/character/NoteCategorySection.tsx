@@ -31,6 +31,16 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
 
   const matchupNotes = notes.filter((note) => note.opponentId === opponent);
 
+  if (oppChar.length === 0 && tab === "MATCHUPS") {
+    return (
+      <>
+        <h1 className="font-black text-rose-500 text-5xl pb-5">{tab}</h1>
+        <h2 className="font-black  text-5xl pb-5 capitalize pl-5">
+          Opponent not found.
+        </h2>
+      </>
+    );
+  }
   return (
     <>
       <h1 className="font-black text-rose-500 text-5xl pb-5">{tab}</h1>
