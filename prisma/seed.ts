@@ -225,6 +225,13 @@ const sfCharacters: CharacterType[] = [
       "A pretty, mysterious young girl who claims to travel through parallel worlds. Using a sort of crest and code she manifests powers beyond the laws of the world. Talks like someone beyond her years.",
     avatarUrl: "ingrid",
   },
+  {
+    slug: "yasmin-sf6",
+    name: "yasmin",
+    story:
+      "A high-schooler who became a fighter to find her lost brother. She is a shy and gentle soul, but beams with confidence in fights, where she uses her Lolo's moves.",
+    avatarUrl: "yasmin",
+  },
 ];
 
 const cotwCharacters: CharacterType[] = [
@@ -426,16 +433,93 @@ const lolCharacters: CharacterType[] = [
   },
 ];
 
+const avatarCharacters: CharacterType[] = [
+  {
+    slug: "avaang-avatar",
+    name: "Avatar Aang",
+    story: `Avatar Aang is the version of Aang over taken by the avatar state. With the memories and abilities of all past avatars at his disposal, he is one of the most beings in the avatar universe. He is also at his most vulnerable, as death in the avatar state is death of the avatar.`,
+    avatarUrl: "avaang",
+  },
+  {
+    slug: "sokka-avatar",
+    name: "Sokka",
+    story: `The boomerang wielding founding member of team avatar, and the brother of Katara. Sokka is a fiercely loyal friend and serves as a comedy sidekick to much of the team.`,
+    avatarUrl: "sokka",
+  },
+  {
+    slug: "toph-avatar",
+    name: "Toph",
+    story: `Toph Beifong was an earthbending master, one of the most powerful of her time, and the discoverer of metalbending. Another member of team avatar, that betrayed her high society upbringing to help Aang conquer the fire nation.`,
+    avatarUrl: "toph",
+  },
+  {
+    slug: "katara-avatar",
+    name: "Katara",
+    story: `One of the founding members of team avatar and sister of Sokka. Katara was one of the greatests water benders of her time mastering blood bending while in her teens.`,
+    avatarUrl: "katara",
+  },
+  {
+    slug: "ozai-avatar",
+    name: "Ozai",
+    story: `The leader of the fire nation and primary antagonist of the original avatar series. He is the father of Azula, and Zuko, but I use the word father loosely. Everyone is disposable to Ozai where his ambition is concerned.`,
+    avatarUrl: "ozai",
+  },
+  {
+    slug: "aang-avatar",
+    name: "Aang",
+    story: `The last of the airbenders to have survived the fire nations genocide on the airbender nation. He is the avatar during the original series, where he created a team, mastered the elements and finally defeated Ozai without killing him.`,
+    avatarUrl: "aang",
+  },
+  {
+    slug: "korra-avatar",
+    name: "Korra",
+    story: `The water tribe avatar sucessor to Aang. She discovered the origin of the avatar and the nature of Raava and Vaatu.`,
+    avatarUrl: "korra",
+  },
+  {
+    slug: "zaheer-avatar",
+    name: "Zaheer",
+    story: `A leading member of the Red Lotus, Zaheer gained air bending after the events of the Harmonic Convergence. He is one of two air benders to have ever "enter the void" and gain the ability to fly. A revolutionary, he sought to topple corrupt governments and return power to the people.`,
+    avatarUrl: "zaheer",
+  },
+  {
+    slug: "zuko-avatar",
+    name: "Zuko",
+    story: `Zuko was the son of Ozai, and the prince of the fire nation. First serving as the antognist to Aang, he later had a change of heart thanks to his Uncle Iroh's parentage. He earned the trust of the team and proved an invaluable ally and long time friend of Aang.`,
+    avatarUrl: "zuko",
+  },
+  {
+    slug: "kyoshi-avatar",
+    name: "Kyoshi",
+    story: `One of the past avatars that recklessly used her avatar powers to manipulate the plate tectonics of the planet causing untold devestation. She is apparently very tall, and this is very important that everyone knows just how tall she was. Giant.`,
+    avatarUrl: "kyoshi",
+  },
+  {
+    slug: "azula-avatar",
+    name: "Azula",
+    story: `Azula is the sister of Zuko and the princess to the fire nation. She is one of the most powerful fire benders mastering lighting control years before Zuko learned to redirect it. However, due to the mental abuse she suffered at the hands of Ozai and her mother, her mental state is unstable causing her fire to burn hotter than any other bender turning the fire blue.`,
+    avatarUrl: "azula",
+  },
+  {
+    slug: "norra-avatar",
+    name: "Nightmare Korra",
+    story: `Nightmare Korra, is the version of Avatar Korra overtaken by the dark avatar spirit Vaatu. In this state, she is unhinged in power trading safety of the avatar state for pure aggression.`,
+    avatarUrl: "norra",
+  },
+];
+
 const characters: CharacterType[][] = [
   sfCharacters,
   cotwCharacters,
   lolCharacters,
+  avatarCharacters,
 ];
 
 const games: GameType[] = [
   { slug: "sf6", name: "street fighter 6" },
   { slug: "cotw", name: "city of the wolves" },
   { slug: "2xko", name: "2XKO" },
+  { slug: "avatar", name: "avatar" },
 ];
 
 async function main() {

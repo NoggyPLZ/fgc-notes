@@ -60,4 +60,17 @@ export const notationBank: GameNotation[] = [
     rows: "grid-rows-3",
     cols: "grid-cols-3",
   },
+  {
+    name: "avatar",
+    inputs: ["SJ", "ABC", "A", "B", "F", "C"],
+    styles: {
+      A: "bg-red-500",
+      B: "bg-blue-500",
+      C: "bg-green-600",
+      F: "bg-sky-400",
+      ABC: "bg-orange-500",
+    },
+    rows: "grid-rows-3",
+    cols: "grid-cols-2",
+  },
 ];
