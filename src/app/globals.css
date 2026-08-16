@@ -62,7 +62,7 @@ button,
 }
 
 .pinstripe{
-  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 2px, transparent 2px, transparent 26px);
+  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0px, rgba(255,255,255,.045) 2px, transparent 2px, transparent 26px);
 }
 
 .dark-bg{
