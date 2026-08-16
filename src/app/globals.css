@@ -60,3 +60,11 @@ button,
 .note-content {
   font-family: "Noto Sans Symbols", "Segoe UI Symbol", sans-serif;
 }
+
+.pinstripe{
+  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.025) 0px, rgba(255,255,255,.025) 2px, transparent 2px, transparent 26px);
+}
+
+.dark-bg{
+  background-color:#161616;
+}
