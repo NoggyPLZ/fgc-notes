@@ -15,7 +15,7 @@ export default async function GameSelect() {
           <div className="w-[5px] bg-red-500 bg-rose-600"></div>
         </div>
         <h1 className="text-5xl md:text-8xl text-white font-black">Game Select</h1></div>
-      <div className="text-neutral-500 text-lg">Choose a game below to open it&apos;s roster</div>
+      <div className="text-neutral-400 text-lg border-b-2 border-b-neutral-800 pb-4 ml-[30px]">Choose a game below to open it&apos;s roster</div>
       <div className="flex md:flex-row flex-col">
         {games.map((game) => (
           <div
