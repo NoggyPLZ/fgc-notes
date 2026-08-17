@@ -24,9 +24,12 @@ export default async function CharacterSelect({
 
   return (
     <div>
-      <h1 className="text-5xl md:text-8xl text-rose-600 font-black">
-        Character Select
-      </h1>
+      <div className="flex gap-4 items-stretch">
+        <div className="md:py-5 flex">
+          <div className="w-[5px] bg-red-500 bg-rose-600"></div>
+        </div>
+        <h1 className="text-5xl md:text-8xl text-white font-black">Character Select</h1></div>
+      <div className="text-neutral-500 text-lg">Choose a character below to open it&apos;s notes page</div>
       <div className="flex flex-row flex-wrap gap-5 pt-5">
         {game.characters.map((character) => (
           <div
