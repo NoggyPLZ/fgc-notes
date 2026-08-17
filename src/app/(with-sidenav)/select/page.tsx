@@ -10,13 +10,12 @@ export default async function GameSelect() {
 
   return (
     <div>
-      <div className="flex gap-4 items-stretch">
-        <div className="w-[5px] bg-red-500 h-[90%] self-center bg-rose-600"></div>
-        <h1 className="text-5xl md:text-8xl text-white font-black">
-          Game Select
-        </h1>
-      </div>
-      <div className="text-neutral-600 text-md">Choose a game below to open it&apos;s roster</div>
+      <div class="flex gap-4 items-stretch">
+        <div class="md:py-5 flex">
+          <div class="w-[5px] bg-red-500 bg-rose-600"></div>
+        </div>
+        <h1 class="text-5xl md:text-8xl text-white font-black">Game Select</h1></div>
+      <div class="text-neutral-500 text-lg">Choose a game below to open it&apos;s roster</div>
       <div className="flex md:flex-row flex-col">
         {games.map((game) => (
           <div
