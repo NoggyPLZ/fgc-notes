@@ -23,7 +23,7 @@
     "dompurify": "^3.3.0",
     "jose": "^6.0.12",
     "lucide-react": "^0.539.0",
-    "next": "^15.5.9",
+    "next": "^15.5.24",
     "next-themes": "^0.4.6",
     "react": "^19.1.2",
     "react-dom": "^19.1.2",
@@ -45,5 +45,12 @@
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "@prisma/client@6.13.0": true,
+    "@prisma/engines@6.12.0": true,
+    "prisma@6.12.0": true,
+    "@tailwindcss/oxide@4.1.11": true,
+    "unrs-resolver@1.11.1": true
   }
 }
