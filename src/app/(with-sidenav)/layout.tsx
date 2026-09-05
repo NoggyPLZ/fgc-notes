@@ -3,7 +3,7 @@ import SideNav from "@/components/ui/dashboard/sideNav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="bg-neutral-950">
-      <div className="flex min-h-screen md:h-screen flex-col md:flex-row md:overflow-hidden pinstripe">
+      <div className="flex min-h-screen md:h-screen flex-col md:flex-row md:overflow-hidden pinstripe p-4">
         <div className="w-full flex-none md:w-64">
           <SideNav />
         </div>
