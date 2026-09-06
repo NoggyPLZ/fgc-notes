@@ -32,7 +32,7 @@ export default async function PopularCharactersCol() {
     >
       <div className="clip"></div>
       <h2 className="bg-neutral-900 font-black text-neutral-100 text-2xl -mx-5 -mt-5 p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">
-        Most popular characters
+        Most Popular Characters
       </h2>
       <div className="flex pt-2 flex-col gap-2 justify-between">
         {characters.map((char) => (
