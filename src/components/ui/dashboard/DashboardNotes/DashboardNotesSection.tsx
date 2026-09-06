@@ -3,7 +3,7 @@ import DashboardNote from "./DashboardNote";
 
 export default async function DashboardNoteSection() {
   const recentNotes = await prisma.note.findMany({
-    take: 10,
+    take: 15,
     orderBy: { createdAt: "desc" },
     include: {
       Character: {
@@ -18,8 +18,9 @@ export default async function DashboardNoteSection() {
   }
 
   return (
-    <div className="flex flex-col bg-gray-200 dark:bg-gray-800 rounded-2xl p-2 pb-6 shadow-sm">
-      <h2 className="font-black text-rose-500 text-5xl p-3 border-b-1 border-b-gray-300 dark:border-b-gray-900">
+    <div className="flex flex-col bg-gray-200 dark:bg-gray-800 p-2 pb-6 shadow-sm outer-clip relative">
+      <div className="clip"></div>
+      <h2 className="bg-neutral-900 font-black text-neutral-100 text-5xl -mx-2 -mt-2 p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">
         Recent Notes
       </h2>
       {recentNotes.map((note) => (

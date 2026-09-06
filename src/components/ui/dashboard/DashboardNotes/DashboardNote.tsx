@@ -10,7 +10,7 @@ export default function DashboardNote({ note }: { note: RecentNote }) {
   });
 
   return (
-    <div className="p-3 border-b-1 dark:border-b-gray-900 border-b-gray-300 flex flex-col gap-3 drop-shadow-sm">
+    <div className="p-3 border-b-1 dark:border-b-gray-900 border-b-gray-300 flex flex-col gap-3">
       <p className="font-semibold whitespace-pre-wrap note-content">
         {content}
       </p>

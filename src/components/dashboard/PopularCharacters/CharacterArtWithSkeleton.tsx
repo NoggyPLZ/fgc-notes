@@ -22,7 +22,7 @@ export default function CharacterArtWithSkeleton({
         alt={alt}
         width={width}
         height={height}
-        className="rounded-2xl"
+        className=""
         onLoad={() => setLoaded(true)}
       />
       {!loaded && (

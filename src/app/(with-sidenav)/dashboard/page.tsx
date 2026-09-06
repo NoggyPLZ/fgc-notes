@@ -5,9 +5,11 @@ import FavoriteCharacter from "@/components/dashboard/FavoriteCharacter/Favorite
 import NoteCount from "@/components/dashboard/NoteCount/NoteCount";
 import NumberOfUpVotes from "@/components/dashboard/NumberOfUpVotes/NumberOfUpVotes";
 import PopularCharacters from "@/components/dashboard/PopularCharacters/PopularCharacters";
+import PopularCharactersCol from "@/components/dashboard/PopularCharacters/PopularCharactersCol";
 import SiteNews from "@/components/dashboard/SiteNews/SiteNews";
 import SmallCardSKeleton from "@/components/skeletons/dashboard/SmallCardSkeleton";
 import DashboardNoteSection from "@/components/ui/dashboard/DashboardNotes/DashboardNotesSection";
+import DashboardSmallCard from "@/components/ui/dashboard/DashboardSmallCard";
 import { getCurrentUser } from "@/lib/auth";
 import { Suspense } from "react";
 
@@ -21,20 +23,20 @@ export default async function Dashboard() {
 
   return (
     <>
-      <div className="grid grid-cols-6 gap-2 md:gap-5 pb-2 md:pb-5">
+      {/* <div className="grid grid-cols-6 gap-2 md:gap-5 pb-2 md:pb-5">
         <div className="col-span-2 lg:col-span-1 rounded-2xl">
           <Suspense fallback={<SmallCardSKeleton />}>
-            <NoteCount />
+            <NoteCount size="mobile" />
           </Suspense>
         </div>
         <div className="col-span-2 lg:col-span-1 rounded-2xl">
           <Suspense fallback={<SmallCardSKeleton />}>
-            <NumberOfUpVotes />
+            <NumberOfUpVotes size="mobile" />
           </Suspense>
         </div>
         <div className="col-span-2 lg:col-span-1 rounded-2xl">
           <Suspense fallback={<SmallCardSKeleton />}>
-            <FavoriteCharacter />
+            <FavoriteCharacter size="mobile" />
           </Suspense>
         </div>
         <div className="col-span-6 lg:col-span-3 rounded-2xl">
@@ -42,14 +44,28 @@ export default async function Dashboard() {
             <PopularCharacters />
           </Suspense>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col xl:flex-row gap-2 md:gap-5">
         <div
           className={`flex flex-col gap-2 md:gap-5 lg:order-2 order-2 2xl:min-w-[250px] 2xl:max-w-[45%]`}
         >
           {admin ? (
             <>
-              <div className="lg:min-h-[500px]">
+              <div className="">
+                <div className="flex flex-col gap-2 pb-2">
+                  <PopularCharactersCol />
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <NoteCount size="desktop" />
+                  </Suspense>
+
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <NumberOfUpVotes size="desktop" />
+                  </Suspense>
+
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <FavoriteCharacter size="desktop" />
+                  </Suspense>
+                </div>
                 <SiteNews admin={admin} />
               </div>
               <div className="row-span-3 flex flex-col lg:gap-5 gap-2">
@@ -63,7 +79,21 @@ export default async function Dashboard() {
             </>
           ) : (
             <>
-              <div className="lg:min-h-[500px]">
+              <div className="">
+                <div className="flex flex-col gap-2 pb-2">
+                  <PopularCharactersCol />
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <NoteCount size="desktop" />
+                  </Suspense>
+
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <NumberOfUpVotes size="desktop" />
+                  </Suspense>
+
+                  <Suspense fallback={<SmallCardSKeleton />}>
+                    <FavoriteCharacter size="desktop" />
+                  </Suspense>
+                </div>
                 <SiteNews />
               </div>
               <div className="row-span-3">

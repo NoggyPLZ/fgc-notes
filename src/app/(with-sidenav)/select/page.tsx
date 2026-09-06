@@ -12,28 +12,34 @@ export default async function GameSelect() {
     <div>
       <div className="flex gap-4 items-stretch">
         <div className="md:py-5 flex">
-          <div className="w-[5px] bg-red-500 bg-rose-600"></div>
+          <div className="w-[5px] bg-rose-600"></div>
         </div>
-        <h1 className="text-5xl md:text-8xl text-white font-black">Game Select</h1></div>
-      <div className="text-neutral-400 text-lg border-b-2 border-b-neutral-800 pb-4 ml-[30px]">Choose a game below to open it&apos;s roster</div>
-      <div className="flex md:flex-row flex-col">
+        <h1 className="text-5xl md:text-8xl text-white font-black">
+          Game Select
+        </h1>
+      </div>
+      <div className="text-neutral-400 text-lg border-b-2 border-b-neutral-800 pb-4 ml-[30px]">
+        Choose a game below to open it&apos;s roster
+      </div>
+      <div className="flex lg:flex-row flex-col px-10">
         {games.map((game) => (
           <div
             key={game.id}
-            className="flex flex-col gap-5 p-5 justify-center items-center"
+            className="flex flex-col p-2 justify-center items-center lg:-skew-x-12"
           >
             <Link href={`select/${game.slug}/`}>
               <div
                 style={{
                   backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
                 }}
-                className="flex flex-col basis-1/2 md:basis-1/6 bg-neutral-900 dark:bg-gray-800 rounded-2xl  h-full p-5 shadow-sm border-transparent hover:border-rose-500 border-4 bg-center bg-size-[auto_300px]"
+                className="flex flex-col basis-1/2 md:basis-1/6 bg-neutral-900 dark:bg-gray-800 h-full p-5 shadow-sm border-transparent hover:border-rose-500 border-4 bg-center bg-size-[auto_300px]"
               >
                 <img
                   src={`/logos/${game.slug}-logo.webp`}
                   width={300}
                   height={300}
                   alt={`Logo for ${game.name}`}
+                  className="lg:skew-x-12"
                 />
               </div>
             </Link>

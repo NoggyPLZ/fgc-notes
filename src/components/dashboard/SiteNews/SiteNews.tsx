@@ -1,6 +1,7 @@
 import DashboardCard from "@/components/ui/dashboard/DashboardCard";
 import { prisma } from "@/lib/db";
 import CreateNews from "./CreateNews";
+import DashboardLargeCard from "@/components/ui/dashboard/DashboardLargeCard";
 
 export default async function SiteNews({ admin }: { admin?: boolean }) {
   const news = await prisma.news.findFirst({
@@ -17,7 +18,7 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
   });
   if (!news) {
     return (
-      <DashboardCard>
+      <DashboardLargeCard>
         <h2 className="text-5xl text-rose-500 font-black">Site News</h2>
         <div className="flex gap-2 pt-2 items-center">
           <span className="font-semibold border-r-1 border-rose-500 pr-2">
@@ -33,7 +34,7 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
         </p>
 
         {admin && <CreateNews />}
-      </DashboardCard>
+      </DashboardLargeCard>
     );
   }
 
@@ -44,7 +45,7 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
     year: "numeric",
   });
   return (
-    <DashboardCard>
+    <DashboardLargeCard>
       <h2 className="text-5xl text-rose-500 font-black">{news.title}</h2>
       <div className="flex gap-2 pt-2 items-center">
         <span className="font-semibold border-r-1 border-rose-500 pr-2">
@@ -60,6 +61,6 @@ export default async function SiteNews({ admin }: { admin?: boolean }) {
           <CreateNews />
         </div>
       )}
-    </DashboardCard>
+    </DashboardLargeCard>
   );
 }

@@ -3,8 +3,14 @@ import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
 import CharacterArtWithSkeleton from "../PopularCharacters/CharacterArtWithSkeleton";
+import { DashboardSizetype } from "@/lib/types";
+import DashboardSmallCard from "@/components/ui/dashboard/DashboardSmallCard";
 
-export default async function FavoriteCharacter() {
+export default async function FavoriteCharacter({
+  size,
+}: {
+  size: DashboardSizetype;
+}) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
@@ -64,32 +70,66 @@ export default async function FavoriteCharacter() {
   }
 
   return (
-    <DashboardCard bg="magenta">
-      <p className="text-center font-bold uppercase text-sm md:text-md text-gray-100">
-        Favorite Character
-      </p>
-      <div className="flex flex-col md:flex-row items-center justify-center md:gap-2 pt-2">
-        <div className="hidden xl:flex max-w-20">
-          <CharacterArtWithSkeleton
-            src={`/character-icons/${
-              result.Game.slug
-            }/${result.avatarUrl?.toLowerCase()}-sml.webp`}
-            alt={`Character portrait for ${result.name}`}
-            width={80}
-            height={80}
-          />
-        </div>
-        <div className="flex flex-col">
-          <h3 className="text-xs text-center font-medium lg:text-sm hidden md:flex text-gray-100">
-            {result.Game.name}
-          </h3>
-          <h2 className="text-xl  xl:text-2xl font-black text-gray-100 text-center hover:text-gray-200">
-            <Link href={`/select/${result.Game.slug}/${result.slug}`}>
-              {result.name}
-            </Link>
-          </h2>
-        </div>
-      </div>
-    </DashboardCard>
+    <>
+      {size === "mobile" ? (
+        <DashboardCard bg="magenta">
+          <p className="text-center font-bold uppercase text-sm md:text-md text-gray-100">
+            Favorite Character
+          </p>
+          <div className="flex flex-col md:flex-row items-center justify-center md:gap-2 pt-2">
+            <div className="hidden xl:flex max-w-20">
+              <CharacterArtWithSkeleton
+                src={`/character-icons/${
+                  result.Game.slug
+                }/${result.avatarUrl?.toLowerCase()}-sml.webp`}
+                alt={`Character portrait for ${result.name}`}
+                width={80}
+                height={80}
+              />
+            </div>
+            <div className="flex flex-col">
+              <h3 className="text-xs text-center font-medium lg:text-sm hidden md:flex text-gray-100">
+                {result.Game.name}
+              </h3>
+              <h2 className="text-xl  xl:text-2xl font-black text-gray-100 text-center hover:text-gray-200">
+                <Link href={`/select/${result.Game.slug}/${result.slug}`}>
+                  {result.name}
+                </Link>
+              </h2>
+            </div>
+          </div>
+        </DashboardCard>
+      ) : (
+        <DashboardSmallCard>
+          <p className="text-center font-bold uppercase text-sm md:text-md text-gray-100">
+            Favorite Character
+          </p>
+          <div className="flex flex-col md:flex-row items-center justify-center md:gap-2">
+            <div className="hidden border-1 border-neutral-500 -skew-x-12 xl:flex max-w-20">
+              <div className="skew-x-12">
+                <CharacterArtWithSkeleton
+                  src={`/character-icons/${
+                    result.Game.slug
+                  }/${result.avatarUrl?.toLowerCase()}-sml.webp`}
+                  alt={`Character portrait for ${result.name}`}
+                  width={50}
+                  height={50}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <h2 className="text-xl uppercase xl:text-3xl font-black text-gray-100 hover:text-gray-200">
+                <Link href={`/select/${result.Game.slug}/${result.slug}`}>
+                  {result.name}
+                </Link>
+              </h2>
+              <h3 className="text-xs font-light lg:text-sm hidden md:flex text-gray-300">
+                {result.Game.name}
+              </h3>
+            </div>
+          </div>
+        </DashboardSmallCard>
+      )}
+    </>
   );
 }

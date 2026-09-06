@@ -278,3 +278,5 @@ export const reportBugSchema = z.object({
 });
 
 export type TReportBugSchema = z.infer<typeof reportBugSchema>;
+
+export type DashboardSizetype = 'mobile' | 'desktop';
