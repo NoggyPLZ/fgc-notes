@@ -21,7 +21,7 @@ export default function FeaturesSection() {
           <div className="clip"></div>
           <ThumbsUp size={100} />
           <h3 className="font-black uppercase text-2xl">
-            Decide what's valueable
+            Decide what&apos;s valueable
           </h3>
           <p className="px-15">
             Upvote or downvote, you decide what falls and what rises.
@@ -49,7 +49,7 @@ export default function FeaturesSection() {
             Contribute to Others
           </h3>
           <p className="px-15">
-            Learn from other's mistakes, and they will from yours.
+            Learn from other&apos;s mistakes, and they will from yours.
           </p>
         </div>
         <div className="flex flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip">
