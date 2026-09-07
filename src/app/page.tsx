@@ -47,7 +47,7 @@ export default function Home() {
             <h2 className="text-5xl md:text-6xl text-white font-black">
               Sign Up To View More
             </h2>
-            <p>
+            <p className="text-white">
               This is only a preview of the wealth of knowledge inside. In order
               to ensure the organic exhange of ideas happens, we need
               contributors, that&apos;s where you come in. Sign up and be a part
