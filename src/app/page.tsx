@@ -1,6 +1,10 @@
 import Footer from "@/components/footer";
 import ToggleLogin from "@/components/forms/ToggleLogin";
 import Header from "@/components/header";
+import FeaturesSection from "@/components/ui/landing/FeaturesSection";
+import NewsIndex from "@/components/ui/landing/NewsIndex";
+import NotesIndex from "@/components/ui/landing/NotesIndex";
+import ScrollToTop from "@/components/ui/landing/ScrollToTop";
 import ThreeSection from "@/components/ui/landing/ThreeSection";
 import Image from "next/image";
 
@@ -27,7 +31,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="relative md:h-[700px] h-[300px] w-full z-0">
+      <div className="relative md:h-[500px] h-[300px] w-full z-0">
         <Image
           src="/landing/landing-banner.gif"
           alt="landing banner image"
@@ -36,7 +40,28 @@ export default function Home() {
           className="object-cover object-top"
         />
       </div>
-      <ThreeSection />
+      <div className="pinstripe dark-bg relative p-4 flex flex-col gap-5 lg:gap-15">
+        <NewsIndex />
+        <div className="flex flex-col lg:flex-row max-w-[1440px] mx-auto gap-5 lg:order-1 order-2">
+          <div className="lg:basis-2/6 flex flex-col gap-4 p-4">
+            <h2 className="text-5xl md:text-6xl text-white font-black">
+              Sign Up To View More
+            </h2>
+            <p>
+              This is only a preview of the wealth of knowledge inside. In order
+              to ensure the organic exhange of ideas happens, we need
+              contributors, that's where you come in. Sign up and be a part of
+              the story of the Fighting Game Community.
+            </p>
+            <ScrollToTop />
+          </div>
+          <div className="lg:basis-4/6">
+            <NotesIndex />
+          </div>
+        </div>
+      </div>
+      <FeaturesSection />
+      {/* <ThreeSection /> */}
       <Footer />
     </>
   );

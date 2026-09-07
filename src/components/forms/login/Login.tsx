@@ -15,14 +15,16 @@ export default function Login(props: LoginProps) {
 
   return (
     <div className="flex flex-col mx-auto gap-5">
-      <span className="font-semibold text-center text-2xl">Login</span>
-      <form action={loginAction} className="flex flex-col gap-5">
+      <span className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">
+        Login
+      </span>
+      <form action={loginAction} className="flex flex-col p-4 gap-5">
         <input
           name="email"
           id="email"
           placeholder="email"
           type="email"
-          className=" border-1 border-gray-300 rounded-2xl p-5"
+          className=" border-1 border-gray-300 rounded-md p-2"
         />
         {state?.errors?.email && (
           <p className="text-red-500">{state.errors.email}</p>
@@ -32,7 +34,7 @@ export default function Login(props: LoginProps) {
           id="password"
           placeholder="password"
           type="password"
-          className=" border-1 border-gray-300 rounded-2xl p-5"
+          className=" border-1 border-gray-300 rounded-md p-2"
         />
         {state?.errors?.password && (
           <p className="text-red-500">{state.errors.password}</p>

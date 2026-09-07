@@ -66,14 +66,19 @@ export default function Signup(props: SignupProps) {
 
   return (
     <div className="flex flex-col mx-auto gap-5">
-      <span className="font-semibold text-center text-2xl">Sign Up</span>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+      <span className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">
+        Sign Up
+      </span>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex p-4 flex-col gap-5"
+      >
         <input
           {...register("email")}
           type="email"
           name="email"
           placeholder="email"
-          className=" border-1 border-gray-300 rounded-2xl p-5"
+          className=" border-1 border-gray-300 rounded-md p-2"
           required
         />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
@@ -82,7 +87,7 @@ export default function Signup(props: SignupProps) {
           type="password"
           name="password"
           placeholder="password"
-          className=" border-1 border-gray-300 rounded-2xl p-5"
+          className=" border-1 border-gray-300 rounded-md p-2"
           required
         />
         {errors.password && (
@@ -93,7 +98,7 @@ export default function Signup(props: SignupProps) {
           type="password"
           name="confirmPassword"
           placeholder="confirm password"
-          className=" border-1 border-gray-300 rounded-2xl p-5"
+          className=" border-1 border-gray-300 rounded-md p-2"
           required
         />
         {errors.confirmPassword && (
