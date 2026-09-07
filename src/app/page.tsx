@@ -50,8 +50,8 @@ export default function Home() {
             <p>
               This is only a preview of the wealth of knowledge inside. In order
               to ensure the organic exhange of ideas happens, we need
-              contributors, that's where you come in. Sign up and be a part of
-              the story of the Fighting Game Community.
+              contributors, that&apos;s where you come in. Sign up and be a part
+              of the story of the Fighting Game Community.
             </p>
             <ScrollToTop />
           </div>
