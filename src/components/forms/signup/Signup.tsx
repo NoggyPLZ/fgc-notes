@@ -66,7 +66,7 @@ export default function Signup(props: SignupProps) {
 
   return (
     <div className="flex flex-col mx-auto gap-5">
-      <span className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">
+      <span className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-b-1 border-l-4 border-l-rose-500">
         Sign Up
       </span>
       <form

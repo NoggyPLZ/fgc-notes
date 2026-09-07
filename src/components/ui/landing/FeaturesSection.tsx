@@ -10,7 +10,7 @@ import {
 export default function FeaturesSection() {
   return (
     <div className="bg-rose-500 p-8">
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 max-w-[1440px] mx-auto text-center">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 max-w-[1440px] mx-auto text-center text-neutral-100">
         <div className="flex flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip">
           <div className="clip"></div>
           <Gauge size={100} />
