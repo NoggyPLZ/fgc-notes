@@ -40,7 +40,7 @@ export default async function NewsIndex() {
     year: "numeric",
   });
   return (
-    <div className="pinstripe dark-bg relative p-4">
+    <div className="relative p-4">
       <div className="max-w-[1440px] bg-neutral-100 relative outer-clip mx-auto -top-15">
         <div className="clip"></div>
         <h2 className="bg-neutral-900 font-black text-neutral-100 text-4xl  p-3 border-b-1 border-l-4 border-l-rose-500 border-b-gray-300 dark:border-b-gray-900">

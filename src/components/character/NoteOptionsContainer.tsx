@@ -11,7 +11,7 @@ export default function NoteOptionsContainer({
   filter: string;
 }) {
   return (
-    <div className="bg-gray-800 dark:bg-gray-950 flex flex-col md:flex-row text-gray-100 justify-center items-center p-2 gap-5">
+    <div className="bg-gray-800 dark:bg-gray-950 flex flex-col md:flex-row text-gray-100 justify-center items-center p-2 py-4 gap-5">
       <SearchBar characterSlug={characterSlug} gameSlug={gameSlug} />
       <NoteToggle
         characterSlug={characterSlug}

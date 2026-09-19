@@ -43,7 +43,7 @@ export default function SearchBar({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex justify-center items-center gap-2 relative"
+      className="flex justify-center items-center gap-2 relative px-2"
     >
       {errors.query && (
         <div className="text-red-800 absolute z-10 bottom-15 bg-gray-300 rounded-2xl text-sm p-2 shadow-2xl/50">
@@ -55,10 +55,8 @@ export default function SearchBar({
         className="bg-gray-900 border-1 border-gray-300 rounded-2xl p-2 focus:outline-0 focus:border-rose-500 lg:w-[400px]"
       />
       <Button type="submit" style="primary" disabled={isSubmitting}>
-        <div className="flex">
-          <Search />
-          Search
-        </div>
+        <p className="hidden md:block">Search</p>
+        <Search />
       </Button>
     </form>
   );

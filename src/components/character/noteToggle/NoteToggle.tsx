@@ -18,7 +18,7 @@ export default function NoteToggle({
 
   return (
     <div className="flex rounded-2xl items-center">
-      <div className="px-2 flex">
+      <div className="px-2 md:flex hidden">
         Filter Notes
         <SlidersHorizontal size={25} />
       </div>

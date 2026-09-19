@@ -12,16 +12,16 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="bg-gray-100 relative md:h-[700px] h-[800px] flex justify-center">
+      <div className="bg-gray-100 relative md:h-[700px] h-[700px] flex justify-center">
         <div className="absolute md:top-50 top-20 flex xl:flex-row flex-col gap-5 mt-auto mb-auto w-[90%] xl:w-[80%] mx-auto justify-center items-center py-10 rounded-2xl xl:min-h-[600px]">
           <div className="lg:basis-7/12 xl:text-left text-center">
-            <h2 className="text-2xl lg:text-3xl xl:text-5xl font-black uppercase xl:leading-10 xl:pl-3 text-rose-500 ">
+            <h2 className="text-2xl lg:text-3xl xl:text-5xl font-black uppercase xl:leading-10 xl:pl-3 text-rose-500 tracking-tighter">
               An FGC user driven
             </h2>
-            <h1 className="text-6xl lg:text-5xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 font-black uppercase text-neutral-900 ">
+            <h1 className="text-[5.3rem]/[4rem]  lg:text-8xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 font-black uppercase text-neutral-900 tracking-tighter">
               Living Document
             </h1>
-            <p className="xl:pl-2 text-2xl text-neutral-900 pt-5 font-semibold">
+            <p className="xl:pl-2 text-2xl text-neutral-900 pt-2 font-semibold">
               Using collaboration within the FGC to create a centralized deposit
               of FGC game knowledge.
             </p>

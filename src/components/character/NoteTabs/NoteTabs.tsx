@@ -67,7 +67,7 @@ export default function NoteTabs({
   }, [opponent]);
 
   return (
-    <div className="dark:bg-gray-900 bg-gray-300 pt-2 md:flex md:gap-1 pb-2 md:pb-0 grid grid-cols-2 gap-2">
+    <div className="dark:bg-gray-900 bg-gray-300 pt-2 md:flex md:gap-1 pb-2 md:pb-0 grid grid-cols-2 gap-2 px-2 md:px-0">
       {tabLinks.map((link, i) =>
         link.name === "MATCHUPS" ? (
           <button

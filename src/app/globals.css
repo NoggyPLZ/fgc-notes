@@ -99,3 +99,11 @@ button,
     0 calc(100% - 12px)
   );
 }
+
+.button-clips{
+  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+}
+
+.shadow-wrap {
+  filter: drop-shadow(-1px 6px 3px rgba(50, 50, 0, 0.5));
+}
