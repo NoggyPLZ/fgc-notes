@@ -232,6 +232,13 @@ const sfCharacters: CharacterType[] = [
       "A high-schooler who became a fighter to find her lost brother. She is a shy and gentle soul, but beams with confidence in fights, where she uses her Lolo's moves.",
     avatarUrl: "yasmin",
   },
+  {
+    slug: "arjun-sf6",
+    name: "arjun",
+    story:
+      "Falsely accused of killing his partner, Arjun is a former officer on the lam who will not stop until he uncovers the truth behind the murder. Before he picked up the badge, he dreamt of being an actor.",
+    avatarUrl: "arjun",
+  },
 ];
 
 const cotwCharacters: CharacterType[] = [
