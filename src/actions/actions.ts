@@ -915,7 +915,7 @@ export async function createNews(
         content,
       },
     });
-    revalidatePath("/dashboard/");
+    revalidatePath("/");
     return {
       success: true,
       errors: {},
