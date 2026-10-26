@@ -21,7 +21,7 @@ export default function FeaturesSection() {
           <div className="clip"></div>
           <ThumbsUp size={100} />
           <h3 className="font-black uppercase text-2xl">
-            Decide what&apos;s valueable
+            Decide what&apos;s valuable
           </h3>
           <p className="px-15">
             Upvote or downvote, you decide what falls and what rises.
@@ -57,7 +57,7 @@ export default function FeaturesSection() {
           <Flag size={100} />
           <h3 className="font-black uppercase text-2xl">Make your mark</h3>
           <p className="px-15">
-            Credit to notes is always perserved, and you get the credit.
+            Credit to notes is always preserved, and you get the credit.
           </p>
         </div>
       </div>

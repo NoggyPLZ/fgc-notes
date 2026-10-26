@@ -49,7 +49,7 @@ export default function Home() {
             </h2>
             <p className="text-white">
               This is only a preview of the wealth of knowledge inside. In order
-              to ensure the organic exhange of ideas happens, we need
+              to ensure the organic exchange of ideas happens, we need
               contributors, that&apos;s where you come in. Sign up and be a part
               of the story of the Fighting Game Community.
             </p>
