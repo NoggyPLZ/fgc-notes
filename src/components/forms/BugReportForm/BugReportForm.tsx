@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 export default function BugReportForm() {
   const [state, reportBugAction, pending] = useActionState(
     reportBugForm,
-    undefined
+    undefined,
   );
 
   useEffect(() => {

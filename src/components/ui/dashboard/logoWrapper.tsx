@@ -9,32 +9,32 @@ export default function LogoWrapper() {
       className="text-gray-500 p-3 rounded-2xl text-2xl text-center"
     >
       <img
-        src={`/tech-trap-logos/techtrap-vert-full-logo-lm.webp`}
+        src={`/tech-trap-logos/logo-dark.webp`}
         alt={"vertical tech trap logo"}
-        width={100}
-        height={100}
-        className="hidden dark:md:flex"
+        width={250}
+        height={250}
+        className="hidden dark:md:flex w-[100px]"
       />
       <img
-        src={`/tech-trap-logos/techtrap-logo-lm.webp`}
-        height={100}
-        width={100}
+        src={`/tech-trap-logos/logo-dark.webp`}
+        height={250}
+        width={250}
         alt={`Tech Trap logo`}
-        className="hidden dark:flex dark:md:hidden"
+        className="hidden dark:flex dark:md:hidden w-[150px]"
       />
       <img
-        src={`/tech-trap-logos/techtrap-vert-full-logo.webp`}
+        src={`/tech-trap-logos/logo-light.webp`}
         alt={"vertical tech trap logo"}
-        width={100}
-        height={100}
-        className="hidden md:flex dark:hidden"
+        width={250}
+        height={250}
+        className="hidden md:flex dark:hidden w-[100px]"
       />
       <img
-        src={`/tech-trap-logos/techtrap-logo.webp`}
-        height={100}
-        width={100}
+        src={`/tech-trap-logos/logo-light.webp`}
+        height={250}
+        width={250}
         alt={`Tech Trap logo`}
-        className="md:hidden dark:hidden"
+        className="md:hidden dark:hidden w-[150px]"
       />
     </Link>
   );

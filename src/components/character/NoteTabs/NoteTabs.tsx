@@ -95,7 +95,7 @@ export default function NoteTabs({
           >
             {link.name}
           </button>
-        )
+        ),
       )}
       <div
         popover="auto"

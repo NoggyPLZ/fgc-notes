@@ -28,14 +28,14 @@ export default function NoteForm(props: NoteFormProps) {
   } = props;
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const [category, setCategory] = useState<NoteCategory>(
-    latestCategory ?? "NEUTRAL"
+    latestCategory ?? "NEUTRAL",
   );
   const [opponent, setOpponent] = useState(
-    latestOpponent ?? characterList[0].id
+    latestOpponent ?? characterList[0].id,
   );
   const [state, noteSubmitAction, pending] = useActionState(
     noteSubmit,
-    undefined
+    undefined,
   );
 
   const notationHelper = (symbol: string) => {

@@ -12,7 +12,7 @@ export default async function GameSelect() {
     <div>
       <div className="flex gap-4 items-stretch">
         <div className="md:py-5 flex">
-          <div className="w-[5px] bg-rose-600"></div>
+          <div className="w-[5px] bg-rose-500"></div>
         </div>
         <h1 className="text-5xl md:text-8xl text-white font-black">
           Game Select

@@ -26,7 +26,7 @@ export default async function CharacterSelect({
     <div>
       <div className="flex gap-4 items-stretch">
         <div className="md:py-5 flex">
-          <div className="w-[5px] bg-rose-600"></div>
+          <div className="w-[5px] bg-rose-500"></div>
         </div>
         <h1 className="text-5xl md:text-8xl text-white font-black">
           Character Select
@@ -39,7 +39,7 @@ export default async function CharacterSelect({
         {game.characters.map((character) => (
           <div
             key={character.id}
-            className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-800"
+            className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-600"
           >
             <Link href={`/select/${game.slug}/${character.slug}`}>
               <img
