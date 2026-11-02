@@ -103,7 +103,7 @@ export default async function CharacterPage({
       <NoteTabs
         characterSlug={characterChoice.slug}
         gameSlug={game.slug}
-        tab={filterSearch?.tab || ""}
+        tab={filterSearch?.tab || "NEUTRAL"}
         opponent={filterSearch?.opponent || ""}
         characterList={characterList}
         filter={filterSearch?.filter}
