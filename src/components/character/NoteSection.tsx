@@ -118,8 +118,8 @@ export default async function NoteSection({
   return (
     <>
       {query ? (
-        <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 border-l-10 border-l-rose-500 p-5 shadow-xl">
-          <h1 className="text-4xl font-bold">
+        <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 shadow-xl">
+          <h1 className="font-black text-white bg-neutral-900 border-l-4 w-full border-rose-500 text-4xl py-4 px-4 mb-5">
             Search Results for:{" "}
             <span className="font-medium italic">{query}</span>
           </h1>

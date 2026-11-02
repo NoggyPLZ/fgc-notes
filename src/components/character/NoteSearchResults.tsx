@@ -28,13 +28,15 @@ export default function NoteSearchResults(props: NoteByCategoryProps) {
   if (notes.length < 1) return;
   return (
     <>
-      <h1 className="font-black text-rose-500 text-5xl pb-5">{category}</h1>
+      <h1 className="font-black text-rose-500 text-5xl pb-5 px-2">
+        {category}
+      </h1>
       {notes.length < 1 && <p>{`No notes for ${category}, be the first!`}</p>}
       {category === "MATCHUPS" ? (
-        <div className="grid grid-cols-1 gap-4 w-full">
+        <div className="grid grid-cols-1  gap-4 w-full">
           {characterList.map((char, i) => (
             <div key={i} className="flex flex-col">
-              <h2 className="font-black text-2xl text-rose-500 uppercase">
+              <h2 className="font-black text-2xl px-2 text-rose-500 uppercase">
                 {char.name}
               </h2>
               {matchupNotes.map((note) => (
