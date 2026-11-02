@@ -34,7 +34,9 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
   if (oppChar.length === 0 && tab === "MATCHUPS") {
     return (
       <>
-        <h1 className="font-black text-rose-500 text-5xl pb-5">{tab}</h1>
+        <h1 className="font-black text-white bg-neutral-900 border-l-4 w-full border-rose-500 text-4xl py-4 px-4 mb-5">
+          {tab}
+        </h1>
         <h2 className="font-black  text-5xl pb-5 capitalize pl-5">
           Opponent not found.
         </h2>
@@ -43,7 +45,9 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
   }
   return (
     <>
-      <h1 className="font-black text-rose-500 text-5xl pb-5">{tab}</h1>
+      <h1 className="font-black text-white bg-neutral-900 border-l-4 w-full border-rose-500 text-4xl py-4 px-4 mb-5">
+        {tab}
+      </h1>
       {tab === "MATCHUPS" ? (
         <>
           <h2 className="font-black  text-5xl pb-5 capitalize pl-5">
@@ -51,7 +55,7 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
           </h2>
           <div className="grid grid-cols-1 gap-4 w-full">
             {matchupNotes.length < 1 && (
-              <p>{`No ${tab.toLocaleLowerCase()} notes for ${
+              <p className="px-4 pb-4">{`No ${tab.toLocaleLowerCase()} notes for ${
                 oppChar[0].name
               }, be the first!`}</p>
             )}

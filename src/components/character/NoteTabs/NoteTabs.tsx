@@ -67,33 +67,33 @@ export default function NoteTabs({
   }, [opponent]);
 
   return (
-    <div className="dark:bg-gray-900 bg-gray-300 pt-2 md:flex md:gap-1 pb-2 md:pb-0 grid grid-cols-2 gap-2 px-2 md:px-0">
+    <div className="pinstripe bg-neutral-900 dark:bg-neutral-950 pt-2 md:flex md:gap-1 pb-2 md:pl-2 md:pb-0 grid grid-cols-2 gap-2 px-2 md:px-0">
       {tabLinks.map((link, i) =>
         link.name === "MATCHUPS" ? (
           <button
             key={i}
-            className={`ring-1 md:ring-0 rounded-xl md:rounded-l-none md:rounded-br-none md:rounded-tr-2xl md:w-auto md:border-l-10 md:border-l-rose-500 uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`ring-1 md:ring-0 md:w-auto md:-skew-x-12  uppercase cursor-pointer p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
-                : "bg-gray-200 dark:bg-gray-950"
+                : "bg-neutral-100 text-neutral-900"
             }`}
             popoverTarget="opponentsPopup"
             disabled={isPending}
           >
-            {link.name}
+            <p className="md:skew-x-12">{link.name}</p>
           </button>
         ) : (
           <button
             key={i}
-            className={`ring-1 md:ring-0 rounded-xl md:rounded-l-none md:rounded-br-none md:rounded-tr-2xl  md:w-auto md:border-l-10 md:border-l-rose-500 uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
+            className={`ring-1 md:ring-0 md:w-auto md:-skew-x-12  uppercase p-4 hover:bg-rose-500 hover:text-gray-100 font-black border-gray-400 ${
               tab === link.name
                 ? "bg-rose-500 text-gray-100 pointer-none border-b-rose-500"
-                : "bg-gray-200 dark:bg-gray-950 cursor-pointer"
+                : "bg-neutral-100 text-neutral-900 cursor-pointer"
             }`}
             onClick={() => handleClick(link.name)}
             disabled={isPending || tab === link.name}
           >
-            {link.name}
+            <p className="md:skew-x-12">{link.name}</p>
           </button>
         ),
       )}

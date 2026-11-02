@@ -139,7 +139,7 @@ export default async function NoteSection({
           ))}
         </div>
       ) : (
-        <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800 border-l-10 border-l-rose-500 p-5 shadow-xl mb-20">
+        <div className="flex flex-wrap bg-gray-200 dark:bg-gray-800  shadow-xl mb-20">
           <NoteCategorySection
             tab={cat}
             notes={grouped[cat] ?? []}

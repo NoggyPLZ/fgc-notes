@@ -32,18 +32,18 @@ export default function SingleNote(props: SingleNoteProps) {
   const canEdit = (creatorPresent && verified) || adminPresent;
 
   return (
-    <div className="relative flex flex-col gap-3 mb-5 px-2">
-      <div className="flex flex-row gap-3 mb-2 border-b-1 border-gray-400 dark:border-gray-900 pb-1">
+    <div className="relative flex flex-col gap-3">
+      <div className="flex flex-row gap-3 mb-2 border-b-1 px-4 border-gray-300 dark:border-neutral-600 pb-1">
         <div className="flex flex-col w-full">
           <div className="flex flex-col gap-3">
-            <h3 className="text-lg font-semibold whitespace-pre-wrap note-content">
+            <h3 className="text-base/5 font-semibold whitespace-pre-wrap note-content">
               {note.content}
               {canEdit && <EditNote note={note} game={game} />}
             </h3>
           </div>
-          <div className="flex flex-row gap-3 mt-2 items-center relative bg-gray-300 dark:bg-gray-900 p-1">
+          <div className="flex flex-row gap-3 mt-2 items-center relative p-1">
             {creatorPresent ? (
-              <div className="dark:bg-gray-900 bg-gray-800 text-gray-100 dark:border-gray-700 border-1 border-gray-400 px-2 py-1 rounded-lg font-semibold">
+              <div className="text-rose-500 dark:text-rose-400 py-1 font-black">
                 {total + 1}
               </div>
             ) : (
