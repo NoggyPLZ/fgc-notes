@@ -58,6 +58,7 @@ export default async function NoteSection({
             ? {
                 content: {
                   contains: decodeURIComponent(query),
+                  mode: "insensitive",
                 },
               }
             : {}),
