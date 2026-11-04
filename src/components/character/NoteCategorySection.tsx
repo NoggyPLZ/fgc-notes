@@ -77,7 +77,9 @@ export default function NoteCategorySection(props: NoteByCategoryProps) {
         </>
       ) : (
         <div className="grid grid-cols-1 gap-4 w-full">
-          {notes.length < 1 && <p>{`No notes for ${tab}, be the first!`}</p>}
+          {notes.length < 1 && (
+            <p className="px-4 pb-4">{`No notes for ${tab}, be the first!`}</p>
+          )}
           {notes.map((note) => (
             <SingleNote
               key={note.id}
