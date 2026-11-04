@@ -25,7 +25,7 @@ export default function ChangeName({ id }: { id: string }) {
   return (
     <>
       <button
-        className="bg-green-500 hover:bg-green-600 cursor-pointer p-1 text-gray-100 rounded-md"
+        className="bg-rose-500 hover:bg-rose-600 cursor-pointer p-1 text-gray-100 rounded-md"
         onClick={handleToggle}
       >
         <PenLine size={15} />

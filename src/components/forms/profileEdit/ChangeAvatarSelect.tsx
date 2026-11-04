@@ -14,13 +14,10 @@ export default function ChangeAvatarSelect({
   const [select, setSelect] = useState("");
   return (
     <>
-      <div className="">
-        <button
-          className="p-3 bg-green-500 text-gray-100 rounded-2xl cursor-pointer hover:bg-green-600 flex font-black gap-4 justify-center items-center"
-          onClick={() => setToggle((prev) => !prev)}
-        >
+      <div className="py-4">
+        <Button style="secondary" onClick={() => setToggle((prev) => !prev)}>
           Change Avatar <UserPen size={25} />
-        </button>
+        </Button>
       </div>
       {toggle && (
         <>
@@ -49,7 +46,7 @@ export default function ChangeAvatarSelect({
               </section>
             ))}
           </div>
-          <div>
+          <div className="pt-4">
             <Button
               style="primary"
               type="button"
