@@ -4,6 +4,7 @@ import Signup from "./signup/Signup";
 import Button from "../ui/Button";
 import { useState } from "react";
 import ConfirmEmail from "./pwreset/ConfirmEmail";
+import RecaptchaScript from "../recaptcha/recaptcha";
 
 type ToggleFormType = "signup" | "login" | "forgot";
 
@@ -18,6 +19,7 @@ export default function ToggleLogin() {
   return (
     <div className="bg-neutral-900 md:max-w-[600px] mx-auto text-gray-100 relative outer-clip">
       <div className="clip"></div>
+      <RecaptchaScript />
       {!toggleForm && (
         <div className="flex flex-col p-2 md:p-5 rounded-2xl mx-auto gap-5">
           <Button onClick={handleClick} value="login" style="primary">

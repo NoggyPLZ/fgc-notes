@@ -25,6 +25,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 } */
 
+@theme {
+  --breakpoint-3xl: 120rem;
+}
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -62,21 +65,27 @@ button,
   font-family: "Noto Sans Symbols", "Segoe UI Symbol", sans-serif;
 }
 
-.pinstripe{
-  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,.045) 0px, rgba(255,255,255,.045) 2px, transparent 2px, transparent 26px);
+.pinstripe {
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 2px,
+    transparent 2px,
+    transparent 26px
+  );
 }
 
-.dark-bg{
-  background-color:#161616;
+.dark-bg {
+  background-color: #161616;
 }
 
-.button-angle{
+.button-angle {
   corner-shape: bevel;
   border-bottom-right-radius: 16px;
   border-top-left-radius: 16px;
 }
 
-.clip{
+.clip {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -86,8 +95,14 @@ button,
   clip-path: polygon(0px 0px, 100% 100%, 0px 100%);
 }
 
-.outer-clip{
-  clip-path: polygon(0px 0px, calc(100% - 22px) 0px, 100% 22px, 100% 100%, 0px 100%);
+.outer-clip {
+  clip-path: polygon(
+    0px 0px,
+    calc(100% - 22px) 0px,
+    100% 22px,
+    100% 100%,
+    0px 100%
+  );
 }
 
 .button-clip {
@@ -101,8 +116,8 @@ button,
   );
 }
 
-.button-clips{
-  clip-path: polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,0 100%);
+.button-clips {
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
 }
 
 .shadow-wrap {

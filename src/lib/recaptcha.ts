@@ -1,15 +1,20 @@
-export async function reCaptchaToken() {
+/// <reference types="grecaptcha" />
+
+export function reCaptchaToken() {
   return new Promise<string | null>((resolve) => {
-    grecaptcha.ready(async () => {
-      const siteKey = process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY;
-      if (!siteKey) {
+    const siteKey = process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY;
+    if (!siteKey || typeof grecaptcha === "undefined") {
+      resolve(null);
+      return;
+    }
+    grecaptcha.ready(() => {
+      try {
+        grecaptcha
+          .execute(siteKey, { action: "signUp" })
+          .then(resolve, () => resolve(null));
+      } catch {
         resolve(null);
-        return;
       }
-      const token = await grecaptcha.execute(siteKey, {
-        action: "signUp",
-      });
-      resolve(token);
     });
   });
 }

@@ -12,16 +12,16 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="bg-gray-100 relative md:h-[700px] h-[700px] flex justify-center">
-        <div className="absolute md:top-50 top-20 flex xl:flex-row flex-col gap-5 mt-auto mb-auto w-[90%] xl:w-[80%] mx-auto justify-center items-center py-10 rounded-2xl xl:min-h-[600px]">
-          <div className="lg:basis-7/12 xl:text-left text-center">
+      <div className="bg-gray-100 relative 3xl:h-[550px] md:h-[700px] h-[700px] flex justify-center">
+        <div className="absolute md:top-50 2xl:top-20 top-20 flex xl:flex-row flex-col gap-5 mt-auto mb-auto w-[90%] xl:w-[80%] mx-auto justify-center items-center py-10 rounded-2xl xl:min-h-[600px]">
+          <div className="lg:basis-7/12 xl:text-left text-center z-10">
             <h2 className="text-2xl lg:text-3xl xl:text-5xl font-black uppercase xl:leading-10 xl:pl-3 text-rose-500 tracking-tighter">
               An FGC user driven
             </h2>
-            <h1 className="text-[5.3rem]/[4rem]  lg:text-8xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 font-black uppercase text-neutral-900 tracking-tighter">
+            <h1 className="text-[5.3rem]/[4rem]  lg:text-8xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 3xl:text-[210px] 3xl:leading-41 font-black uppercase text-neutral-900 tracking-tighter">
               Living Document
             </h1>
-            <p className="xl:pl-2 text-2xl text-neutral-900 pt-2 font-semibold">
+            <p className="xl:pl-2 text-2xl 2xl:text-3xl text-neutral-900 pt-4 font-semibold">
               Using collaboration within the FGC to create a centralized deposit
               of FGC game knowledge.
             </p>
@@ -31,7 +31,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="relative md:h-[500px] h-[300px] w-full z-0">
+      <div className="relative 3xl:h-[700px] md:h-[500px] h-[300px] w-full z-0">
         <Image
           src="/landing/landing-banner.gif"
           alt="landing banner image"
