@@ -36,10 +36,10 @@ export default function SingleNote(props: SingleNoteProps) {
       <div className="flex flex-row gap-3 mb-2 border-b-1 px-4 border-gray-300 dark:border-neutral-600 pb-1">
         <div className="flex flex-col w-full">
           <div className="flex flex-col gap-3">
-            <h3 className="text-base/5 font-semibold whitespace-pre-wrap note-content">
+            <h2 className="text-base/5 font-semibold whitespace-pre-wrap note-content">
               {note.content}
               {canEdit && <EditNote note={note} game={game} />}
-            </h3>
+            </h2>
           </div>
           <div className="flex flex-row gap-3 mt-2 items-center relative p-1">
             {creatorPresent ? (

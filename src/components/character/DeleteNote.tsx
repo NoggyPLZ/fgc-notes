@@ -20,9 +20,15 @@ export default function DeleteNote({ note }: { note: NoteWithUserSafe }) {
       } `}
     >
       {isPending ? (
-        <Loader2 size={15} className="animate-spin-slow" />
+        <>
+          <span className="sr-only">Deleting note</span>
+          <Loader2 size={15} className="animate-spin-slow" />
+        </>
       ) : (
-        <LucideTrash size={15} />
+        <>
+          <LucideTrash size={15} />
+          <span className="sr-only">Delete note</span>
+        </>
       )}
     </button>
   );

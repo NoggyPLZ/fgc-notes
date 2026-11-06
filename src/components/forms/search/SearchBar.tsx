@@ -44,19 +44,31 @@ export default function SearchBar({
     <form
       onSubmit={handleSubmit(onSubmit)}
       className="flex justify-center items-center gap-2 relative px-2"
+      role="search"
     >
       {errors.query && (
-        <div className="text-red-800 absolute z-10 bottom-15 bg-gray-300 rounded-2xl text-sm p-2 shadow-2xl/50">
-          {errors.query?.message}
+        <div
+          id="note-search-error"
+          role="alert"
+          className="text-red-800 absolute z-10 bottom-15 bg-gray-300 rounded-2xl text-sm p-2 shadow-2xl/50"
+        >
+          {errors.query.message}
         </div>
       )}
+      <label htmlFor="note-search" className="sr-only">
+        Search notes
+      </label>
       <input
+        id="note-search"
+        type="search"
         {...register("query")}
+        aria-invalid={errors.query ? true : undefined}
+        aria-describedby={errors.query ? "note-search-error" : undefined}
         className="bg-gray-900 border-1 border-gray-300 rounded-2xl p-2 focus:outline-0 focus:border-rose-500 lg:w-[400px]"
       />
       <Button type="submit" style="primary" disabled={isSubmitting}>
-        <p className="hidden md:block">Search</p>
-        <Search />
+        <span className="sr-only md:not-sr-only">Search</span>
+        <Search aria-hidden="true" />
       </Button>
     </form>
   );

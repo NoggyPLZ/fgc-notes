@@ -20,6 +20,7 @@ export default function EditNote({
         onClick={() => setEditToggle((prev) => !prev)}
         className={`cursor-pointer rounded-md p-1 text-gray-200 bg-blue-500 hover:bg-blue-600 ml-3`}
       >
+        <span className="sr-only">Edit note</span>
         <SquarePen size={15} />
       </button>
       {editToggle && (
