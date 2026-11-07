@@ -11,7 +11,7 @@ export default function ConfirmEmail({
 }) {
   const [state, confirmEmailForPWAction, pending] = useActionState(
     confirmEmailForPW,
-    undefined
+    undefined,
   );
 
   return (
@@ -19,20 +19,22 @@ export default function ConfirmEmail({
       action={confirmEmailForPWAction}
       className="flex flex-col p-5 rounded-2xl mx-auto gap-5"
     >
-      <label htmlFor="email">Email used:</label>
-      <input
-        name="email"
-        placeholder=""
-        className=" border-1 border-gray-300 rounded-2xl p-5"
-      />
-      {state?.errors.email && (
-        <p className="text-red-500">{state.errors.email}</p>
-      )}
-      {state?.success && (
-        <p className="text-cyan-500 font-bold text-center">
-          Password reset link sent to the email provided.
-        </p>
-      )}
+      <div className="flex flex-col">
+        <label htmlFor="email">Email used:</label>
+        <input
+          name="email"
+          placeholder=""
+          className=" border-1 border-gray-300 rounded-md p-2"
+        />
+        {state?.errors.email && (
+          <p className="text-red-500">{state.errors.email}</p>
+        )}
+        {state?.success && (
+          <p className="text-cyan-500 font-bold text-center">
+            Password reset link sent to the email provided.
+          </p>
+        )}
+      </div>
       <Button style="primary" type="submit" disabled={pending}>
         Submit
       </Button>

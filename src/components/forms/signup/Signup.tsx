@@ -66,44 +66,56 @@ export default function Signup(props: SignupProps) {
 
   return (
     <div className="flex flex-col mx-auto gap-5">
-      <span className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-l-4 border-l-rose-500">
+      <h2 className="bg-neutral-900 font-black text-neutral-100 text-3xl  p-3 border-l-4 border-l-rose-500">
         Sign Up
-      </span>
+      </h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex p-4 flex-col gap-5"
+        className="flex p-4 flex-col gap-4"
       >
-        <input
-          {...register("email")}
-          type="email"
-          name="email"
-          placeholder="email"
-          className=" border-1 border-gray-300 rounded-md p-2"
-          required
-        />
-        {errors.email && <p className="text-red-500">{errors.email.message}</p>}
-        <input
-          {...register("password")}
-          type="password"
-          name="password"
-          placeholder="password"
-          className=" border-1 border-gray-300 rounded-md p-2"
-          required
-        />
-        {errors.password && (
-          <p className="text-red-500">{errors.password.message}</p>
-        )}
-        <input
-          {...register("confirmPassword")}
-          type="password"
-          name="confirmPassword"
-          placeholder="confirm password"
-          className=" border-1 border-gray-300 rounded-md p-2"
-          required
-        />
-        {errors.confirmPassword && (
-          <p className="text-red-500">{errors.confirmPassword.message}</p>
-        )}
+        <div className="flex flex-col ">
+          <label htmlFor="email">Email:</label>
+          <input
+            {...register("email")}
+            type="email"
+            name="email"
+            placeholder="email"
+            autoComplete="email"
+            className=" border-1 border-gray-300 rounded-md p-2"
+            required
+          />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
+        </div>
+        <div className="flex flex-col ">
+          <label htmlFor="password">Password:</label>
+          <input
+            {...register("password")}
+            type="password"
+            name="password"
+            placeholder="password"
+            className=" border-1 border-gray-300 rounded-md p-2"
+            required
+          />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
+        </div>
+        <div className="flex flex-col ">
+          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <input
+            {...register("confirmPassword")}
+            type="password"
+            name="confirmPassword"
+            placeholder="confirm password"
+            className=" border-1 border-gray-300 rounded-md p-2"
+            required
+          />
+          {errors.confirmPassword && (
+            <p className="text-red-500">{errors.confirmPassword.message}</p>
+          )}
+        </div>
         <div className="text-sm">
           This site is protected by reCAPTCHA and the Google{" "}
           <a
