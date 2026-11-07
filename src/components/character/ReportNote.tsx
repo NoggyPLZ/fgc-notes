@@ -15,7 +15,7 @@ export default function ReportNote({ note }: { note: NoteWithUserSafe }) {
   return (
     <>
       {modal && (
-        <Modal type="report" direction="center" clickHandler={closeHandler}>
+        <Modal title="Report" direction="center" clickHandler={closeHandler}>
           <ReportForm note={note} clickHandler={closeHandler} />
         </Modal>
       )}

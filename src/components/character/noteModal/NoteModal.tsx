@@ -22,7 +22,7 @@ export default function NoteModal({ children }: { children: React.ReactNode }) {
         </button>
       </div>
       {modal && (
-        <Modal type="note" direction="bottomRight" clickHandler={clickHandler}>
+        <Modal title="Note" direction="bottomRight" clickHandler={clickHandler}>
           {children}
         </Modal>
       )}
