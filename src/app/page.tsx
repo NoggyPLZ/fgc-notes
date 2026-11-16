@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="bg-gray-100 relative 3xl:h-[550px] md:h-[750px] h-[700px] flex justify-center">
+      <div className="bg-gray-100 relative 3xl:h-[550px] md:h-[700px] h-[750px] flex justify-center">
         <div className="absolute md:top-50 2xl:top-20 top-20 flex xl:flex-row flex-col gap-5 mt-auto mb-auto w-[90%] xl:w-[80%] mx-auto justify-center items-center py-10 rounded-2xl xl:min-h-[600px]">
           <div className="lg:basis-7/12 xl:text-left text-center z-10">
             <h2 className="text-2xl lg:text-3xl xl:text-5xl font-black uppercase xl:leading-10 xl:pl-3 text-rose-500 tracking-tighter">
