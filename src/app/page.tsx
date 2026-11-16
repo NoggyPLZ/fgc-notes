@@ -18,12 +18,12 @@ export default function Home() {
             <h2 className="text-2xl lg:text-3xl xl:text-5xl font-black uppercase xl:leading-10 xl:pl-3 text-rose-500 tracking-tighter">
               An FGC user driven
             </h2>
-            <h1 className="text-[5.3rem]/[4rem]  lg:text-8xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 3xl:text-[210px] 3xl:leading-41 font-black uppercase text-neutral-900 tracking-tighter">
+            <h1 className="text-[4rem]/[4rem] md:text-[5.3rem]/[4rem]  lg:text-8xl xl:text-9xl 2xl:text-[170px] xl:leading-25 2xl:leading-35 3xl:text-[210px] 3xl:leading-41 font-black uppercase text-neutral-900 tracking-tighter">
               Living Document
             </h1>
             <p className="xl:pl-2 text-2xl 2xl:text-3xl text-neutral-900 pt-4 font-semibold">
-              Using collaboration within the FGC to create a centralized deposit
-              of FGC game knowledge.
+              Using collaboration within the FGC to create a centralized
+              repository of fighting game knowledge.
             </p>
           </div>
           <div className="md:basis-5/12 md:grow w-full z-10">
