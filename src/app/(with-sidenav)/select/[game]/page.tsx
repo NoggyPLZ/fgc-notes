@@ -35,11 +35,11 @@ export default async function CharacterSelect({
       <div className="text-neutral-400 text-lg border-b-2 border-b-neutral-800 pb-4 ml-6">
         Choose a character below to open it&apos;s notes page
       </div>
-      <div className="flex flex-row flex-wrap gap-5 pt-5">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-5 pt-5 px-5">
         {game.characters.map((character) => (
           <div
             key={character.id}
-            className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-600"
+            className="relative group bg-neutral-800 rounded-2xl hover:bg-rose-600 transition delay-10 hover:-translate-y-5 hover:scale-110 hover:-rotate-3 motion-reduce:transition-none motion-reduce:hover:transform-none overflow-hidden hover:border-4 border-white"
           >
             <Link href={`/select/${game.slug}/${character.slug}`}>
               <img
@@ -50,9 +50,9 @@ export default async function CharacterSelect({
                       }/${character.avatarUrl.toLocaleLowerCase()}-sml.webp`
                     : `/profile-image-placeholder.gif`
                 }
-                className="rounded-2xl"
-                width={200}
-                height={200}
+                className="rounded-2xl w-full hover:scale-130 transition delay:50"
+                width={250}
+                height={250}
                 alt={`Character portraite for ${character.name} that links to the page for ${character.name}`}
               />
               <h4 className="absolute bottom-0 text-2xl font-black bg-gray-800 group-hover:bg-rose-500 text-gray-100 px-2">

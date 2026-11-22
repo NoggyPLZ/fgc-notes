@@ -32,7 +32,7 @@ export default async function GameSelect() {
                 style={{
                   backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
                 }}
-                className="flex flex-col basis-1/2 md:basis-1/6 bg-neutral-900 dark:bg-gray-800 h-full p-5 shadow-sm border-transparent hover:border-rose-500 border-4 bg-center bg-size-[auto_300px]"
+                className="flex flex-col basis-1/2 md:basis-1/6 bg-neutral-900 dark:bg-gray-800 h-full p-5 shadow-sm border-transparent hover:border-white border-4 bg-center bg-size-[auto_300px] transition delay-30  hover:scale-110"
               >
                 <img
                   src={`/logos/${game.slug}-logo.webp`}
