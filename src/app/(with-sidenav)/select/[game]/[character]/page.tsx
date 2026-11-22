@@ -5,6 +5,8 @@ import NoteTabs from "@/components/character/NoteTabs/NoteTabs";
 import NoteForm from "@/components/forms/note/NoteForm";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { ArrowBigLeft } from "lucide-react";
+import Link from "next/link";
 
 export default async function CharacterPage({
   params,
@@ -70,64 +72,75 @@ export default async function CharacterPage({
     : `/profile-image-placeholder.gif`;
 
   return (
-    <div
-      style={{
-        backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
-      }}
-      className={`rounded-2xl ${
-        game.slug === "cotw"
-          ? "bg-neutral-900 bg-center bg-blend-soft-light"
-          : "bg-cyan-500 bg-blend-multiply"
-      }`}
-    >
-      <div className="flex flex-col lg:flex-row gap-5 p-5">
-        <img
-          src={avatarImage}
-          alt={`Character portrait of ${characterChoice.name}`}
-          width={200}
-          height={200}
-          className="rounded-2xl"
-        />
-        <div className="flex flex-col md:gap-4 text-gray-100 lg:w-[50%]">
-          <h1 className="text-5xl font-black mb-5">
-            {characterChoice && characterChoice.name}
-          </h1>
-          <p>{characterChoice.story}</p>
-        </div>
+    <>
+      <div className="text-white flex">
+        <Link
+          href={`/select/${game.slug}`}
+          className="inline-flex px-5 gap-2 py-2 hover:underline"
+        >
+          <ArrowBigLeft />
+          Back to Character Select
+        </Link>
       </div>
-      <NoteOptionsContainer
-        characterSlug={characterChoice.slug}
-        gameSlug={game.slug}
-        filter={filterSearch?.filter || "ALL"}
-      />
-      <NoteTabs
-        characterSlug={characterChoice.slug}
-        gameSlug={game.slug}
-        tab={filterSearch?.tab || "NEUTRAL"}
-        opponent={filterSearch?.opponent || ""}
-        characterList={characterList}
-        filter={filterSearch?.filter}
-      />
-      <NoteSection
-        characterId={characterId}
-        characterList={characterList}
-        filter={filterSearch?.filter || "ALL"}
-        query={filterSearch?.query}
-        tab={filterSearch?.tab}
-        opponent={filterSearch?.opponent}
-        game={game.slug}
-      />
-      <NoteModal>
-        <NoteForm
-          key={latestNote?.id}
-          characterList={characterList}
-          mainCharacter={characterChoice}
-          game={game.slug}
-          latestCategory={latestNote?.category}
-          latestOpponent={latestNote?.opponentId}
-          verified={verified ?? false}
+      <div
+        style={{
+          backgroundImage: `url(/bg-images/${game.slug}-bg.webp)`,
+        }}
+        className={`rounded-2xl ${
+          game.slug === "cotw"
+            ? "bg-neutral-900 bg-center bg-blend-soft-light"
+            : "bg-cyan-500 bg-blend-multiply"
+        }`}
+      >
+        <div className="flex flex-col lg:flex-row gap-5 p-5">
+          <img
+            src={avatarImage}
+            alt={`Character portrait of ${characterChoice.name}`}
+            width={200}
+            height={200}
+            className="rounded-2xl"
+          />
+          <div className="flex flex-col md:gap-4 text-gray-100 lg:w-[50%]">
+            <h1 className="text-5xl font-black mb-5">
+              {characterChoice && characterChoice.name}
+            </h1>
+            <p>{characterChoice.story}</p>
+          </div>
+        </div>
+        <NoteOptionsContainer
+          characterSlug={characterChoice.slug}
+          gameSlug={game.slug}
+          filter={filterSearch?.filter || "ALL"}
         />
-      </NoteModal>
-    </div>
+        <NoteTabs
+          characterSlug={characterChoice.slug}
+          gameSlug={game.slug}
+          tab={filterSearch?.tab || "NEUTRAL"}
+          opponent={filterSearch?.opponent || ""}
+          characterList={characterList}
+          filter={filterSearch?.filter}
+        />
+        <NoteSection
+          characterId={characterId}
+          characterList={characterList}
+          filter={filterSearch?.filter || "ALL"}
+          query={filterSearch?.query}
+          tab={filterSearch?.tab}
+          opponent={filterSearch?.opponent}
+          game={game.slug}
+        />
+        <NoteModal>
+          <NoteForm
+            key={latestNote?.id}
+            characterList={characterList}
+            mainCharacter={characterChoice}
+            game={game.slug}
+            latestCategory={latestNote?.category}
+            latestOpponent={latestNote?.opponentId}
+            verified={verified ?? false}
+          />
+        </NoteModal>
+      </div>
+    </>
   );
 }
