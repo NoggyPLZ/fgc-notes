@@ -18,10 +18,6 @@ export default function NoteToggle({
 
   return (
     <div className="flex rounded-2xl items-center">
-      <div className="px-2 md:flex hidden">
-        Filter Notes
-        <SlidersHorizontal size={25} />
-      </div>
       <button
         className={`  px-3 py-2 rounded-l-2xl hover:bg-rose-500 hover:text-gray-100 font-black border-1 border-gray-900 ${
           filter === "ALL"
