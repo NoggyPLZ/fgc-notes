@@ -11,7 +11,7 @@ export default function FeaturesSection() {
   return (
     <div className="bg-rose-500 bg-[url(/landing/halftone-bg.webp)] bg-bottom-right bg-no-repeat p-8">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 max-w-[1440px] mx-auto lg:text-center text-neutral-100">
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <Gauge size={100} />
           <div className="w-[80%] lg:w-full">
@@ -19,7 +19,7 @@ export default function FeaturesSection() {
             <p className="lg:px-15">Text based, so notes load fast.</p>
           </div>
         </div>
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <ThumbsUp size={100} />
           <div className="w-[80%] lg:w-full">
@@ -31,7 +31,7 @@ export default function FeaturesSection() {
             </p>
           </div>
         </div>
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <NotebookPen size={100} />
           <div className="w-[80%] lg:w-full">
@@ -44,7 +44,7 @@ export default function FeaturesSection() {
           </div>
         </div>
 
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <TrendingUp size={100} />
           <div className="w-[80%] lg:w-full">
@@ -56,7 +56,7 @@ export default function FeaturesSection() {
             </p>
           </div>
         </div>
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <Handshake size={100} />
           <div className="w-[80%] lg:w-full">
@@ -68,7 +68,7 @@ export default function FeaturesSection() {
             </p>
           </div>
         </div>
-        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-5 rounded-b-md relative outer-clip justify-center">
+        <div className="flex flex-row lg:flex-col gap-5 items-center bg-neutral-900 py-15 px-10 lg:px-5 rounded-b-md relative outer-clip justify-center">
           <div className="clip"></div>
           <Flag size={100} />
           <div className="w-[80%] lg:w-full">
